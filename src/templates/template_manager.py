@@ -1,8 +1,9 @@
 import os
 
-def CopyTemplate(filepath, templatepath):
+def CopyTemplate(filepath, templatepath, keywords={}):
     """ Copy the given template to the lcoation given """
     lines = GetTemplateFileLines(templatepath)
+    lines = ReplaceKeywords(lines, keywords)
     Save(filepath, lines)
 
 def GetTemplateFileLines(templatepath):
@@ -11,6 +12,13 @@ def GetTemplateFileLines(templatepath):
     file = open(fullTemplatePath, 'r')
     lines = file.readlines()
     file.close()
+    return lines
+    
+def ReplaceKeywords(lines, keywords):
+    """ Replace keywords in the template lines """
+    for i in range(len(lines)):
+        for keyword in keywords:
+            lines[i] = lines[i].replace(keyword, keywords[keyword])
     return lines
     
 def Save(filepath, lines):
