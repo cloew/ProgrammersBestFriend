@@ -32,8 +32,8 @@ def RunCommand(category, command, arguments):
         package = GetPackage(category, command)
         package.help()
     else:
-        package = GetPackage(category, command)()
-        package.run()
+        package = GetPackage(category, command)
+        package.run(arguments)
         
 def GetPackage(category, command):
     """ Return an instance of the Package Class """
