@@ -18,13 +18,14 @@ class MakePyTestDir:
         
     def makeTestDirectory(self, dirname):
         """ Make the Test Directory """
+        testDirectory = os.path.join(dirname, "Test")
         mkPyDir = MakePyDir()
-        mkPyDir.makePyDir(dirname)
-        template_manager.CopyTemplate(os.path.join(dirname, "suite.py"), "suite.py")
+        mkPyDir.makePyDir(testDirectory)
+        template_manager.CopyTemplate(os.path.join(testDirectory, "suite.py"), "suite.py")
     
     def help(self):
         """ Print the usage of the Make Test Dir """
         print "Usage: pbf mk testdir [path/to/dir]"
-        print "\tWill create a Python Test Directory called [name] at the path given"
+        print "\tWill create a Python Test Directory called Test at the path given"
     
 package_manager.RegisterPackage(MakePyTestDir)
