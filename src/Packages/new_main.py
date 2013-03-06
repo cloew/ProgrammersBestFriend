@@ -4,6 +4,7 @@ class NewMain:
     """ Creates a new Python Main file """
     category = "new"
     command = "main"
+    description = "Create a new Python main file"
     
     def run(self, args):
         """ Run the Package """

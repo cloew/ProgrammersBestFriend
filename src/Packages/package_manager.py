@@ -52,7 +52,7 @@ def PrintCommands(category):
     PrintUsage()
     print "Available Commands for Package Category: {0}".format(category)
     for key in __Packages__[category]:
-        print "\t{0}".format(key)
+        print "\t{0} -- {1}".format(key, __Packages__[category][key].description)
     print "\nFor more information on specific arguments for each command run: pbf [category] [command]"
     
 def PrintUsage():
