@@ -1,12 +1,14 @@
+import os
 
 def CopyTemplate(filepath, templatepath):
     """ Copy the given template to the lcoation given """
     lines = GetTemplateFileLines(templatepath)
     Save(filepath, lines)
 
-def GetTemplateFileLines(filepath):
+def GetTemplateFileLines(templatepath):
     """ Return the lines from given template filepath """
-    file = open(filepath, 'r')
+    fullTemplatePath = GetRealTemplatePath(templatepath)
+    file = open(fullTemplatePath, 'r')
     lines = file.readlines()
     file.close()
     return lines
@@ -16,3 +18,8 @@ def Save(filepath, lines):
     file = open(filepath, 'w')
     file.writelines(lines)
     file.close()
+    
+def GetRealTemplatePath(templatepath):
+    """ Returns the Actula Path to the template file """
+    templates_directory = os.path.dirname(__file__)
+    return os.path.join(templates_directory, templatepath)

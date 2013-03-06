@@ -1,4 +1,5 @@
 import package_manager
+import templates.template_manager as template_manager
 
 class NewMain:
     """ Creates a new Python Main file """
@@ -8,7 +9,8 @@ class NewMain:
     
     def run(self, args):
         """ Run the Package """
-        print "Path:", args
+        print "Creating Python main at:", args[0]
+        template_manager.CopyTemplate(args[0], "main.py")
     
     def help(self):
         """ Print the Usage of the New Main Package """
