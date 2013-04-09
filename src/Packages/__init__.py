@@ -1,9 +1,9 @@
 import os
 import sys
 
-def get_immediate_subdirectories(dir):
-    return [name for name in os.listdir(dir)
-            if os.path.isdir(os.path.join(dir, name))]
+def GetImmediateSubdirectories(directory):
+    return [name for name in os.listdir(directory)
+            if os.path.isdir(os.path.join(directory, name))]
             
 def GetPackageName(directory):
     """ Return the Python package Name for the given directory """
@@ -25,7 +25,7 @@ def ImportPythonFilesFromDirectory(directory):
         
 def ImportSubDirectories(directory):
     """ Import Python files from subdirectories of the given directory """
-    for subdirectory in get_immediate_subdirectories(directory):
+    for subdirectory in GetImmediateSubdirectories(directory):
         fullpath = os.path.join(directory, subdirectory)
         ImportPythonDirectory(fullpath)
 

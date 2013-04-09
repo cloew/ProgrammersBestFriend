@@ -1,7 +1,7 @@
-import package_manager
+from Packages import package_manager
 import templates.template_manager as template_manager
 
-from Packages.mk_pydir import MakePyDir
+from Packages.Python.mk_pydir import MakePyDir
 
 import os
 
