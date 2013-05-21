@@ -16,4 +16,7 @@ def GetCategoriesForTabCompletion(packages):
     
 def GetCommandsForTabCompletion(packages, category):
     """ Return a list of strings for tab completion """
-    return packages[category].keys()
+    if not category in packages:
+        return GetCategoriesForTabCompletion(packages)
+    else:
+        return packages[category].keys()
