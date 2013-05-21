@@ -1,3 +1,5 @@
+from tab_completion_manager import PrintTabCompletion
+
 __Packages__ = {}
 
 def RegisterPackage(package):
@@ -10,6 +12,8 @@ def Run(arguments):
     """ Try to Run the given Package """
     if len(arguments) == 0:
         PrintCategories()
+    elif arguments[0] == "-c":
+        PrintTabCompletion(__Packages__, arguments[1:])
     else:
         RunCategory(arguments[0], arguments[1:])
         
