@@ -28,5 +28,9 @@ def GetFilenameFromClassname(classname):
     
     className = ""
     for piece in pieces:
-        className += piece.capitalize()
+        className += Capitalize(piece)
     return className
+    
+def Capitalize(string):
+    """ Capitalizes ONLY the first letter of the given string """
+    return string.replace(string[0], string[0].upper(), 1)
