@@ -14,9 +14,9 @@ class NewConsoleView:
         viewFileName = args[0]
         viewName = GetPythonClassnameFromFilename(viewFileName)
         print "Creating Pandemic Console View:", viewName, "at:", viewFileName
-        self.createController(viewFileName, viewName)
+        self.createView(viewFileName, viewName)
         
-    def createController(self, viewFileName, viewName):
+    def createView(self, viewFileName, viewName):
         """ Create the controller file """
         template_manager.CopyTemplate(viewFileName, "Pandemic/console_view.py", {"%ViewName%":viewName})
     
