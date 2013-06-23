@@ -1,4 +1,4 @@
-import package_manager
+from Packages import package_manager
 
 class %PackageName%:
     """ ADD DESCRIPTION HERE """
