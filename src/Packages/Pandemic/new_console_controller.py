@@ -2,7 +2,6 @@ from helpers.filename_helper import GetPythonClassnameFromFilename
 
 from Packages import package_manager
 import templates.template_manager as template_manager
-import os
 
 class NewConsoleController:
     """ Creates a new Console Controller """
@@ -24,6 +23,6 @@ class NewConsoleController:
     def help(self):
         """  """
         print "Usage: pbf new cns-ctrl [path/to/controller]"
-        print "\tWill create a PBF Package called [name] at the path given"
+        print "\tWill create a Pandemic Console Controller at the path given"
     
 package_manager.RegisterPackage(NewConsoleController)

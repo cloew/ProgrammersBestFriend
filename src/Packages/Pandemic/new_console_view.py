@@ -1,15 +1,28 @@
-import package_manager
+from helpers.filename_helper import GetPythonClassnameFromFilename
 
-class NewConsoleController:
-    """ ADD DESCRIPTION HERE """
-    category = "" # ADD CATEGORY HERE
-    command = "" # ADD COMMAND HERE
-    description = "" # ADD DESCRIPTION HERE
+from Packages import package_manager
+import templates.template_manager as template_manager
+
+class NewConsoleView:
+    """ Creates a new Console View """
+    category = "new"
+    command = "cns-view"
+    description = "Creates a new Pandemic Console View"
     
     def run(self, args):
-        """ ADD LOGIC TO RUN THE PACKAGE HERE """
+        """ Create the Console View """
+        viewFileName = args[0]
+        viewName = GetPythonClassnameFromFilename(viewFileName)
+        print "Creating Pandemic Console View:", viewName, "at:", viewFileName
+        self.createController(viewFileName, viewName)
+        
+    def createController(self, viewFileName, viewName):
+        """ Create the controller file """
+        template_manager.CopyTemplate(viewFileName, "Pandemic/console_view.py", {"%ViewName%":viewName})
     
     def help(self):
-        """ ADD USAGE HERE """
+        """  """
+        print "Usage: pbf new cns-view [path/to/view]"
+        print "\tWill create a Pandemic Console View at the path given"
     
-package_manager.RegisterPackage(NewConsoleController)
+package_manager.RegisterPackage(NewConsoleView)
