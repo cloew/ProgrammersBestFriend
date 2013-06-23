@@ -1,4 +1,4 @@
-from helpers.filename_helper import GetPythonClassnameFromFilename
+from helpers.filename_helper import GetPythonClassnameFromFilename, GetFilenameFromClassname
 
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -16,9 +16,12 @@ class NewConsoleController:
         print "Creating Pandemic Console Controller:", controllerName, "at:", controllerFileName
         self.createController(controllerFileName, controllerName)
         
-    def createController(self, controllerFileName, controllerName):
+    def createController(self, controllerFileName, controllerName, ):
         """ Create the controller file """
-        template_manager.CopyTemplate(controllerFileName, "Pandemic/console_controller.py", {"%ControllerName%":controllerName})
+        viewName = controllerName.replace("Controller", "View")
+        template_manager.CopyTemplate(controllerFileName, "Pandemic/console_controller.py", {"%ControllerName%":controllerName,
+                                                                                             "%ViewName%":viewName,
+                                                                                             "%ViewFilename%":GetFilenameFromClassname(viewName)})
     
     def help(self):
         """  """
