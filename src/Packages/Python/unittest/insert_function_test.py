@@ -1,4 +1,4 @@
-from helpers.file_helper import Save
+from helpers.file_helper import GetLinesFromFile, Save
 from helpers.filename_helper import Capitalize
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -18,7 +18,7 @@ class InsertFunctionTest:
         
     def insertFunctionTestLogic(self, functionToTest, testFilename):
         """ Insert Function Test Logic """
-        originalLines = self.getOriginalFileLines(testFilename)
+        originalLines = GetLinesFromFile(testFilename)
         newLines = self.getTemplateLines(functionToTest)
         
         linesRange = range(len(originalLines))
@@ -32,13 +32,6 @@ class InsertFunctionTest:
                 break               
             
         Save(testFilename, originalLines)
-        
-    def getOriginalFileLines(self, testFilename):
-        """ Return lines from the original file """
-        testfile = open(testFilename, 'r')
-        lines = testfile.readlines()
-        testfile.close()
-        return lines        
         
     def getTemplateLines(self, functionToTest):
         """ Return the lines from the template file """
