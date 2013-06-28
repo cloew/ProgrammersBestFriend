@@ -7,9 +7,7 @@ def TryToAddSuiteToParent(filename):
     """ Try to add a suite to its parent in the unittest test hierarchy """
     suiteFilename = GetParentTestSuite(filename)
     if suiteFilename is not None:
-        basename = GetBaseFilenameWithoutExtension(filename)
-        basename = basename.replace("_test", "")
-        suitename = basename+"_suite"
+        suitename = GetSuiteNameForFile(filename)
         AddSuiteToSuiteFile(suitename, suiteFilename)
 
 def GetParentTestSuite(filename):
@@ -52,3 +50,8 @@ def AddSuiteToSuiteList(lines, startingLineNumber, suiteName):
             lines[i] = line.replace("]", replaceString)
             return lines
     
+def GetSuiteNameForFile(filename):
+    """ Returns the suitename for the file given """
+    basename = GetBaseFilenameWithoutExtension(filename)
+    basename = basename.replace("_test", "")
+    return basename + "_suite"
