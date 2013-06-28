@@ -1,4 +1,5 @@
 from Packages import package_manager
+from Packages.Python.unittest.insert_function_test import InsertFunctionTest
 import templates.template_manager as template_manager
 
 class NewTest:
@@ -8,14 +9,21 @@ class NewTest:
     description = "Creates a new Python unittest file"
     minimumNumberOfArguments = 1
     
+    def __init__(self):
+        """ Initialize the New Test Package """
+        self.insertFunctionTestPackage = InsertFunctionTest()
+    
     def run(self, args):
         """ Create the Python unittest file """
         print "Creating Python Test:", args[0]
         self.newTest(args[0])
         
-    def newTest(self, path):
+    def newTest(self, path, addTest=True):
         """ Create the Python unittest file """
         template_manager.CopyTemplate(path, "Python/unittest/test.py")
+        
+        if addTest:
+            self.insertFunctionTestPackage.insertFunctionTestLogic("functionToTest", path)
     
     def help(self):
         """ Print the Usage of the New Test Package """

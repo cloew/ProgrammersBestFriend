@@ -28,8 +28,8 @@ class InsertFunctionTest:
             line = originalLines[i]
             if "suites = [" in line:
                 originalLines = self.addSuiteToSuiteList(originalLines, i, functionToTest)
-            if "##########################################################" in line:
-                originalLines[i+1:i+1] = newLines
+            #if "##########################################################" in line:
+                originalLines[i-2:i-2] = newLines
                 break               
             
         Save(testFilename, originalLines)
@@ -44,11 +44,15 @@ class InsertFunctionTest:
     def addSuiteToSuiteList(self, lines, startingLineNumber, functionToTest):
         """ Add the current suite to the suite List """
         suiteName = "suite"+Capitalize(functionToTest)
+        replaceString = ",\n          {0}]".format(suiteName)
         
+        if "[]" in lines[startingLineNumber]:
+            replaceString = "{0}]".format(suiteName)
+            
         for i in range(startingLineNumber, len(lines)):
             line = lines[i]
             if  "]" in line:
-                lines[i] = line.replace("]", ",\n          {0}]".format(suiteName))
+                lines[i] = line.replace("]", replaceString)
                 return lines
     
     def help(self):
