@@ -32,9 +32,12 @@ def RunCommand(category, command, arguments):
     if command not in __Packages__[category]:
         print "No such Package Command: {0} for category {1}".format(command, category)
         PrintCommands()
-    elif len(arguments) == 0:
-        package = GetPackage(category, command)
-        package.help()
+    # elif len(arguments) == 0:
+        # package = GetPackage(category, command)
+        # try:
+          # package.run(arguments)
+        # except Exception:
+          # package.help()
     else:
         package = GetPackage(category, command)
         package.run(arguments)

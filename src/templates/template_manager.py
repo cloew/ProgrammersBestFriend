@@ -25,6 +25,16 @@ def ReplaceKeywords(lines, keywords):
             lines[i] = lines[i].replace(keyword, keywords[keyword])
     return lines
     
+def AppendLinesToEndOfFile(filename, lines):
+    """ Append the given lines to the end of the file """
+    originalLines = []
+    with open(filename, 'r') as file:
+        originalLines = file.readlines()
+    
+    allLines = originalLines + lines
+    with open(filename, 'w') as file:
+        file.writelines(allLines)
+    
 def Save(filepath, lines):
     """ Writes the given lines to the file specified at the filepath """
     file = open(filepath, 'w')
