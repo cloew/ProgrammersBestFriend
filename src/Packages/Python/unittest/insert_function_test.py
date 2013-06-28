@@ -28,7 +28,6 @@ class InsertFunctionTest:
             line = originalLines[i]
             if "suites = [" in line:
                 originalLines = self.addSuiteToSuiteList(originalLines, i, functionToTest)
-            #if "##########################################################" in line:
                 originalLines[i-2:i-2] = newLines
                 break               
             
