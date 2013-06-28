@@ -10,6 +10,7 @@ class MakePyTestDir:
     category = "mk"
     command = "testdir"
     description = "Makes a Python Test Directory"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Create the Python Test Directory """

@@ -6,6 +6,7 @@ class NewMain:
     category = "new"
     command = "main"
     description = "Create a new Python main file"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Run the Package """

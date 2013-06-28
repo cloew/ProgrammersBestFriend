@@ -7,6 +7,7 @@ class NewPySideMain:
     category = "new"
     command = "ps_main"
     description = "Create a new PySide Main File"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ ADD LOGIC TO RUN THE PACKAGE HERE """

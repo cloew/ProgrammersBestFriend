@@ -8,6 +8,7 @@ class NewConsoleView:
     category = "new"
     command = "cns-view"
     description = "Creates a new Pandemic Console View"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Create the Console View """

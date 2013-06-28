@@ -5,6 +5,7 @@ class %PackageName%:
     category = "%CategoryName%"
     command = "%CommandName%"
     description = "" # ADD DESCRIPTION HERE
+    minimumNumberOfArguments = 0 # SET MINIMUM NUMBER OF REQUIRED ARGUMENTS
     
     def run(self, args):
         """ Run the package """

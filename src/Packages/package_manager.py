@@ -27,20 +27,17 @@ def RunCategory(category, arguments):
     else:
         RunCommand(category, arguments[0], arguments[1:])
         
-def RunCommand(category, command, arguments):
+def RunCommand(category, command, arguments, help=False):
     """ Run the specified command """
     if command not in __Packages__[category]:
         print "No such Package Command: {0} for category {1}".format(command, category)
         PrintCommands()
-    # elif len(arguments) == 0:
-        # package = GetPackage(category, command)
-        # try:
-          # package.run(arguments)
-        # except Exception:
-          # package.help()
     else:
         package = GetPackage(category, command)
-        package.run(arguments)
+        if TooFewArguments(package, len(arguments)) or help:
+            package.help()
+        else:
+            package.run(arguments)
         
 def GetPackage(category, command):
     """ Return an instance of the Package Class """
@@ -65,3 +62,7 @@ def PrintCommands(category):
 def PrintUsage():
     """ Prints the usage for pbf """
     print "Usage: pbf [category] [command] [arguments]"
+    
+def TooFewArguments(package, argumentCount):
+    """ Return if the Package was given too few of arguments """
+    return package.minimumNumberOfArguments > argumentCount

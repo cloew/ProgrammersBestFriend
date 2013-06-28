@@ -9,6 +9,7 @@ class NewPackage:
     category = "new"
     command = "package"
     description = "Create a new PBF package file"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Run the Package """

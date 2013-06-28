@@ -11,6 +11,7 @@ class NewConsoleUI:
     category = "new"
     command = "cns-ui"
     description = "Crates a new Pandemic Console UI controller and view"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ ADD LOGIC TO RUN THE PACKAGE HERE """

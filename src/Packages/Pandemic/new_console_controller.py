@@ -8,6 +8,7 @@ class NewConsoleController:
     category = "new"
     command = "cns-ctrl"
     description = "Creates a new Pandemic Console Controller"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ ADD LOGIC TO RUN THE PACKAGE HERE """

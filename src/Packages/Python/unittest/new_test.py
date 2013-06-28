@@ -6,6 +6,7 @@ class NewTest:
     category = "new"
     command = "test"
     description = "Creates a new Python unittest file"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Create the Python unittest file """

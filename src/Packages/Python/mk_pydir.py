@@ -8,6 +8,7 @@ class MakePyDir:
     category = "mk"
     command = "pydir"
     description = "Makes a Python Directory"
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Create the Python Directory and the __init__.py file """

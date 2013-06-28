@@ -9,6 +9,7 @@ class InstallTabCompletion:
     category = "install"
     command = "tab-completion"
     description = "Install the PBF Tab Completion"
+    minimumNumberOfArguments = 0
     
     def run(self, args): # Note: currently only tested for Cygwin
         """ Install the PBF Tab Completion """

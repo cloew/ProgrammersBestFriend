@@ -8,6 +8,7 @@ class InsertFunctionTest:
     category = "insert"
     command = "test"
     description = "Insert a Python Function Test Class in a pre-existing Python test file"
+    minimumNumberOfArguments = 2
     
     def run(self, args):
         """ Run the package """
