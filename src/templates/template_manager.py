@@ -1,3 +1,5 @@
+from helpers.file_helper import GetLinesFromFile, Save
+
 import os
 
 def CopyTemplate(filepath, templatepath, keywords={}):
@@ -13,9 +15,7 @@ def GetTemplateFileLinesWithKeywordsReplaced(templatepath, keywords):
 def GetTemplateFileLines(templatepath):
     """ Return the lines from given template filepath """
     fullTemplatePath = GetRealTemplatePath(templatepath)
-    file = open(fullTemplatePath, 'r')
-    lines = file.readlines()
-    file.close()
+    lines = GetLinesFromFile(fullTemplatePath)
     return lines
     
 def ReplaceKeywords(lines, keywords):
@@ -24,22 +24,6 @@ def ReplaceKeywords(lines, keywords):
         for keyword in keywords:
             lines[i] = lines[i].replace(keyword, keywords[keyword])
     return lines
-    
-def AppendLinesToEndOfFile(filename, lines):
-    """ Append the given lines to the end of the file """
-    originalLines = []
-    with open(filename, 'r') as file:
-        originalLines = file.readlines()
-    
-    allLines = originalLines + lines
-    with open(filename, 'w') as file:
-        file.writelines(allLines)
-    
-def Save(filepath, lines):
-    """ Writes the given lines to the file specified at the filepath """
-    file = open(filepath, 'w')
-    file.writelines(lines)
-    file.close()
     
 def GetRealTemplatePath(templatepath):
     """ Returns the Actula Path to the template file """

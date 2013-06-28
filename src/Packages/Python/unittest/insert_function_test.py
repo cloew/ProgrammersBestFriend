@@ -1,3 +1,4 @@
+from helpers.file_helper import Save
 from helpers.filename_helper import Capitalize
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -28,10 +29,9 @@ class InsertFunctionTest:
                 originalLines = self.addSuiteToSuiteList(originalLines, i, functionToTest)
             if "##########################################################" in line:
                 originalLines[i+1:i+1] = newLines
-                break
-                
+                break               
             
-        template_manager.Save(testFilename, originalLines)
+        Save(testFilename, originalLines)
         
     def getOriginalFileLines(self, testFilename):
         """ Return lines from the original file """
@@ -43,12 +43,9 @@ class InsertFunctionTest:
     def getTemplateLines(self, functionToTest):
         """ Return the lines from the template file """
         capitalName = Capitalize(functionToTest)
-        return template_manager.GetTemplateFileLinesWithKeywordsReplaced("Python/unittest/functiontest.py", {"%functionToTest%":functionToTest,
-                                                                                                      "%FunctionToTest%":capitalName})
-    
-    def writeLines(self, lines, testFilename):
-        """ Write the lines to the file """
-        template_manager.Save(testFilename, lines)
+        return template_manager.GetTemplateFileLinesWithKeywordsReplaced("Python/unittest/functiontest.py", 
+                                                                            {"%functionToTest%":functionToTest,
+                                                                             "%FunctionToTest%":capitalName})
         
     def addSuiteToSuiteList(self, lines, startingLineNumber, functionToTest):
         """ Add the current suite to the suite List """
