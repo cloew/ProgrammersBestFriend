@@ -1,5 +1,9 @@
 import os
 
+def IsDirectory(filename):
+    """ Return if the given filename is a directory """
+    return os.path.isdir(filename)
+
 def GetLinesFromFile(filename):
     """ Return Lines from a file """
     lines = []
