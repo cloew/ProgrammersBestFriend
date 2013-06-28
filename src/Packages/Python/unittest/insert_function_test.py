@@ -1,5 +1,5 @@
 from helpers.file_helper import GetLinesFromFile, Save
-from helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList
+from helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList, FindSuiteStartingLine
 from helpers.filename_helper import Capitalize
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -22,16 +22,10 @@ class InsertFunctionTest:
         """ Insert Function Test Logic """
         originalLines = GetLinesFromFile(testFilename)
         newLines = self.getTemplateLines(functionToTest)
+        suiteLineNumber = FindSuiteStartingLine(originalLines)
         
-        linesRange = range(len(originalLines))
-        linesRange.reverse()
-        for i in linesRange:
-            line = originalLines[i]
-            if "suites = [" in line:
-                originalLines = AddSuiteToSuiteList(originalLines, i, functionToTest)
-                originalLines[i-2:i-2] = newLines
-                break               
-            
+        originalLines = AddSuiteToSuiteList(originalLines, suiteLineNumber, functionToTest)
+        originalLines[suiteLineNumber-2:suiteLineNumber-2] = newLines
         Save(testFilename, originalLines)
         
     def getTemplateLines(self, functionToTest):

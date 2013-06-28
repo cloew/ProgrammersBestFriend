@@ -1,5 +1,15 @@
 from helpers.filename_helper import Capitalize
 
+def FindSuiteStartingLine(lines):
+    """ Returns the line number where the suites are defined """
+    linesRange = range(len(lines))
+    linesRange.reverse()
+    for i in linesRange:
+        line = lines[i]
+        if "suites = [" in line:
+            return i
+    return len(lines)
+
 def AddSuiteToSuiteList(lines, startingLineNumber, functionToTest):
     """ Add the current suite to the suite List """
     suiteName = "suite"+Capitalize(functionToTest)
