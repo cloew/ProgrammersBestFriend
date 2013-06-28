@@ -14,7 +14,7 @@ class NewTest:
         
     def newTest(self, path):
         """ Create the Python unittest file """
-        template_manager.CopyTemplate(path, "test.py")
+        template_manager.CopyTemplate(path, "Python/unittest/test.py")
     
     def help(self):
         """ Print the Usage of the New Test Package """

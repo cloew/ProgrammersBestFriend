@@ -10,7 +10,7 @@ class NewMain:
     def run(self, args):
         """ Run the Package """
         print "Creating Python main at:", args[0]
-        template_manager.CopyTemplate(args[0], "main.py")
+        template_manager.CopyTemplate(args[0], "Python/main.py")
     
     def help(self):
         """ Print the Usage of the New Main Package """

@@ -11,7 +11,7 @@ class NewPySideMain:
     def run(self, args):
         """ ADD LOGIC TO RUN THE PACKAGE HERE """
         print "Creating PySide main at:", args[0]
-        template_manager.CopyTemplate(args[0], "pyside_main.py")
+        template_manager.CopyTemplate(args[0], "Python/PySide/pyside_main.py")
     
     def help(self):
         """ ADD USAGE HERE """
