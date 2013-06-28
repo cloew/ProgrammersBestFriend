@@ -23,7 +23,7 @@ class NewPackage:
     
     def help(self):
         """ Print the Usage of the New Main Package """
-        print "Usage: pbf new package [path/to/package]"
+        print "Usage: pbf {category} {command} [path/to/package]".format(category=self.category, command=self.command)
         print "\tWill create a PBF Package at the path given"
     
 package_manager.RegisterPackage(NewPackage)

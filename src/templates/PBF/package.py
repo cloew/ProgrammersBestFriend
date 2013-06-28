@@ -11,7 +11,7 @@ class %PackageName%:
     
     def help(self):
         """ Print Package usage """
-        print "Usage: pbf %CategoryName% %CommandName%" # ADD ADITIONAL PACKAGE ARGUMENTS
+        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
         print "" # ADD DETAILED DESCRIPTION 
     
 package_manager.RegisterPackage(%PackageName%)
