@@ -1,3 +1,4 @@
+from helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
 from Packages import package_manager
 from Packages.Python.unittest.insert_function_test import InsertFunctionTest
 import templates.template_manager as template_manager
@@ -24,6 +25,8 @@ class NewTest:
         
         if addTest:
             self.insertFunctionTestPackage.insertFunctionTestLogic("functionToTest", path)
+            
+        TryToAddSuiteToParent(path)
     
     def help(self):
         """ Print the Usage of the New Test Package """

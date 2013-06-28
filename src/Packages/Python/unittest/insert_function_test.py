@@ -1,4 +1,5 @@
 from helpers.file_helper import GetLinesFromFile, Save
+from helpers.filename_helper import Capitalize
 from helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList, FindSuiteStartingLine
 from helpers.filename_helper import Capitalize
 from Packages import package_manager
@@ -24,7 +25,7 @@ class InsertFunctionTest:
         newLines = self.getTemplateLines(functionToTest)
         suiteLineNumber = FindSuiteStartingLine(originalLines)
         
-        originalLines = AddSuiteToSuiteList(originalLines, suiteLineNumber, functionToTest)
+        originalLines = AddSuiteToSuiteList(originalLines, suiteLineNumber, "suite"+Capitalize(functionToTest))
         originalLines[suiteLineNumber-2:suiteLineNumber-2] = newLines
         Save(testFilename, originalLines)
         

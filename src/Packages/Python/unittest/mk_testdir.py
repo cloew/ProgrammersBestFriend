@@ -22,7 +22,7 @@ class MakePyTestDir:
         testDirectory = os.path.join(dirname, "Test")
         mkPyDir = MakePyDir()
         mkPyDir.makePyDir(testDirectory)
-        template_manager.CopyTemplate(os.path.join(testDirectory, "suite.py"), "suite.py")
+        template_manager.CopyTemplate(os.path.join(testDirectory, "suite.py"), "Python/unittest/suite.py")
     
     def help(self):
         """ Print the usage of the Make Test Dir """
