@@ -1,4 +1,5 @@
 from helpers.file_helper import GetLinesFromFile, Save
+from helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList
 from helpers.filename_helper import Capitalize
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -27,7 +28,7 @@ class InsertFunctionTest:
         for i in linesRange:
             line = originalLines[i]
             if "suites = [" in line:
-                originalLines = self.addSuiteToSuiteList(originalLines, i, functionToTest)
+                originalLines = AddSuiteToSuiteList(originalLines, i, functionToTest)
                 originalLines[i-2:i-2] = newLines
                 break               
             
@@ -39,20 +40,6 @@ class InsertFunctionTest:
         return template_manager.GetTemplateFileLinesWithKeywordsReplaced("Python/unittest/functiontest.py", 
                                                                             {"%functionToTest%":functionToTest,
                                                                              "%FunctionToTest%":capitalName})
-        
-    def addSuiteToSuiteList(self, lines, startingLineNumber, functionToTest):
-        """ Add the current suite to the suite List """
-        suiteName = "suite"+Capitalize(functionToTest)
-        replaceString = ",\n          {0}]".format(suiteName)
-        
-        if "[]" in lines[startingLineNumber]:
-            replaceString = "{0}]".format(suiteName)
-            
-        for i in range(startingLineNumber, len(lines)):
-            line = lines[i]
-            if  "]" in line:
-                lines[i] = line.replace("]", replaceString)
-                return lines
     
     def help(self):
         """ Print the Usage of the Insert Function Test Package """
