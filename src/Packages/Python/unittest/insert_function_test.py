@@ -43,7 +43,7 @@ class InsertFunctionTest:
     def getTemplateLines(self, functionToTest):
         """ Return the lines from the template file """
         capitalName = Capitalize(functionToTest)
-        return template_manager.GetTemplateFileLinesWithKeywordsReplaced("unittest/functiontest.py", {"%functionToTest%":functionToTest,
+        return template_manager.GetTemplateFileLinesWithKeywordsReplaced("Python/unittest/functiontest.py", {"%functionToTest%":functionToTest,
                                                                                                       "%FunctionToTest%":capitalName})
     
     def writeLines(self, lines, testFilename):
