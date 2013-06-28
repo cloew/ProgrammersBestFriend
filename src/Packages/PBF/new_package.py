@@ -1,3 +1,4 @@
+from helpers.filename_helper import GetPythonClassnameFromFilename
 from Packages import package_manager
 import templates.template_manager as template_manager
 
@@ -11,12 +12,15 @@ class NewPackage:
     
     def run(self, args):
         """ Run the Package """
-        print "Creating PBF Package:", args[0], "at:", args[1]
-        template_manager.CopyTemplate(args[1], "PBF/package.py", {"%PackageName%":args[0]})
+        classname = GetPythonClassnameFromFilename(args[0])
+        print "Creating PBF Package:", classname, "at:", args[0]
+        template_manager.CopyTemplate(args[0], "PBF/package.py", {"%PackageName%":classname,
+                                                                  "%CategoryName%":"",
+                                                                  "%CommandName%":""})
     
     def help(self):
         """ Print the Usage of the New Main Package """
-        print "Usage: pbf new package [name] [path/to/package]"
-        print "\tWill create a PBF Package called [name] at the path given"
+        print "Usage: pbf new package [path/to/package]"
+        print "\tWill create a PBF Package at the path given"
     
 package_manager.RegisterPackage(NewPackage)
