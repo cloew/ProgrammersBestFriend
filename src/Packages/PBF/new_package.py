@@ -12,7 +12,7 @@ class NewPackage:
     def run(self, args):
         """ Run the Package """
         print "Creating PBF Package:", args[0], "at:", args[1]
-        template_manager.CopyTemplate(args[1], "package.py", {"%PackageName%":args[0]})
+        template_manager.CopyTemplate(args[1], "PBF/package.py", {"%PackageName%":args[0]})
     
     def help(self):
         """ Print the Usage of the New Main Package """
