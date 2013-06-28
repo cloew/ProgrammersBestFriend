@@ -1,14 +1,18 @@
 import os
 import re
 
+def GetBaseFilenameWithoutExtension(filename):
+    """ Return the base filename withourt the file extension """
+    basename = os.path.basename(filename)
+    return RemoveFileExtension(basename)
+
 def RemoveFileExtension(filename):
     """ Return the filename without the extension """
     return os.path.splitext(filename)[0]
 
 def GetPythonClassnameFromFilename(filename):
     """ Returns a capitalized camel-case Python name from a Python filename """
-    basename = os.path.basename(filename)
-    filenameWithoutExtension = RemoveFileExtension(basename)
+    filenameWithoutExtension = GetBaseFilenameWithoutExtension(filename)
     pieces = filenameWithoutExtension.split("_")
     
     className = ""

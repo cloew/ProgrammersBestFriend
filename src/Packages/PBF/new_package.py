@@ -1,4 +1,4 @@
-from helpers.filename_helper import GetPythonClassnameFromFilename
+from helpers.filename_helper import GetPythonClassnameFromFilename, GetBaseFilenameWithoutExtension
 from Packages import package_manager
 import templates.template_manager as template_manager
 
@@ -13,10 +13,13 @@ class NewPackage:
     def run(self, args):
         """ Run the Package """
         classname = GetPythonClassnameFromFilename(args[0])
+        pieces = GetBaseFilenameWithoutExtension(args[0]).split("_")
+        categoryName = pieces[0]
+        commandName = "-".join(pieces[1:])
         print "Creating PBF Package:", classname, "at:", args[0]
         template_manager.CopyTemplate(args[0], "PBF/package.py", {"%PackageName%":classname,
-                                                                  "%CategoryName%":"",
-                                                                  "%CommandName%":""})
+                                                                  "%CategoryName%":categoryName,
+                                                                  "%CommandName%":commandName})
     
     def help(self):
         """ Print the Usage of the New Main Package """
