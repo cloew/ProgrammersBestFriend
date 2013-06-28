@@ -1,4 +1,4 @@
-from helpers.file_helper import AppendLinesToEndOfFile
+from helpers.file_helper import AppendLinesToEndOfFile, GetLinesFromFile
 from Packages import package_manager
 import templates.template_manager as template_manager
 
@@ -12,11 +12,16 @@ class InstallTabCompletion:
     
     def run(self, args): # Note: currently only tested for Cygwin
         """ Install the PBF Tab Completion """
-        profile = "/home/FoeDiddly/.bashrc"
-        profile = os.path.join(os.path.expanduser("~"), ".bashrc")
         template_manager.CopyTemplate("/etc/bash_completion.d/pbf_completion", "PBF/pbf_completion.sh")
-    
-        AppendLinesToEndOfFile(profile, ["\n", "#Source PBF Tab Completion\n", "source /etc/bash_completion.d/pbf_completion\n"])
+        self.tryToAddTabCompletionToProfile()
+        
+    def tryToAddTabCompletionToProfile(self):
+        """ Tries to Source Tab Completion in the profile """
+        profile = os.path.join(os.path.expanduser("~"), ".bashrc")
+        lines = GetLinesFromFile(profile)
+        
+        if "source /etc/bash_completion.d/pbf_completion\n" not in lines:
+            AppendLinesToEndOfFile(profile, ["\n", "#Source PBF Tab Completion\n", "source /etc/bash_completion.d/pbf_completion\n"])
     
     def help(self):
         """ Print usage """
