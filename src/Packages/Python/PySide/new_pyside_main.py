@@ -15,7 +15,7 @@ class NewPySideMain:
     
     def help(self):
         """ ADD USAGE HERE """
-        print "Usage: pbf new ps_main [path/to/main.py]"
+        print "Usage: pbf {category} {command} [path/to/main.py]".format(category=self.category, command=self.command)
         print "\tWill create a main.py file at the location given"
     
 package_manager.RegisterPackage(NewPySideMain)

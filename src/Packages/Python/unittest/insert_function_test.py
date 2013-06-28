@@ -52,6 +52,7 @@ class InsertFunctionTest:
     
     def help(self):
         """ Print the Usage of the Insert Function Test Package """
+        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command)
         print "Usage: pbf insert test [FunctionToTest] [path/to/test]"
         print "\tWill create a new unittest style test class for the given function in the file at the path given"
     

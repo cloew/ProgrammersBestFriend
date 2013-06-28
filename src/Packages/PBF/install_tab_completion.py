@@ -30,7 +30,7 @@ class InstallTabCompletion:
     
     def help(self):
         """ Print usage """
-        print "Usage: pbf install tab-completion"
+        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command)
         print "\tWill install the PBF Tab Completion"
     
 package_manager.RegisterPackage(InstallTabCompletion)

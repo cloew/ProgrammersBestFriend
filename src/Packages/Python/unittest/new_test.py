@@ -18,7 +18,7 @@ class NewTest:
     
     def help(self):
         """ Print the Usage of the New Test Package """
-        print "Usage: pbf new test [path/to/test]"
+        print "Usage: pbf {category} {command} [path/to/test]".format(category=self.category, command=self.command)
         print "\tWill create a new unittest style test file at the path given"
     
 package_manager.RegisterPackage(NewTest)

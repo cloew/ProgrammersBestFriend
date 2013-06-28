@@ -22,7 +22,7 @@ class NewConsoleView:
     
     def help(self):
         """  """
-        print "Usage: pbf new cns-view [path/to/view]"
+        print "Usage: pbf {category} {command} [path/to/view]".format(category=self.category, command=self.command)
         print "\tWill create a Pandemic Console View at the path given"
     
 package_manager.RegisterPackage(NewConsoleView)

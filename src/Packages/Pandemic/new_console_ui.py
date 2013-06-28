@@ -26,7 +26,7 @@ class NewConsoleUI:
     
     def help(self):
         """  """
-        print "Usage: pbf new cns-ui [path/to/ui]"
+        print "Usage: pbf {category} {command} [path/to/ui]".format(category=self.category, command=self.command)
         print "\tWill create a Pandemic Console COntroller & View at the path given"
     
 package_manager.RegisterPackage(NewConsoleUI)

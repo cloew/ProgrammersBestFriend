@@ -14,7 +14,7 @@ class NewMain:
     
     def help(self):
         """ Print the Usage of the New Main Package """
-        print "Usage: pbf new main [path/to/main.py]"
+        print "Usage: pbf {category} {command} [path/to/main.py]".format(category=self.category, command=self.command)
         print "\tWill create a main.py file at the location given"
     
 package_manager.RegisterPackage(NewMain)

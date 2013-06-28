@@ -25,7 +25,7 @@ class NewConsoleController:
     
     def help(self):
         """  """
-        print "Usage: pbf new cns-ctrl [path/to/controller]"
+        print "Usage: pbf {category} {command} [path/to/controller]".format(category=self.category, command=self.command)
         print "\tWill create a Pandemic Console Controller at the path given"
     
 package_manager.RegisterPackage(NewConsoleController)

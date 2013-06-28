@@ -21,7 +21,7 @@ class MakePyDir:
     
     def help(self):
         """ Print the usage of the Make Py Dir """
-        print "Usage: pbf mk pydir [path/to/dir]"
+        print "Usage: pbf {category} {command} [path/to/dir]".format(category=self.category, command=self.command)
         print "\tWill create a Python Directory called [name] at the path given"
     
 package_manager.RegisterPackage(MakePyDir)
