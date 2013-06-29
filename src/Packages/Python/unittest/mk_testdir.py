@@ -1,3 +1,4 @@
+from helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
 from Packages import package_manager
 import templates.template_manager as template_manager
 
@@ -22,7 +23,9 @@ class MakePyTestDir:
         testDirectory = os.path.join(dirname, "Test")
         mkPyDir = MakePyDir()
         mkPyDir.makePyDir(testDirectory)
-        template_manager.CopyTemplate(os.path.join(testDirectory, "suite.py"), "Python/unittest/suite.py")
+        suiteFilename = os.path.join(testDirectory, "suite.py")
+        template_manager.CopyTemplate(suiteFilename, "Python/unittest/suite.py")
+        TryToAddSuiteToParent(suiteFilename)
     
     def help(self):
         """ Print the usage of the Make Test Dir """

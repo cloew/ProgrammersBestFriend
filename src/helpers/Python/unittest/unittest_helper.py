@@ -15,13 +15,26 @@ def TryToAddSuiteToParent(filename):
 
 def GetParentTestSuite(filename):
     """ Return the Parent Test Suite for the given test filename """
-    parentDirectory = os.path.dirname(filename)
-    testSuite = os.path.join(parentDirectory, "suite.py")
+    if os.path.basename(filename) == "suite.py":
+        testSuite = GetParentSuite(filename)
+    else:
+        testSuite = GetLocalSuite(filename)
     
     if os.path.exists(testSuite):
         return testSuite
     else:
         return None
+        
+def GetLocalSuite(filename):
+    """ Return the local suite filename """
+    parentDirectory = os.path.dirname(filename)
+    return os.path.join(parentDirectory, "suite.py")
+    
+def GetParentSuite(filename):
+    """ Return the parent suite name """
+    parentDirectory = os.path.dirname(filename)
+    parentPath = os.path.join(parentDirectory, "../../Test/suite.py")
+    return os.path.normpath(parentPath)
         
 def AddSuiteToSuiteFile(lines, suitename):
     """ Add suite to the given file """
