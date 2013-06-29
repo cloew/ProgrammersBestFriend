@@ -8,7 +8,10 @@ def TryToAddSuiteToParent(filename):
     suiteFilename = GetParentTestSuite(filename)
     if suiteFilename is not None:
         suitename = GetSuiteNameForFile(filename)
-        AddSuiteToSuiteFile(suitename, suiteFilename)
+        lines = GetLinesFromFile(suiteFilename)
+        lines = AddImportToSuiteFile(lines, filename)
+        lines = AddSuiteToSuiteFile(lines, suitename)
+        Save(suiteFilename, lines)
 
 def GetParentTestSuite(filename):
     """ Return the Parent Test Suite for the given test filename """
@@ -20,12 +23,10 @@ def GetParentTestSuite(filename):
     else:
         return None
         
-def AddSuiteToSuiteFile(suitename, parentSuiteFilename):
+def AddSuiteToSuiteFile(lines, suitename):
     """ Add suite to the given file """
-    lines = GetLinesFromFile(parentSuiteFilename)
     startingLine = FindSuiteStartingLine(lines)
-    lines = AddSuiteToSuiteList(lines, startingLine, suitename)
-    Save(parentSuiteFilename, lines)
+    return AddSuiteToSuiteList(lines, startingLine, suitename)
 
 def FindSuiteStartingLine(lines):
     """ Returns the line number where the suites are defined """
@@ -36,7 +37,7 @@ def FindSuiteStartingLine(lines):
         if "suites = [" in line:
             return i
     return len(lines)
-
+    
 def AddSuiteToSuiteList(lines, startingLineNumber, suiteName):
     """ Add the current suite to the suite List """
     replaceString = ",\n          {0}]".format(suiteName)
@@ -49,6 +50,26 @@ def AddSuiteToSuiteList(lines, startingLineNumber, suiteName):
         if  "]" in line:
             lines[i] = line.replace("]", replaceString)
             return lines
+
+def AddImportToSuiteFile(lines, suitename):
+    """ Add suite to the given file """
+    startingLine = FindImportStartingLine(lines)
+    return AddImportToSuiteLines(lines, startingLine, suitename)
+            
+def FindImportStartingLine(lines):
+    """ Returns the line number where the imports are defined """
+    linesRange = range(len(lines))
+    for i in linesRange:
+        line = lines[i]
+        if "import unittest" in line:
+            return i+2
+    return 0
+    
+def AddImportToSuiteLines(lines, startingLineNumber, filename):
+    """ Add the current suite to the suite List """
+    importString = "from {0} import suite as {1}\n".format(GetBaseFilenameWithoutExtension(filename), GetSuiteNameForFile(filename))
+    lines[startingLineNumber:startingLineNumber] = [importString]
+    return lines
     
 def GetSuiteNameForFile(filename):
     """ Returns the suitename for the file given """
