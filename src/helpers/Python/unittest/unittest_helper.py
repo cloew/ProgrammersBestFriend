@@ -86,6 +86,12 @@ def AddImportToSuiteLines(lines, startingLineNumber, filename):
     
 def GetSuiteNameForFile(filename):
     """ Returns the suitename for the file given """
-    basename = GetBaseFilenameWithoutExtension(filename)
-    basename = basename.replace("_test", "")
+    if os.path.basename(filename) == "suite.py":
+        dirname = os.path.dirname(filename)
+        basename = os.path.join(dirname, "../../")
+        basename = os.path.normpath(basename)
+        basename = os.path.basename(basename)
+    else:
+        basename = GetBaseFilenameWithoutExtension(filename)
+        basename = basename.replace("_test", "")
     return basename + "_suite"
