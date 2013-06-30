@@ -37,7 +37,6 @@ def GetParentSuite(filename):
     
     if not os.path.exists(parentPath):
         parentPath = os.path.join(parentDirectory, "../../test.py")
-    print parentPath
     basename = os.path.normpath(parentPath)
     return basename
         
@@ -93,10 +92,10 @@ def GetSuiteNameForFile(filename):
     """ Returns the suitename for the file given """
     if os.path.basename(filename) == "suite.py":
         dirname = os.path.dirname(filename)
-        basename = os.path.join(dirname, "../../")
+        basename = os.path.join(dirname, "../")
         basename = os.path.normpath(basename)
+        basename = os.path.abspath(basename)
         basename = os.path.basename(basename)
-        print basename
     else:
         basename = GetBaseFilenameWithoutExtension(filename)
         basename = basename.replace("_test", "")
