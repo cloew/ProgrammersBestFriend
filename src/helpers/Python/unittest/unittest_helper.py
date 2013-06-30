@@ -34,7 +34,12 @@ def GetParentSuite(filename):
     """ Return the parent suite name """
     parentDirectory = os.path.dirname(filename)
     parentPath = os.path.join(parentDirectory, "../../Test/suite.py")
-    return os.path.normpath(parentPath)
+    
+    if not os.path.exists(parentPath):
+        parentPath = os.path.join(parentDirectory, "../../test.py")
+    print parentPath
+    basename = os.path.normpath(parentPath)
+    return basename
         
 def AddSuiteToSuiteFile(lines, suitename):
     """ Add suite to the given file """
@@ -91,6 +96,7 @@ def GetSuiteNameForFile(filename):
         basename = os.path.join(dirname, "../../")
         basename = os.path.normpath(basename)
         basename = os.path.basename(basename)
+        print basename
     else:
         basename = GetBaseFilenameWithoutExtension(filename)
         basename = basename.replace("_test", "")
