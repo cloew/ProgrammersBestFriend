@@ -1,4 +1,4 @@
-from helpers.filename_helper import RemoveFileExtension
+from helpers.filename_helper import GetBaseFilenameWithoutExtension, RemoveFileExtension
 
 import os
 
@@ -8,3 +8,8 @@ def GetPythonPackageForFilename(rootDirectory, filename):
     path = RemoveFileExtension(path)
     path = path.replace("/", ".")
     return path.replace("\\", ".")
+    
+def GetPythonImportString(filenameToImportFrom, imports):
+    """ Constructs and returns a Python Import Line """
+    fromFilename = GetBaseFilenameWithoutExtension(filenameToImportFrom)
+    return "from {0} import {1}".format(fromFilename, ", ".join(imports))
