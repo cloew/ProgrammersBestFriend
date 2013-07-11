@@ -1,3 +1,5 @@
+from helpers.configuration_helper import GetConfigurationsFilename
+from helpers.file_helper import CreateFileIfItDoesNotExist
 from helpers.filename_helper import GetBaseFilenameWithoutExtension, RemoveFileExtension
 
 import os
@@ -13,3 +15,9 @@ def GetPythonImportString(filenameToImportFrom, imports):
     """ Constructs and returns a Python Import Line """
     fromFilename = GetBaseFilenameWithoutExtension(filenameToImportFrom)
     return "from {0} import {1}".format(fromFilename, ", ".join(imports))
+    
+def GetPythonRootsConfigurationsFilename():
+    """ Return the Python Roots Configurations Filename """
+    filename = GetConfigurationsFilename("python_roots")
+    CreateFileIfItDoesNotExist(filename)
+    return filename

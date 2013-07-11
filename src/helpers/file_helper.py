@@ -21,3 +21,9 @@ def Save(filename, lines):
     """ Writes the given lines to the file specified at the filename """
     with open(filename, 'w') as file:
         file.writelines(lines)
+        
+def CreateFileIfItDoesNotExist(filename):
+    """ Creates the given file if it does not exist """
+    if not os.path.exists(filename):
+        with open(filename, 'w'):
+            pass
