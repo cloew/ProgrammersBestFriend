@@ -7,7 +7,7 @@ from Packages import package_manager
 import os
 
 class AddRoot:
-    """ ADD DESCRIPTION HERE """
+    """ Adds a Python Project Root to a configuration file """
     category = "add"
     command = "root"
     description = "Adds a Directory as the root of a Python Project"
