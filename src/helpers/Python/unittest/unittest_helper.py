@@ -96,6 +96,7 @@ def GetSuiteNameForFile(filename):
         basename = os.path.normpath(basename)
         basename = os.path.abspath(basename)
         basename = os.path.basename(basename)
+        basename = basename.lower()
     else:
         basename = GetBaseFilenameWithoutExtension(filename)
         basename = basename.replace("_test", "")
