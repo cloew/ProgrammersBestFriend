@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
+from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory, GetConfigurationPathRelativeToCurrentDirectory
 from helpers.file_helper import CreateFileIfItDoesNotExist, GetLinesFromFile
 from helpers.filename_helper import GetBaseFilenameWithoutExtension, RemoveFileExtension
 
@@ -14,11 +14,17 @@ def GetPythonPackageForFilename(rootDirectory, filename):
     else:
         return GetBaseFilenameWithoutExtension(filename)
     
-def GetPythonImportString(filenameToImportFrom, imports):
+def GetPythonImportString(filenameToImportFrom, imports, asName=None):
     """ Constructs and returns a Python Import Line """
     packageRoot = GetPythonRootForFilename(filenameToImportFrom)
     package = GetPythonPackageForFilename(packageRoot, filenameToImportFrom)
-    return "from {0} import {1}".format(package, ", ".join(imports))
+    asString = ""
+    
+    if asName is not None and len(imports) == 1:
+        asString = " as {0}".format(asName)
+    
+    importString = "from {0} import {1}{2}\n".format(package, ", ".join(imports), asString)
+    return importString
 
 def GetPythonRoots():
     """ Return the Python Roots """
@@ -38,6 +44,6 @@ def GetPythonRootForFilename(filename):
     relativeFilepath = GetRelativePathFromConfigurationsDirectory(filename)
     for root in roots:
         if root in relativeFilepath:
-            return os.path.relpath(root)
+            return GetConfigurationPathRelativeToCurrentDirectory(root)
     else:
         return None 

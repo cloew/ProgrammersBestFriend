@@ -1,5 +1,6 @@
 from helpers.file_helper import GetLinesFromFile, Save
 from helpers.filename_helper import Capitalize, GetBaseFilenameWithoutExtension
+from helpers.Python.python_helper import GetPythonImportString
 
 import os
 
@@ -84,7 +85,7 @@ def FindImportStartingLine(lines):
     
 def AddImportToSuiteLines(lines, startingLineNumber, filename):
     """ Add the current suite to the suite List """
-    importString = "from {0} import suite as {1}\n".format(GetBaseFilenameWithoutExtension(filename), GetSuiteNameForFile(filename))
+    importString = GetPythonImportString(filename, ["suite"], asName=GetSuiteNameForFile(filename))
     lines[startingLineNumber:startingLineNumber] = [importString]
     return lines
     
