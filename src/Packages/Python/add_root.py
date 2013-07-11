@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetConfigurationsDirectory
+from helpers.configuration_helper import GetConfigurationsDirectory, GetConfigurationsFilename
 from helpers.file_helper import AppendLinesToEndOfFile
 
 from Packages import package_manager
@@ -21,7 +21,7 @@ class AddRoot:
     def addRoot(self, directory):
         """ Add Python Root Directory to the roots file """
         configurationsDirectory = GetConfigurationsDirectory() 
-        rootsFile = os.path.join(configurationsDirectory, self.roots_filename)
+        rootsFile = GetConfigurationsFilename(self.roots_filename)
         pathToPythonRoot = os.path.relpath(directory, configurationsDirectory)
         
         self.createRootsFileIfNeeded(rootsFile)

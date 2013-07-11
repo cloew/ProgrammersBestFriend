@@ -7,3 +7,6 @@ def GetConfigurationsDirectory():
         os.mkdir(configurationsPath)
     return configurationsPath
    
+def GetConfigurationsFilename(filename):    
+    """ Returns the path to a file in the configurations directory """
+    return os.path.join(GetConfigurationsDirectory(), filename)
