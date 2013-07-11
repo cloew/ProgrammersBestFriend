@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetConfigurationsDirectory, GetConfigurationsFilename
+from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationsFilename
 from helpers.file_helper import Save
 from helpers.Python.python_helper import GetPythonRoots, GetPythonRootsConfigurationsFilename
 
@@ -20,10 +20,9 @@ class AddRoot:
         
     def addRoot(self, directory):
         """ Add Python Root Directory to the roots file """
-        configurationsDirectory = GetConfigurationsDirectory() 
         rootsFile = GetPythonRootsConfigurationsFilename()
         roots = GetPythonRoots()
-        pathToPythonRoot = os.path.relpath(directory, configurationsDirectory)
+        pathToPythonRoot = GetRelativePathFromConfigurationsDirectory(directory)
         
         if pathToPythonRoot not in roots:
             roots.append(pathToPythonRoot)

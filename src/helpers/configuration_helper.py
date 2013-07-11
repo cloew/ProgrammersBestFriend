@@ -10,3 +10,7 @@ def GetConfigurationsDirectory():
 def GetConfigurationsFilename(filename):    
     """ Returns the path to a file in the configurations directory """
     return os.path.join(GetConfigurationsDirectory(), filename)
+    
+def GetRelativePathFromConfigurationsDirectory(filename):
+    """ Returns the relative path from the configurations directory to the file given """
+    return os.path.relpath(filename, GetConfigurationsDirectory())
