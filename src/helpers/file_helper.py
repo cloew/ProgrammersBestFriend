@@ -21,6 +21,11 @@ def Save(filename, lines):
     """ Writes the given lines to the file specified at the filename """
     with open(filename, 'w') as file:
         file.writelines(lines)
+
+def CreateDirectoryIfItDoesNotExist(directoryName):
+    """ Creates the given directory if it does not exist """
+    if not IsDirectory(directoryName):
+        os.mkdir(directoryName)
         
 def CreateFileIfItDoesNotExist(filename):
     """ Creates the given file if it does not exist """

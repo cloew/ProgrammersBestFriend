@@ -1,4 +1,4 @@
-from helpers.file_helper import AppendLinesToEndOfFile, GetLinesFromFile
+from helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
 from Packages import package_manager
 import templates.template_manager as template_manager
 
@@ -12,8 +12,13 @@ class InstallTabCompletion:
     minimumNumberOfArguments = 0
     
     def run(self, args): # Note: currently only tested for Cygwin
+        self.installTabCompletion()
+    
+    def installTabCompletion(self):
         """ Install the PBF Tab Completion """
-        completionFilename = "/etc/bash_completion.d/pbf_completion"
+        completionDirectory = "/etc/bash_completion.d"
+        CreateDirectoryIfItDoesNotExist(completionDirectory)
+        completionFilename = os.path.join(completionDirectory, "pbf_completion")
         template_manager.CopyTemplate(completionFilename, "PBF/pbf_completion.sh")
         self.tryToAddTabCompletionToProfile()
         
