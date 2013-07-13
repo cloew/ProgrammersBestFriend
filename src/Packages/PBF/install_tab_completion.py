@@ -10,15 +10,16 @@ class InstallTabCompletion:
     command = "tab-completion"
     description = "Install the PBF Tab Completion"
     minimumNumberOfArguments = 0
+    completionDirectory = "/etc/bash_completion.d"
+    completionFilename = "pbf_completion"
     
     def run(self, args): # Note: currently only tested for Cygwin
         self.installTabCompletion()
     
     def installTabCompletion(self):
         """ Install the PBF Tab Completion """
-        completionDirectory = "/etc/bash_completion.d"
-        CreateDirectoryIfItDoesNotExist(completionDirectory)
-        completionFilename = os.path.join(completionDirectory, "pbf_completion")
+        CreateDirectoryIfItDoesNotExist(self.completionDirectory)
+        completionFilename = self.getFullCompletionFilename()
         template_manager.CopyTemplate(completionFilename, "PBF/pbf_completion.sh")
         self.tryToAddTabCompletionToProfile()
         
@@ -26,9 +27,11 @@ class InstallTabCompletion:
         """ Tries to Source Tab Completion in the profile """
         profile = os.path.join(os.path.expanduser("~"), ".bashrc")
         lines = GetLinesFromFile(profile)
+        sourceCommand = "source {0}".format(self.getFullCompletionFilename())
+        sourceLine = "{0}".format(sourceCommand)
         
-        if "source /etc/bash_completion.d/pbf_completion\n" not in lines:
-            AppendLinesToEndOfFile(profile, ["\n", "#Source PBF Tab Completion\n", "source /etc/bash_completion.d/pbf_completion\n"])
+        if sourceLine not in lines:
+            AppendLinesToEndOfFile(profile, ["\n", "#Source PBF Tab Completion\n", sourceLine])
             print "PBF Tab Completion will now be sourced by {0}".format(profile)
             print "Please source {0} to have PBF tab-completion in the current shell".format(profile)
         else:
@@ -38,5 +41,9 @@ class InstallTabCompletion:
         """ Print usage """
         print "Usage: pbf {category} {command}".format(category=self.category, command=self.command)
         print "\tWill install the PBF Tab Completion"
+        
+    def getFullCompletionFilename(self):
+        """ Return the full completion filename """
+        return os.path.join(self.completionDirectory, self.completionFilename)
     
 package_manager.RegisterPackage(InstallTabCompletion)
