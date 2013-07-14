@@ -3,7 +3,8 @@ import re
 
 def GetBaseFilenameWithoutExtension(filename):
     """ Return the base filename withourt the file extension """
-    basename = os.path.basename(filename)
+    fullPath = os.path.abspath(filename)
+    basename = os.path.basename(fullPath)
     return RemoveFileExtension(basename)
 
 def RemoveFileExtension(filename):
