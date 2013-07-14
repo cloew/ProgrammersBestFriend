@@ -1,6 +1,6 @@
 from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
 from helpers.filename_helper import GetBaseFilenameWithoutExtension
-from helpers.Project.project_helper import GetProjectXMLFilename, GetProjectXMLTree, SaveProjectXML
+from helpers.Project.project_helper import GetProjectXMLFilename, GetProjectXMLTree, HasProjectWithPath, SaveProjectXML
 
 from Packages import package_manager
 
@@ -20,8 +20,11 @@ class NewProject:
     def createNewProject(self, projectPath, editor):
         """ Create a new project """
         tree = GetProjectXMLTree()
-        self.createProjectXML(tree.getroot(), projectPath, editor)
-        SaveProjectXML(tree)
+        if not HasProjectWithPath(projectPath):
+            self.createProjectXML(tree.getroot(), projectPath, editor)
+            SaveProjectXML(tree)
+        else:
+            print "A Project for", projectPath, "already exisits"
         
     def createProjectXML(self, projectsElement, projectPath, editor):
         """ Creaete the Project XML """

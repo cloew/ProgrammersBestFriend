@@ -28,6 +28,10 @@ def SaveProjectXML(tree):
     """ Save the Project XML with the given tree """
     tree.write(GetProjectXMLFilename())
     
+def HasProjectWithPath(projectPath):
+    """ Returns if there is a project with the given path """
+    return GetProjectFromPath(projectPath) is not None
+    
 def GetProjectFromPath(projectPath):
     """ Returns Project XML or None """
     tree = GetProjectXMLTree()
