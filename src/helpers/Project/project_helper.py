@@ -1,4 +1,5 @@
 from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
+from helpers.filename_helper import GetBaseFilenameWithoutExtension
 
 from xml.etree.ElementTree import parse, Element, ElementTree
 
@@ -44,3 +45,6 @@ def GetProjectFromPath(projectPath):
     else:
         return None
         
+def GetProjectNameFromPath(projectPath):
+    """ Returns the Project Name from its path """
+    return GetBaseFilenameWithoutExtension(projectPath)
