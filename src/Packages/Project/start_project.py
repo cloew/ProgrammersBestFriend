@@ -3,7 +3,6 @@ from helpers.Project.project_helper import GetProjectFromPath
 
 from Packages import package_manager
 
-import subprocess
 import os
 
 class StartProject:
