@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetConfigurationsFilename
+from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
 
 from xml.etree.ElementTree import parse, Element, ElementTree
 
@@ -28,3 +28,15 @@ def SaveProjectXML(tree):
     """ Save the Project XML with the given tree """
     tree.write(GetProjectXMLFilename())
     
+def GetProjectFromPath(projectPath):
+    """ Returns Project XML or None """
+    tree = GetProjectXMLTree()
+    cleanedPath = GetRelativePathFromConfigurationsDirectory(projectPath)
+    
+    for projectXML in tree.getroot().findall("project"):
+        pathXML = projectXML.find("path")
+        if cleanedPath == pathXML.text:
+            return projectXML
+    else:
+        return None
+        
