@@ -18,13 +18,11 @@ class StartProject:
         
     def startProject(self, project):
         """ Start the Project """
-        projectElement = GetProjectFromPath(project)
-        if projectElement is None:
+        project = GetProjectFromPath(project)
+        if project is None:
             print "No project:", project
         else:
-            editorElement = projectElement.find("editor")
-            editor = editorElement.text
-            editorPath = GetConfigurationPathRelativeToCurrentDirectory(editor)
+            editorPath = GetConfigurationPathRelativeToCurrentDirectory(project.editor)
             print "Starting", editorPath
             os.system("{0} -multiInst &".format(editorPath))
     

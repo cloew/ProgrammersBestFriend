@@ -1,5 +1,6 @@
 from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
 from helpers.filename_helper import GetBaseFilenameWithoutExtension
+from helpers.Project.project import Project
 
 from xml.etree.ElementTree import parse, Element, ElementTree
 
@@ -41,7 +42,7 @@ def GetProjectFromPath(projectPath):
     for projectXML in tree.getroot().findall("project"):
         pathXML = projectXML.find("path")
         if cleanedPath == pathXML.text:
-            return projectXML
+            return Project(projectXML)
     else:
         return None
         
