@@ -1,15 +1,13 @@
-from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
-from helpers.file_helper import CreateFileIfItDoesNotExist
+from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
 from helpers.filename_helper import GetBaseFilenameWithoutExtension
+from helpers.Project.project_helper import GetProjectXMLFilename, GetProjectXMLTree, SaveProjectXML
 
 from Packages import package_manager
 
-from xml.etree.ElementTree import parse, Element, ElementTree, SubElement
-
-import os
+from xml.etree.ElementTree import SubElement
 
 class NewProject:
-    """ ADD DESCRIPTION HERE """
+    """ Create a New PBF Project     """
     category = "new"
     command = "project"
     description = "Create a new PBF Project"
@@ -21,25 +19,9 @@ class NewProject:
        
     def createNewProject(self, projectPath, editor):
         """ Create a new project """
-        tree = self.getXMLTree()
+        tree = GetProjectXMLTree()
         self.createProjectXML(tree.getroot(), projectPath, editor)
-        tree.write(GetConfigurationsFilename("project.xml"))
-        
-    def getXMLTree(self):
-        """  """
-        projectFilename = GetConfigurationsFilename("project.xml")
-        if os.path.exists(projectFilename):
-            return parse(projectFilename)
-        else:
-            return self.createConfigurationXML()
-        
-    def createConfigurationXML(self):
-        """ Create the Configuration XML """
-        projectFilename = GetConfigurationsFilename("project.xml")
-        element = Element("projects")
-        tree = ElementTree(element)
-        tree.write(projectFilename)
-        return tree
+        SaveProjectXML(tree)
         
     def createProjectXML(self, projectsElement, projectPath, editor):
         """ Creaete the Project XML """
