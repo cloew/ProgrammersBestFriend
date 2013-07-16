@@ -1,3 +1,4 @@
+from helpers.Project.editor import Editor
 
 class Project:
     """ Represents a PBF Project """
@@ -5,6 +6,7 @@ class Project:
     def __init__(self, projectXML):
         """ Initialize the Project with the project XML """
         self.projectXML = projectXML
+        self.editor = Editor(self.projectXML.find('editor'))
         
     @property
     def name(self):
@@ -16,10 +18,10 @@ class Project:
         """ Return the Project path """
         return self.projectXML.find('path').text
         
-    @property
-    def editor(self):
-        """ Return the Project editor """
-        return self.projectXML.find('editor').text
+    # @property
+    # def editor(self):
+        # """ Return the Project editor """
+        # return self.projectXML.find('editor').text
         
     def __repr__(self):
         """ Return the string representation """

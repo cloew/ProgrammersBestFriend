@@ -26,9 +26,7 @@ class StartProject:
         if project is None:
             print "No project:", project
         else:
-            editorPath = GetConfigurationPathRelativeToCurrentDirectory(project.editor)
-            print "Starting", editorPath
-            os.system("{0} -multiInst -nosession {1} &".format(editorPath, GetConfigurationPathRelativeToCurrentDirectory("../helpers/Project/project_helper.py")))
+            project.editor.run()
     
     def help(self):
         """ Print Package usage """

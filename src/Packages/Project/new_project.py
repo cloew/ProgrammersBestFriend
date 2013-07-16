@@ -14,18 +14,18 @@ class NewProject:
     
     def run(self, args):
         """ Run the package """
-        self.createNewProject(args[0], args[1])
+        self.createNewProject(args[0], args[1], args[2:])
        
-    def createNewProject(self, projectPath, editor):
+    def createNewProject(self, projectPath, editor, editorArguments):
         """ Create a new project """
         tree = GetProjectXMLTree()
         if not HasProjectWithPath(projectPath):
-            self.createProjectXML(tree.getroot(), projectPath, editor)
+            self.createProjectXML(tree.getroot(), projectPath, editor, editorArguments)
             SaveProjectXML(tree)
         else:
             print "A Project for", GetProjectNameFromPath(projectPath), "already exisits"
         
-    def createProjectXML(self, projectsElement, projectPath, editor):
+    def createProjectXML(self, projectsElement, projectPath, editor, editorArguments):
         """ Creaete the Project XML """
         projectElement = SubElement(projectsElement, "project")
         pathElement = SubElement(projectElement, "path")
@@ -33,7 +33,13 @@ class NewProject:
         nameElement = SubElement(projectElement, "name")
         nameElement.text = GetProjectNameFromPath(projectPath)
         editorElement = SubElement(projectElement, "editor")
-        editorElement.text = GetRelativePathFromConfigurationsDirectory(editor)
+        editorCommandElement = SubElement(editorElement, "command")
+        editorCommandElement.text = GetRelativePathFromConfigurationsDirectory(editor)
+        editorArgumentsElement = SubElement(editorElement, "arguments")
+        
+        for argument in editorArguments:
+            editorArgumentElement = SubElement(editorArgumentsElement, "argument")
+            editorArgumentElement.text = argument
     
     def help(self):
         """ Print Package usage """
