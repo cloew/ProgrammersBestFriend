@@ -18,11 +18,6 @@ class Project:
         """ Return the Project path """
         return self.projectXML.find('path').text
         
-    # @property
-    # def editor(self):
-        # """ Return the Project editor """
-        # return self.projectXML.find('editor').text
-        
     def __repr__(self):
         """ Return the string representation """
         return self.name
