@@ -32,3 +32,9 @@ def CreateFileIfItDoesNotExist(filename):
     if not os.path.exists(filename):
         with open(filename, 'w'):
             pass
+            
+def IsParentDirectory(parent=None, child=None):
+    """ Returns if the 1st argument is a parent direectory of the second """
+    parentAbsolutePath = os.path.abspath(parent)
+    childAbsolutePath = os.path.abspath(child)
+    return childAbsolutePath.startswith(parentAbsolutePath)

@@ -1,4 +1,5 @@
 from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
+from helpers.file_helper import IsParentDirectory
 from helpers.filename_helper import GetBaseFilenameWithoutExtension
 from helpers.Project.project import Project
 
@@ -42,6 +43,18 @@ def GetProjectFromPath(projectPath):
     for projectXML in tree.getroot().findall("project"):
         pathXML = projectXML.find("path")
         if cleanedPath == pathXML.text:
+            return Project(projectXML)
+    else:
+        return None
+        
+def GetParentProjectFromDirectory(directory=os.getcwd()):
+    """ Returns the project that is the parent to the given directory """
+    tree = GetProjectXMLTree()
+    cleanedPath = GetRelativePathFromConfigurationsDirectory(directory)
+    
+    for projectXML in tree.getroot().findall("project"):
+        pathXML = projectXML.find("path")
+        if IsParentDirectory(parent=pathXML.text, child=cleanedPath):
             return Project(projectXML)
     else:
         return None
