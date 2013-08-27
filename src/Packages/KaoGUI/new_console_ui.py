@@ -17,7 +17,7 @@ class NewConsoleUI:
         """ ADD LOGIC TO RUN THE PACKAGE HERE """
         filename = RemoveFileExtension(args[0])
         uiName = GetPythonClassnameFromFilename(filename)
-        print "Creating Pandemic Console Controller & View:", uiName
+        print "Creating Console Controller & View:", uiName
         
         consoleViewPackage = NewConsoleView()
         consoleControllerPackage = NewConsoleController()
@@ -28,6 +28,6 @@ class NewConsoleUI:
     def help(self):
         """  """
         print "Usage: pbf {category} {command} [path/to/ui]".format(category=self.category, command=self.command)
-        print "\tWill create a Pandemic Console COntroller & View at the path given"
+        print "\tWill create a Console Controller & View at the path given"
     
 package_manager.RegisterPackage(NewConsoleUI)
