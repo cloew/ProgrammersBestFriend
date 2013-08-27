@@ -7,23 +7,23 @@ class NewConsoleView:
     """ Creates a new Console View """
     category = "new"
     command = "cns-view"
-    description = "Creates a new Pandemic Console View"
+    description = "Creates a new Console View"
     minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Create the Console View """
         viewFileName = args[0]
         viewName = GetPythonClassnameFromFilename(viewFileName)
-        print "Creating Pandemic Console View:", viewName, "at:", viewFileName
+        print "Creating Console View:", viewName, "at:", viewFileName
         self.createView(viewFileName, viewName)
         
     def createView(self, viewFileName, viewName):
         """ Create the controller file """
-        template_manager.CopyTemplate(viewFileName, "Pandemic/console_view.py", {"%ViewName%":viewName})
+        template_manager.CopyTemplate(viewFileName, "KaoGUI/console_view.py", {"%ViewName%":viewName})
     
     def help(self):
         """  """
         print "Usage: pbf {category} {command} [path/to/view]".format(category=self.category, command=self.command)
-        print "\tWill create a Pandemic Console View at the path given"
+        print "\tWill create a Console View at the path given"
     
 package_manager.RegisterPackage(NewConsoleView)

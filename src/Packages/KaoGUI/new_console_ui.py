@@ -10,7 +10,7 @@ class NewConsoleUI:
     """ Creates a new Console Controller & View """
     category = "new"
     command = "cns-ui"
-    description = "Crates a new Pandemic Console UI controller and view"
+    description = "Crates a new Console UI controller and view"
     minimumNumberOfArguments = 1
     
     def run(self, args):
@@ -22,7 +22,7 @@ class NewConsoleUI:
         consoleViewPackage = NewConsoleView()
         consoleControllerPackage = NewConsoleController()
         
-        consoleViewPackage.createView(filename+"_view.py", uiName+"View")
+        consoleViewPackage.createView(filename+"_screen.py", uiName+"Screen")
         consoleControllerPackage.createController(filename+"_controller.py", uiName+"Controller")
     
     def help(self):

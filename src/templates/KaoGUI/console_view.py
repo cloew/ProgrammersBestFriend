@@ -5,5 +5,5 @@ class %ViewName%:
     def __init__(self):
         """ Initialize the view """
         
-    def display(self):
-        """ Display the *** """
+    def draw(self):
+        """ Draw the *** """
