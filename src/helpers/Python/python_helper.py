@@ -7,7 +7,9 @@ import os
 def GetPythonPackageForFilename(rootDirectory, filename):
     """ Return the Python Package Path for the given filename from the given Python root """
     if rootDirectory is not None:
+        print "Filename:", filename
         path = os.path.relpath(filename, rootDirectory)
+        print "Relative Path:", path
         path = RemoveFileExtension(path)
         path = path.replace("/", ".")
         return path.replace("\\", ".")
@@ -17,7 +19,9 @@ def GetPythonPackageForFilename(rootDirectory, filename):
 def GetPythonImportString(filenameToImportFrom, imports, asName=None):
     """ Constructs and returns a Python Import Line """
     packageRoot = GetPythonRootForFilename(filenameToImportFrom)
+    print "Package Root:", packageRoot
     package = GetPythonPackageForFilename(packageRoot, filenameToImportFrom)
+    print "Package:", package
     asString = ""
     
     if asName is not None and len(imports) == 1:

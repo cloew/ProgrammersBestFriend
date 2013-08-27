@@ -1,5 +1,4 @@
-from View.Console.%ViewFilename% import %ViewName%
-
+%ViewImport%
 from kao_gui.console.console_controller import ConsoleController
 
 class %ControllerName%(ConsoleController):
@@ -7,4 +6,5 @@ class %ControllerName%(ConsoleController):
     
     def __init__(self):
         """ Initialize the *** Controller """
-        ConsoleController.__init__(self, %ViewName%())
+        screen = %ViewName%()
+        ConsoleController.__init__(self, screen)

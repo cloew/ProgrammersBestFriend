@@ -1,4 +1,5 @@
 from helpers.filename_helper import GetPythonClassnameFromFilename, GetFilenameFromClassname
+from helpers.Python.python_helper import GetPythonImportString
 
 from Packages import package_manager
 import templates.template_manager as template_manager
@@ -20,9 +21,10 @@ class NewConsoleController:
     def createController(self, controllerFileName, controllerName, ):
         """ Create the controller file """
         viewName = controllerName.replace("Controller", "Screen")
+        viewFileName = controllerFileName.replace("controller", "screen")
         template_manager.CopyTemplate(controllerFileName, "KaoGUI/console_controller.py", {"%ControllerName%":controllerName,
                                                                                            "%ViewName%":viewName,
-                                                                                           "%ViewFilename%":GetFilenameFromClassname(viewName)})
+                                                                                           "%ViewImport%":GetPythonImportString(viewFileName, [viewName])})
     
     def help(self):
         """  """
