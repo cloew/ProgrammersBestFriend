@@ -1,21 +1,36 @@
 from tab_completion_manager import PrintTabCompletion
+from Packages.Core.package_list import PackageList
+
+RootPackageList = PackageList()
 
 __Packages__ = {}
 
-def RegisterPackage(package):
+def RegisterPackage(package, category=None):
     """ Registers a Package with the Package Manager """
-    if package.category not in __Packages__:
-        __Packages__[package.category] = {}
-    __Packages__[package.category][package.command] = package
+    if hasattr(package, "category"):
+        category = package.category
+        
+    packageList = RootPackageList
+    for category in category.split('/'):
+        if category in packageList:
+            packageList = packageList[category]
+        else:
+            newPackageList = PackageList(category)
+            packageList.addPackage(category, newPackageList)
+            packageList = newPackageList
+    
+    packageList.addPackage(package.command, package())
+    # if package.category not in __Packages__:
+        # __Packages__[package.category] = {}
+    # __Packages__[package.category][package.command] = package
     
 def Run(arguments):
     """ Try to Run the given Package """
-    if len(arguments) == 0:
-        PrintCategories()
-    elif arguments[0] == "-c":
-        PrintTabCompletion(__Packages__, arguments[1:])
+    if len(arguments) > 0 and arguments[0] == "-c":
+        PrintTabCompletion(RootPackageList, arguments[1:])
     else:
-        RunCategory(arguments[0], arguments[1:])
+        RootPackageList.run(arguments)
+        # RunCategory(arguments[0], arguments[1:])
         
 def RunCategory(category, arguments):
     """ Run the category """

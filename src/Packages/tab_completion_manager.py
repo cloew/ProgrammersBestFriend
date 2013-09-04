@@ -1,11 +1,11 @@
 
-def PrintTabCompletion(packages, arguments):
+def PrintTabCompletion(rootPackageList, arguments):
     """  """
-    results = []
-    if len(arguments) == 0:
-        results = GetCategoriesForTabCompletion(packages)
-    elif len(arguments) == 1:
-        results = GetCommandsForTabCompletion(packages, arguments[0])
+    results = rootPackageList.getCategories(arguments)
+    # if len(arguments) == 0:
+        # results = GetCategoriesForTabCompletion(packages)
+    # elif len(arguments) == 1:
+        # results = GetCommandsForTabCompletion(packages, arguments[0])
         
     results.sort()
     print " ".join(results)
