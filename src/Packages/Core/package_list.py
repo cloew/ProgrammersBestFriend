@@ -24,13 +24,13 @@ class PackageList:
         """ Add the Package to run for the given category """
         self.packages[category] = package
         
-    def getCategories(self, arguments):
-        """ Return the categories """
+    def getTabCompletion(self, arguments):
+        """ Return the tab completion for the given arguments """
         if len(arguments) == 0:
             return self.packages.keys()
         elif arguments[0] in self.packages:
-            if hasattr(self.packages[arguments[0]], "getCategories"):
-                return self.packages[arguments[0]].getCategories(arguments[1:])
+            if hasattr(self.packages[arguments[0]], "getTabCompletion"):
+                return self.packages[arguments[0]].getTabCompletion(arguments[1:])
             else:
                 return []
         else:

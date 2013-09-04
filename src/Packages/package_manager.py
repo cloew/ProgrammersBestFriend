@@ -36,7 +36,7 @@ def Run(arguments):
         
 def GetTabCompletion(rootPackageList, arguments):
     """ Return the tab completion strings """
-    results = rootPackageList.getCategories(arguments)
+    results = rootPackageList.getTabCompletion(arguments)
         
     results.sort()
     print " ".join(results)
