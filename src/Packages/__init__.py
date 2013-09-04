@@ -7,7 +7,9 @@ def GetImmediateSubdirectories(directory):
             
 def GetPackageName(directory):
     """ Return the Python package Name for the given directory """
-    package_paths = directory.split("Packages")[1].split("/")
+    directoryString = directory.split("Packages")[1]
+    directoryString = directoryString.replace("\\", "/")
+    package_paths = directoryString.split("/")
     if '' in package_paths:
         package_paths.remove('')
     package_paths = ["Packages"] + package_paths

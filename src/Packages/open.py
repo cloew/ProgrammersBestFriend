@@ -2,6 +2,9 @@ from Packages import package_manager
 
 from subprocess import call
 
+import os
+import sys
+
 class Open:
     """ Package to open a given file """
     command = "open"
@@ -16,7 +19,11 @@ class Open:
         
     def open(self, file):
         """ Open the given file """
-        self.__open_cygwin__(file)
+        platform = sys.platform
+        if platform == 'cygwin':
+            self.__open_cygwin__(file)
+        elif platform == 'win32':
+            self.__open_windows__(file)
         
     def __open_cygwin__(self, file):
         """ Open the file on Cygwin """
@@ -24,7 +31,7 @@ class Open:
         
     def __open_windows__(self, file):
         """ Open the file on Windows """
-        call([file])
+        call(["start", file])
     
     def help(self):
         """ Print Package usage """
