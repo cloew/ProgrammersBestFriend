@@ -9,10 +9,9 @@ _pbf_completion()
     IFS=" "
     COMP_JOIN="${COMP_WORDS[*]}"
     IFS=$SAVE_IFS
+    text=`pbf -c $COMP_JOIN`
     
-    if [ $COMP_CWORD -lt 3 ] 
-    then
-        text=`pbf -c $COMP_JOIN`
+    if [ -n "$text" ]; then
         COMPREPLY=( $(compgen -W "$text" -- $cur) )
     else
         COMPREPLY=( $(compgen -f -- $cur) )
