@@ -9,7 +9,7 @@ def GetPackageName(directory):
     """ Return the Python package Name for the given directory """
     package_paths = directory.split("Packages")[1].split("/")
     if '' in package_paths:
-            package_paths.remove('')
+        package_paths.remove('')
     package_paths = ["Packages"] + package_paths
     return ".".join(package_paths)
 
