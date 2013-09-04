@@ -10,19 +10,22 @@ def RegisterPackage(package, category=None):
     if hasattr(package, "category"):
         category = package.category
         
-    packageList = RootPackageList
-    for category in category.split('/'):
-        if category in packageList:
-            packageList = packageList[category]
-        else:
-            newPackageList = PackageList(category)
-            packageList.addPackage(category, newPackageList)
-            packageList = newPackageList
+    packageList = GetPackageListForCategory(category)
     
     packageList.addPackage(package.command, package())
-    # if package.category not in __Packages__:
-        # __Packages__[package.category] = {}
-    # __Packages__[package.category][package.command] = package
+    
+def GetPackageListForCategory(category):
+    """ Returns the Package List for the given category """
+    packageList = RootPackageList
+    if category is not None and category != '':
+        for category in category.split('/'):
+            if category in packageList:
+                packageList = packageList[category]
+            else:
+                newPackageList = PackageList(category)
+                packageList.addPackage(category, newPackageList)
+                packageList = newPackageList
+    return packageList
     
 def Run(arguments):
     """ Try to Run the given Package """
