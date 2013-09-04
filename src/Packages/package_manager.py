@@ -30,6 +30,13 @@ def GetPackageListForCategory(category):
 def Run(arguments):
     """ Try to Run the given Package """
     if len(arguments) > 0 and arguments[0] == "-c":
-        PrintTabCompletion(RootPackageList, arguments[1:])
+        GetTabCompletion(RootPackageList, arguments[1:])
     else:
         RootPackageList.run(arguments)
+        
+def GetTabCompletion(rootPackageList, arguments):
+    """ Return the tab completion strings """
+    results = rootPackageList.getCategories(arguments)
+        
+    results.sort()
+    print " ".join(results)
