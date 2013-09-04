@@ -31,7 +31,7 @@ class Open:
         
     def __open_windows__(self, file):
         """ Open the file on Windows """
-        call(["start", file])
+        os.system("START {0}".format(file))
     
     def help(self):
         """ Print Package usage """
