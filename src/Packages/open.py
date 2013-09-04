@@ -20,9 +20,9 @@ class Open:
     def open(self, file):
         """ Open the given file """
         platform = sys.platform
-        if platform == 'cygwin':
+        if platform .startswith('cygwin'):
             self.__open_cygwin__(file)
-        elif platform == 'win32':
+        elif platform .startswith('win32'):
             self.__open_windows__(file)
         
     def __open_cygwin__(self, file):
