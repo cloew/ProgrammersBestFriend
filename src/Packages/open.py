@@ -1,15 +1,20 @@
+from helpers.os_helper import GetActionForOS
 from Packages import package_manager
 
 from subprocess import call
 
 import os
-import sys
 
 class Open:
     """ Package to open a given file """
     command = "open"
     description = "Open the provided file in the default editor." # ADD DESCRIPTION HERE
     minimumNumberOfArguments = 1 # SET MINIMUM NUMBER OF REQUIRED ARGUMENTS
+    
+    def __init__(self):
+        """ Initialize the Open package """
+        self.osActions = {'cygwin':self.__open_cygwin__,
+                          'win32':self.__open_windows__}
     
     def run(self, args):
         """ Run the package """
@@ -19,11 +24,11 @@ class Open:
         
     def open(self, file):
         """ Open the given file """
-        platform = sys.platform
-        if platform .startswith('cygwin'):
-            self.__open_cygwin__(file)
-        elif platform .startswith('win32'):
-            self.__open_windows__(file)
+        action = GetActionForOS(self.osActions)
+        if action is not None:
+            action(file)
+        else:
+            print "Cannot open a file on this OS."
         
     def __open_cygwin__(self, file):
         """ Open the file on Cygwin """
