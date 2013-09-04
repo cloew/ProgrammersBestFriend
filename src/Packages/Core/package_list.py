@@ -29,7 +29,10 @@ class PackageList:
         if len(arguments) == 0:
             return self.packages.keys()
         elif arguments[0] in self.packages:
-            return self.packages[arguments[0]].getCategories(arguments[1:])
+            if hasattr(self.packages[arguments[0]], "getCategories"):
+                return self.packages[arguments[0]].getCategories(arguments[1:])
+            else:
+                return []
         else:
             return []
         
