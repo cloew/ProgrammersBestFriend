@@ -39,7 +39,7 @@ class Open:
         """ Open the file on Windows """
         os.system("START {0}".format(file))
         
-    def __open_on_mac__(self, file):
+    def __open_mac__(self, file):
         """ Open the file on Mac """
         call(["open", file])
     
