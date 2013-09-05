@@ -1,4 +1,3 @@
-from tab_completion_manager import PrintTabCompletion
 from Packages.Core.package_list import PackageList
 
 RootPackageList = PackageList()

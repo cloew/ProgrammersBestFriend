@@ -14,7 +14,7 @@ class Open:
     def __init__(self):
         """ Initialize the Open package """
         self.osActions = {'cygwin':self.__open_cygwin__,
-                          'darwin':self.__open_mac__
+                          'darwin':self.__open_mac__,
                           'win32':self.__open_windows__}
     
     def run(self, args):
