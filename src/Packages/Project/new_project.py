@@ -21,7 +21,7 @@ class NewProject:
         tree = GetProjectXMLTree()
         if not HasProjectWithPath(projectPath):
             self.createProjectXML(tree.getroot(), projectPath, editor, editorArguments)
-            SaveProjectXML(tree)
+            SaveProjectXML()
         else:
             print "A Project for", GetProjectNameFromPath(projectPath), "already exisits"
         
@@ -36,6 +36,7 @@ class NewProject:
         editorCommandElement = SubElement(editorElement, "command")
         editorCommandElement.text = GetRelativePathFromConfigurationsDirectory(editor)
         editorArgumentsElement = SubElement(editorElement, "arguments")
+        recentFilesElement = SubElement(projectElement, "recent_files")
         
         for argument in editorArguments:
             editorArgumentElement = SubElement(editorArgumentsElement, "argument")

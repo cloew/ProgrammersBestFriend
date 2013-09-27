@@ -1,4 +1,7 @@
 from helpers.Project.editor import Editor
+from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
+
+from xml.etree.ElementTree import SubElement
 
 class Project:
     """ Represents a PBF Project """
@@ -7,6 +10,14 @@ class Project:
         """ Initialize the Project with the project XML """
         self.projectXML = projectXML
         self.editor = Editor(self.projectXML.find('editor'))
+        
+    def addRecentFile(self, filename):
+        """ Add a file to the recently opened section of the Project XML """
+        recentFilesElement = self.projectXML.find('recent_files')
+        if recentFilesElement is None:
+            recentFilesElement = SubElement(self.projectXML, "recent_files")
+        recentFileElement = SubElement(recentFilesElement, "recent_file")
+        recentFileElement.text = GetRelativePathFromConfigurationsDirectory(filename)
         
     @property
     def name(self):

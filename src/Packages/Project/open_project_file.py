@@ -1,4 +1,4 @@
-from helpers.Project.project_helper import GetParentProjectFromDirectory
+from helpers.Project.project_helper import GetParentProjectFromDirectory, SaveProjectXML
 
 from Packages import package_manager
 
@@ -6,7 +6,7 @@ class OpenProjectFile:
     """ Open a file within the current Project Context """
     category = "project"
     command = "open"
-    description = "OPen a file within the currrent project"
+    description = "Open a file within the currrent project"
     minimumNumberOfArguments = 1
     
     def run(self, args):
@@ -19,6 +19,8 @@ class OpenProjectFile:
     def open(self, filename, project):
         """ Open the file for the given project """
         project.editor.open(filename)
+        project.addRecentFile(filename)
+        SaveProjectXML()
     
     def help(self):
         """ Print Package usage """

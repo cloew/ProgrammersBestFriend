@@ -7,17 +7,22 @@ from xml.etree.ElementTree import parse, Element, ElementTree
 
 import os
 
+__project_xml_tree__ = None
+
 def GetProjectXMLFilename():
     """ Return the Project XML filename """
     return GetConfigurationsFilename("project.xml")
 
 def GetProjectXMLTree():
     """ Return the Project XML Tree """
+    global __project_xml_tree__
     projectFilename = GetProjectXMLFilename()
-    if os.path.exists(projectFilename):
-        return parse(projectFilename)
-    else:
-        return CreateConfigurationXML()
+    if __project_xml_tree__ is None:
+        if os.path.exists(projectFilename):
+            __project_xml_tree__ = parse(projectFilename)
+        else:
+            __project_xml_tree__ = CreateConfigurationXML()
+    return __project_xml_tree__
     
 def CreateConfigurationXML():
     """ Create the Configuration XML """
@@ -27,9 +32,9 @@ def CreateConfigurationXML():
     tree.write(projectFilename)
     return tree
     
-def SaveProjectXML(tree):
+def SaveProjectXML():
     """ Save the Project XML with the given tree """
-    tree.write(GetProjectXMLFilename())
+    __project_xml_tree__.write(GetProjectXMLFilename())
     
 def HasProjectWithPath(projectPath):
     """ Returns if there is a project with the given path """
