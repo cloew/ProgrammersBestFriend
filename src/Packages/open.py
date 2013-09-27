@@ -8,8 +8,8 @@ import os
 class Open:
     """ Package to open a given file """
     command = "open"
-    description = "Open the provided file in the default editor." # ADD DESCRIPTION HERE
-    minimumNumberOfArguments = 1 # SET MINIMUM NUMBER OF REQUIRED ARGUMENTS
+    description = "Open the provided file in the default editor."
+    minimumNumberOfArguments = 1
     
     def __init__(self):
         """ Initialize the Open package """
