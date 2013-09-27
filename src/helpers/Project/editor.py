@@ -12,8 +12,8 @@ class Editor:
         for argumentElement in self.editorElement.find("arguments").findall("argument"):
             self.arguments.append(argumentElement.text)
         
-    def run(self):
-        """ Run the Editor Command """
+    def start(self):
+        """ Start the Editor Command """
         commandString = "{0} {1}".format(self.command, " ".join(self.arguments))
         os.system(commandString)
         

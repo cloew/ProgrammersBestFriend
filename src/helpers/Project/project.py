@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
+from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationPathRelativeToCurrentDirectory
 from helpers.Project.editor import Editor
 from helpers.Project.project_xml_helper import SaveProjectXML
 
@@ -11,6 +11,12 @@ class Project:
         """ Initialize the Project with the project XML """
         self.projectXML = projectXML
         self.editor = Editor(self.projectXML.find('editor'))
+        
+    def start(self):
+        """ Start the Project """
+        self.editor.start()
+        for filename in self.recentFiles:
+            self.editor.open(filename)
         
     def open(self, filename):
         """ Open the given filename within the context of the current project """
@@ -30,6 +36,12 @@ class Project:
     def name(self):
         """ Return the Project name """
         return self.projectXML.find('name').text
+        
+    @property
+    def recentFiles(self):
+        """ Return the Project path """
+        recentFilesElement = self.projectXML.find('recent_files')
+        return [GetConfigurationPathRelativeToCurrentDirectory(recentFileElement.text) for recentFileElement in recentFilesElement.findall('recent_file')]
         
     @property
     def path(self):

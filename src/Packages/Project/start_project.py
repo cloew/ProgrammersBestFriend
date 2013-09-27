@@ -26,7 +26,7 @@ class StartProject:
         if project is None:
             print "No project:", project
         else:
-            project.editor.run()
+            project.start()
     
     def help(self):
         """ Print Package usage """
