@@ -25,12 +25,16 @@ class Project:
         
     def addRecentFile(self, filename):
         """ Add a file to the recently opened section of the Project XML """
+        
         recentFilesElement = self.projectXML.find('recent_files')
+        
         if recentFilesElement is None:
             recentFilesElement = SubElement(self.projectXML, "recent_files")
-        recentFileElement = SubElement(recentFilesElement, "recent_file")
-        recentFileElement.text = GetRelativePathFromConfigurationsDirectory(filename)
-        SaveProjectXML()
+            
+        if filename not in self.recentFiles:
+            recentFileElement = SubElement(recentFilesElement, "recent_file")
+            recentFileElement.text = GetRelativePathFromConfigurationsDirectory(filename)
+            SaveProjectXML()
         
     @property
     def name(self):
@@ -39,7 +43,7 @@ class Project:
         
     @property
     def recentFiles(self):
-        """ Return the Project path """
+        """ Return the Recent Files relative to the current directory """
         recentFilesElement = self.projectXML.find('recent_files')
         return [GetConfigurationPathRelativeToCurrentDirectory(recentFileElement.text) for recentFileElement in recentFilesElement.findall('recent_file')]
         
