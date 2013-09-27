@@ -1,5 +1,6 @@
-from helpers.Project.editor import Editor
 from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
+from helpers.Project.editor import Editor
+from helpers.Project.project_xml_helper import SaveProjectXML
 
 from xml.etree.ElementTree import SubElement
 
@@ -23,6 +24,7 @@ class Project:
             recentFilesElement = SubElement(self.projectXML, "recent_files")
         recentFileElement = SubElement(recentFilesElement, "recent_file")
         recentFileElement.text = GetRelativePathFromConfigurationsDirectory(filename)
+        SaveProjectXML()
         
     @property
     def name(self):

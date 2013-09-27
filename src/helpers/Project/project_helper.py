@@ -1,40 +1,10 @@
-from helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory
+from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
 from helpers.file_helper import IsParentDirectory
 from helpers.filename_helper import GetBaseFilenameWithoutExtension
 from helpers.Project.project import Project
-
-from xml.etree.ElementTree import parse, Element, ElementTree
+from helpers.Project.project_xml_helper import GetProjectXMLTree
 
 import os
-
-__project_xml_tree__ = None
-
-def GetProjectXMLFilename():
-    """ Return the Project XML filename """
-    return GetConfigurationsFilename("project.xml")
-
-def GetProjectXMLTree():
-    """ Return the Project XML Tree """
-    global __project_xml_tree__
-    projectFilename = GetProjectXMLFilename()
-    if __project_xml_tree__ is None:
-        if os.path.exists(projectFilename):
-            __project_xml_tree__ = parse(projectFilename)
-        else:
-            __project_xml_tree__ = CreateConfigurationXML()
-    return __project_xml_tree__
-    
-def CreateConfigurationXML():
-    """ Create the Configuration XML """
-    projectFilename = GetProjectXMLFilename()
-    element = Element("projects")
-    tree = ElementTree(element)
-    tree.write(projectFilename)
-    return tree
-    
-def SaveProjectXML():
-    """ Save the Project XML with the given tree """
-    __project_xml_tree__.write(GetProjectXMLFilename())
     
 def HasProjectWithPath(projectPath):
     """ Returns if there is a project with the given path """

@@ -1,5 +1,6 @@
 from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
-from helpers.Project.project_helper import GetProjectNameFromPath, GetProjectXMLFilename, GetProjectXMLTree, HasProjectWithPath, SaveProjectXML
+from helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
+from helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
 
 from Packages import package_manager
 

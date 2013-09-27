@@ -1,4 +1,4 @@
-from helpers.Project.project_helper import GetParentProjectFromDirectory, SaveProjectXML
+from helpers.Project.project_helper import GetParentProjectFromDirectory
 
 from Packages import package_manager
 
@@ -19,7 +19,6 @@ class OpenProjectFile:
     def open(self, filename, project):
         """ Open the file for the given project """
         project.open(filename)
-        SaveProjectXML()
     
     def help(self):
         """ Print Package usage """
