@@ -17,6 +17,11 @@ class Editor:
         commandString = "{0} {1}".format(self.command, " ".join(self.arguments))
         os.system(commandString)
         
+    def open(self, filename):
+        """ Open the given file """
+        commandString = "{0} {1}".format(self.command, filename)
+        os.system(commandString)
+        
     @property
     def command(self):
         """ Return the Project Command """
