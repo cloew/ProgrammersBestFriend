@@ -1,7 +1,7 @@
 from helpers.configuration_helper import GetConfigurationsFilename
+from helpers.XML.xml_helper import SaveEtreeXMLPrettily
 
-from xml.dom.minidom import parseString
-from xml.etree.ElementTree import parse, tostring, Element, ElementTree
+from xml.etree.ElementTree import parse, Element, ElementTree
 
 import os
 
@@ -32,8 +32,9 @@ def CreateConfigurationXML():
     
 def SaveProjectXML():
     """ Save the Project XML with the given tree """
-    xmlString = tostring(__project_xml_tree__.getroot())
-    xml = parseString(xmlString)
-    prettyXMLString = xml.toprettyxml()
-    with open(GetProjectXMLFilename(), 'w') as file:
-        file.write(prettyXMLString)
+    SaveEtreeXMLPrettily(__project_xml_tree__, GetProjectXMLFilename())
+    # xmlString = tostring(__project_xml_tree__.getroot())
+    # xml = parseString(xmlString)
+    # prettyXMLString = xml.toprettyxml()
+    # with open(GetProjectXMLFilename(), 'w') as file:
+        # file.write(prettyXMLString)
