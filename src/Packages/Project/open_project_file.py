@@ -18,8 +18,7 @@ class OpenProjectFile:
         
     def open(self, filename, project):
         """ Open the file for the given project """
-        project.editor.open(filename)
-        project.addRecentFile(filename)
+        project.open(filename)
         SaveProjectXML()
     
     def help(self):

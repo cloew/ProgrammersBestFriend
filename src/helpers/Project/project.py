@@ -11,6 +11,11 @@ class Project:
         self.projectXML = projectXML
         self.editor = Editor(self.projectXML.find('editor'))
         
+    def open(self, filename):
+        """ Open the given filename within the context of the current project """
+        self.editor.open(filename)
+        self.addRecentFile(filename)
+        
     def addRecentFile(self, filename):
         """ Add a file to the recently opened section of the Project XML """
         recentFilesElement = self.projectXML.find('recent_files')
