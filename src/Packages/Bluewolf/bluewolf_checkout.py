@@ -9,9 +9,6 @@ class BluewolfCheckout:
     description = "Checkout a Client Salesforce Organization"
     minimumNumberOfArguments = 2
     
-    svnPath = "https://pl5.projectlocker.com/bluewolf/codeblue/svn"
-    svnClientPath = svnPath+"/clients"
-    
     def run(self, args):
         """ Run the package """
         requestedClient = args[0]
