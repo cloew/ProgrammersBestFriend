@@ -8,7 +8,7 @@ def GetClients():
     return GetOutputList(["svn", "ls", svnClientPath])
     
 def FindClient(requestedClient, clients):
-    """ Return the requested Client """
+    """ Return the requested Client if it exists """
     return FindItem(requestedClient, clients)
     
 def GetClientOrganizationTypes(client):
@@ -16,10 +16,17 @@ def GetClientOrganizationTypes(client):
     return GetOutputList(["svn", "ls", svnClientPath+"/"+client])
     
 def FindOrganizationType(requestedType, organizationTypes):
-    """ Return the Organization Type Directory that matches the requested type """
+    """ Return the requested Organization Type if it exists """
     return FindItem(requestedType, organizationTypes)
     
-
+def GetClientOrganizations(client, type):
+    """ Return the Client Organizations for the specified type """
+    return GetOutputList(["svn", "ls", svnClientPath+'/'+client+'/'+type])
+    
+def FindClientOrganziation(requestedOrganization, organizations):
+    """ Return the requested Organization if it exists """
+    return FindItem(requestedOrganization, organizations)
+    
 def FindMatchingClients(requestedClient, clients):
     """ Return all matching client names """
     matchingClients = []
