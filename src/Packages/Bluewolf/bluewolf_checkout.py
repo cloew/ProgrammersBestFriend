@@ -15,16 +15,17 @@ class BluewolfCheckout:
     
     def run(self, args):
         """ Run the package """
-        client = args[0]
+        requestedClient = args[0]
         requestedType = args[1]
         
         clients = self.getClients()
-        print clients
+        client = self.findClient(requestedClient, clients)
+        print client
         
         clientOrganizationTypes = self.getClientOrganizationTypes(client)
         print clientOrganizationTypes
         
-        type = self.getOrganizationType(requestedType, clientOrganizationTypes)
+        type = self.findOrganizationType(requestedType, clientOrganizationTypes)
         print type
         
         if type is None:
@@ -34,18 +35,17 @@ class BluewolfCheckout:
         """ Return the possible clients """
         return self.getOutputList(["svn", "ls", BluewolfCheckout.svnClientPath])
         
+    def findClient(self, requestedClient, clients):
+        """ Return the requested Client """
+        return self.findItem(requestedClient, clients)
+        
     def getClientOrganizationTypes(self, client):
         """ Return the Client Organization Types """
         return self.getOutputList(["svn", "ls", BluewolfCheckout.svnClientPath+"/"+client])
         
-    def getOrganizationType(self, requestedType, organizationTypes):
+    def findOrganizationType(self, requestedType, organizationTypes):
         """ Return the Organization Type Directory that matches the requested type """
-        for type in organizationTypes:
-            cleanedType = type.replace('/', '')
-            if cleanedType.lower() in requestedType.lower():
-                return type
-        else:
-            return None
+        return self.findItem(requestedType, organizationTypes)
             
     def displayOrganizationTypeNotFound(self, requestedType, organizationTypes):
         """ Display the possible Organization Types """
@@ -60,6 +60,15 @@ class BluewolfCheckout:
         outputList = output.split('\n')
         outputList.remove('')
         return outputList
+        
+    def findItem(self, requestedItem, items):
+        """ Find and return the requested item from the items list """
+        for item in items:
+            cleanedItem = item.replace('/', '')
+            if cleanedItem.lower() in requestedItem.lower():
+                return item
+        else:
+            return None
     
     def help(self):
         """ Print Package usage """
