@@ -2,7 +2,7 @@ from Packages import package_manager
 
 from helpers.Bluewolf.error_helper import DisplayPossibleOrganizationTypes, DisplayPossibleOrganizations
 from helpers.Bluewolf.not_found_exception import NotFoundException
-from helpers.Bluewolf.svn_helper import FindClient, FindOrganizationTypeForClient, FindOrganizationForClientAndType, GetClientOrganizationTypes, GetClientOrganizations
+from helpers.Bluewolf.svn_helper import Checkout, FindClient, FindOrganizationTypeForClient, FindOrganizationForClientAndType, GetClientOrganizationTypes, GetClientOrganizations
 
 class BluewolfCheckout:
     """ Checkout a project from Bluewolf """
@@ -35,7 +35,7 @@ class BluewolfCheckout:
         client, type, organization = FindOrganizationForClientAndType(requestedClient, requestedType, requestedOrganization)
         
         if client is not None and type is not None and organization is not None:
-            print "Found a full path"
+            Checkout(client, type, organization, "{0}-{1}".format(type.lower().replace('/', ''), organization.lower().replace('/', '')))
                 
     def unpackArguments(self, args):
         """ Unpack the arguments """

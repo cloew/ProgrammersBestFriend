@@ -2,8 +2,15 @@ from helpers.os_helper import RunCommand
 from helpers.Bluewolf.error_helper import GetClientNotFoundMessage, GetOrganizationTypeNotFoundMessage, GetOrganizationNotFoundMessage
 from helpers.Bluewolf.not_found_exception import NotFoundException
 
+from subprocess import call
+
 svnPath = "https://pl5.projectlocker.com/bluewolf/codeblue/svn"
 svnClientPath = svnPath+"/clients"
+
+def Checkout(client, organizationType, organization, destination):
+    """ Checkout the svn directory to the given destination """
+    fullSVNPath = "{0}/{1}/{2}/{3}".format(svnClientPath, client, organizationType, organization)
+    call(["svn", "checkout", fullSVNPath, destination])
 
 def GetClients():
     """ Return the possible clients """
