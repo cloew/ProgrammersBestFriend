@@ -1,63 +1,53 @@
 from Packages import package_manager
 
-from helpers.Bluewolf.svn_helper import GetClients, FindClient, GetClientOrganizationTypes, FindOrganizationType, GetClientOrganizations, FindClientOrganziation, FindMatchingClients
+from helpers.Bluewolf.error_helper import DisplayPossibleOrganizationTypes, DisplayPossibleOrganizations
+from helpers.Bluewolf.not_found_exception import NotFoundException
+from helpers.Bluewolf.svn_helper import FindClient, FindOrganizationTypeForClient, FindOrganizationForClientAndType, GetClientOrganizationTypes, GetClientOrganizations
 
 class BluewolfCheckout:
-    """ Checkout a project from Blueowlf """
+    """ Checkout a project from Bluewolf """
     category = "bluewolf"
     command = "checkout"
     description = "Checkout a Client Salesforce Organization"
-    minimumNumberOfArguments = 2
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Run the package """
-        requestedClient = args[0]
-        requestedType = args[1]
-        requestedOrganization = args[2]
+        self.unpackArguments(args)
         
-        self.checkout(requestedClient, requestedType, requestedOrganization)
+        try:
+            if len(args) == 1:
+                client = FindClient(self.requestedClient)
+                organizationTypes = GetClientOrganizationTypes(client)
+                DisplayPossibleOrganizationTypes(organizationTypes)
+            elif len(args) == 2:
+                client, type = FindOrganizationTypeForClient(self.requestedClient, self.requestedType)
+                organizations = GetClientOrganizations(client, type)
+                DisplayPossibleOrganizations(organizations)
+            else:
+                self.checkout(self.requestedClient, self.requestedType, self.requestedOrganization)
+
+        except NotFoundException as exception:
+            print exception.message
         
     def checkout(self, requestedClient, requestedType, requestedOrganization):
         """ Checkout the SVN folder for the given client and type if possible """
-        clients = GetClients()
-        client = FindClient(requestedClient, clients)
+        client, type, organization = FindOrganizationForClientAndType(requestedClient, requestedType, requestedOrganization)
         
-        if client is not None:
-            clientOrganizationTypes = GetClientOrganizationTypes(client)
-            type = FindOrganizationType(requestedType, clientOrganizationTypes)
+        if client is not None and type is not None and organization is not None:
+            print "Found a full path"
+                
+    def unpackArguments(self, args):
+        """ Unpack the arguments """
+        self.requestedClient = args[0]
+        self.requestedType = ''
+        self.requestedOrganization = ''
         
-            if type is not None:
-                organizations = GetClientOrganizations(client, type)
-                organization = FindClientOrganziation(requestedOrganization, organizations)
-                if organization is not None:
-                    pass
-                else:
-                    self.displayOrganizationNotFound(requestedOrganization, organizations)
-            else:
-                self.displayOrganizationTypeNotFound(requestedType, clientOrganizationTypes)
-        else:
-            self.displayClientNotFound(requestedClient, clients)
+        if len(args) > 1:
+            self.requestedType = args[1]
+        if len(args) > 2:
+            self.requestedOrganization = args[2]
         
-    def displayClientNotFound(self, requestedClient, clients):
-        """ Disaply the possible Clients """
-        print "Could not find client:", requestedClient
-        print "Did you mean:"
-        for client in FindMatchingClients(requestedClient, clients):
-            print "\t{0}".format(client)
-            
-    def displayOrganizationTypeNotFound(self, requestedType, organizationTypes):
-        """ Display the possible Organization Types """
-        print "Could not find Organization Type:", requestedType
-        print "Possible Organization Types are:"
-        for type in organizationTypes:
-            print "\t{0}".format(type)
-            
-    def displayOrganizationNotFound(self, requestedOrganization, organizations):
-        """ Display the possible Organization Types """
-        print "Could not find Organization:", requestedOrganization
-        print "Possible Organizations are:"
-        for organization in organizations:
-            print "\t{0}".format(organization)
                 
     def help(self):
         """ Print Package usage """

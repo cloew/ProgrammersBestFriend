@@ -1,4 +1,6 @@
 from helpers.os_helper import RunCommand
+from helpers.Bluewolf.error_helper import GetClientNotFoundMessage, GetOrganizationTypeNotFoundMessage, GetOrganizationNotFoundMessage
+from helpers.Bluewolf.not_found_exception import NotFoundException
 
 svnPath = "https://pl5.projectlocker.com/bluewolf/codeblue/svn"
 svnClientPath = svnPath+"/clients"
@@ -7,9 +9,24 @@ def GetClients():
     """ Return the possible clients """
     return GetOutputList(["svn", "ls", svnClientPath])
     
-def FindClient(requestedClient, clients):
+def FindClient(requestedClient):
     """ Return the requested Client if it exists """
-    return FindItem(requestedClient, clients)
+    clients = GetClients()
+    client = FindItem(requestedClient, clients)
+    
+    if client is None:
+        raise NotFoundException(GetClientNotFoundMessage(requestedClient, clients))
+    return client
+    
+def FindOrganizationTypeForClient(requestedClient, requestedType):
+    """ Return the requested Client if it exists """
+    client = FindClient(requestedClient)
+    organizationTypes = GetClientOrganizationTypes(client)
+    organizationType = FindOrganizationType(requestedType, organizationTypes)
+    
+    if organizationType is None:
+        raise NotFoundException(GetOrganizationTypeNotFoundMessage(requestedType, organizationTypes))
+    return client, organizationType
     
 def GetClientOrganizationTypes(client):
     """ Return the Client Organization Types """
@@ -19,6 +36,16 @@ def FindOrganizationType(requestedType, organizationTypes):
     """ Return the requested Organization Type if it exists """
     return FindItem(requestedType, organizationTypes)
     
+def FindOrganizationForClientAndType(requestedClient, requestedType, requestedOrganization):
+    """ Return the requested Client if it exists """
+    client, type = FindOrganizationTypeForClient(requestedClient, requestedType)
+    organizations = GetClientOrganizations(client, type)
+    organization = FindClientOrganziation(requestedOrganization, organizations)
+    
+    if organization is None:
+        raise NotFoundException(GetOrganizationNotFoundMessage(requestedOrganization, organizations))
+    return client, type, organization
+    
 def GetClientOrganizations(client, type):
     """ Return the Client Organizations for the specified type """
     return GetOutputList(["svn", "ls", svnClientPath+'/'+client+'/'+type])
@@ -26,15 +53,6 @@ def GetClientOrganizations(client, type):
 def FindClientOrganziation(requestedOrganization, organizations):
     """ Return the requested Organization if it exists """
     return FindItem(requestedOrganization, organizations)
-    
-def FindMatchingClients(requestedClient, clients):
-    """ Return all matching client names """
-    matchingClients = []
-    for client in clients:
-        if requestedClient.lower() in client.lower():
-            matchingClients.append(client)
-            
-    return matchingClients
     
 def GetOutputList(commandList):
     """ Return the output as a list split on newlines """
@@ -51,3 +69,4 @@ def FindItem(requestedItem, items):
             return item
     else:
         return None
+        
