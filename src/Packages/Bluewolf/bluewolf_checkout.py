@@ -18,18 +18,22 @@ class BluewolfCheckout:
         requestedClient = args[0]
         requestedType = args[1]
         
+        self.checkout(requestedClient, requestedType)
+        
+    def checkout(self, requestedClient, requestedType):
+        """ Checkout the SVN folder for the given client and type if possible """
+        
         clients = self.getClients()
         client = self.findClient(requestedClient, clients)
-        print client
         
-        clientOrganizationTypes = self.getClientOrganizationTypes(client)
-        print clientOrganizationTypes
+        if client is not None:
+            clientOrganizationTypes = self.getClientOrganizationTypes(client)
+            type = self.findOrganizationType(requestedType, clientOrganizationTypes)
         
-        type = self.findOrganizationType(requestedType, clientOrganizationTypes)
-        print type
-        
-        if type is None:
-            self.displayOrganizationTypeNotFound(requestedType, clientOrganizationTypes)
+            if type is None:
+                self.displayOrganizationTypeNotFound(requestedType, clientOrganizationTypes)
+        else:
+            self.displayClientNotFound(requestedClient, clients)
             
     def getClients(self):
         """ Return the possible clients """
@@ -46,6 +50,13 @@ class BluewolfCheckout:
     def findOrganizationType(self, requestedType, organizationTypes):
         """ Return the Organization Type Directory that matches the requested type """
         return self.findItem(requestedType, organizationTypes)
+        
+    def displayClientNotFound(self, requestedClient, clients):
+        """ Disaply the possible Clients """
+        print "Could not find client:", requestedClient
+        print "Did you mean:"
+        for client in self.findMatchingClients(requestedClient, clients):
+            print "\t{0}".format(client)
             
     def displayOrganizationTypeNotFound(self, requestedType, organizationTypes):
         """ Display the possible Organization Types """
@@ -53,6 +64,15 @@ class BluewolfCheckout:
         print "Possible Organization Types are:"
         for type in organizationTypes:
             print "\t{0}".format(type)
+            
+    def findMatchingClients(self, requestedClient, clients):
+        """ Return all matching client names """
+        matchingClients = []
+        for client in clients:
+            if requestedClient.lower() in client.lower():
+                matchingClients.append(client)
+                
+        return matchingClients
             
     def getOutputList(self, commandList):
         """ Return the output as a list split on newlines """
@@ -65,7 +85,7 @@ class BluewolfCheckout:
         """ Find and return the requested item from the items list """
         for item in items:
             cleanedItem = item.replace('/', '')
-            if cleanedItem.lower() in requestedItem.lower():
+            if cleanedItem.lower() == requestedItem.lower():
                 return item
         else:
             return None
