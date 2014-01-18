@@ -1,3 +1,5 @@
+from subprocess import Popen, PIPE
+
 import sys
 
 def GetActionForOS(platformToActions):
@@ -9,3 +11,9 @@ def GetActionForOS(platformToActions):
             return platformToActions[platform]
     else:
         return None 
+        
+def RunCommand(commandList):
+    """ Runs the given command list and returns the output from stdout """
+    process = Popen(commandList, stdout=PIPE)
+    output, errors  = process.communicate()
+    return output
