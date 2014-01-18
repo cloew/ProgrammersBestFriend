@@ -1,6 +1,6 @@
 from Packages import package_manager
 
-from helpers.Bluewolf.svn_helper import GetClients, FindClient, GetClientOrganizationTypes, FindOrganizationType, FindMatchingClients
+from helpers.Bluewolf.svn_helper import GetClients, FindClient, GetClientOrganizationTypes, FindOrganizationType, GetClientOrganizations, FindClientOrganziation, FindMatchingClients
 
 class BluewolfCheckout:
     """ Checkout a project from Blueowlf """
@@ -13,10 +13,11 @@ class BluewolfCheckout:
         """ Run the package """
         requestedClient = args[0]
         requestedType = args[1]
+        requestedOrganization = args[2]
         
-        self.checkout(requestedClient, requestedType)
+        self.checkout(requestedClient, requestedType, requestedOrganization)
         
-    def checkout(self, requestedClient, requestedType):
+    def checkout(self, requestedClient, requestedType, requestedOrganization):
         """ Checkout the SVN folder for the given client and type if possible """
         clients = GetClients()
         client = FindClient(requestedClient, clients)
@@ -26,7 +27,12 @@ class BluewolfCheckout:
             type = FindOrganizationType(requestedType, clientOrganizationTypes)
         
             if type is not None:
-                pass
+                organizations = GetClientOrganizations(client, type)
+                organization = FindClientOrganziation(requestedOrganization, organizations)
+                if organization is not None:
+                    pass
+                else:
+                    self.displayOrganizationNotFound(requestedOrganization, organizations)
             else:
                 self.displayOrganizationTypeNotFound(requestedType, clientOrganizationTypes)
         else:
@@ -45,6 +51,13 @@ class BluewolfCheckout:
         print "Possible Organization Types are:"
         for type in organizationTypes:
             print "\t{0}".format(type)
+            
+    def displayOrganizationNotFound(self, requestedOrganization, organizations):
+        """ Display the possible Organization Types """
+        print "Could not find Organization:", requestedOrganization
+        print "Possible Organizations are:"
+        for organization in organizations:
+            print "\t{0}".format(organization)
                 
     def help(self):
         """ Print Package usage """
