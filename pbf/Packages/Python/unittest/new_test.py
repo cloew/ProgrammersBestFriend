@@ -1,7 +1,7 @@
-from helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
-from Packages import package_manager
-from Packages.Python.unittest.insert_function_test import InsertFunctionTest
-import templates.template_manager as template_manager
+from pbf.helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
+from pbf.Packages import package_manager
+from pbf.Packages.Python.unittest.insert_function_test import InsertFunctionTest
+import pbf.templates.template_manager as template_manager
 
 class NewTest:
     """ Create a New Python Test """

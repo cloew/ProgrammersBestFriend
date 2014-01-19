@@ -1,7 +1,7 @@
-from helpers.configuration_helper import GetConfigurationPathRelativeToCurrentDirectory
-from helpers.Project.project_helper import GetParentProjectFromDirectory
+from pbf.helpers.configuration_helper import GetConfigurationPathRelativeToCurrentDirectory
+from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 import os
 

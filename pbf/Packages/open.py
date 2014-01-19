@@ -1,5 +1,5 @@
-from helpers.os_helper import GetActionForOS
-from Packages import package_manager
+from pbf.helpers.os_helper import GetActionForOS
+from pbf.Packages import package_manager
 
 from subprocess import call
 

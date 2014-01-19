@@ -1,10 +1,10 @@
-from helpers.filename_helper import RemoveFileExtension, GetPythonClassnameFromFilename
+from pbf.helpers.filename_helper import RemoveFileExtension, GetPythonClassnameFromFilename
 
 from new_console_controller import NewConsoleController
 from new_console_view import NewConsoleView
 
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 class NewConsoleUI:
     """ Creates a new Console Controller & View """

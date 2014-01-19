@@ -1,8 +1,8 @@
-from helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.helpers.Python.unittest.unittest_helper import TryToAddSuiteToParent
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
-from Packages.Python.mk_pydir import MakePyDir
+from pbf.Packages.Python.mk_pydir import MakePyDir
 
 import os
 

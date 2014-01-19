@@ -1,8 +1,8 @@
-from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
-from helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
-from helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
+from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
+from pbf.helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
+from pbf.helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 from xml.etree.ElementTree import SubElement
 

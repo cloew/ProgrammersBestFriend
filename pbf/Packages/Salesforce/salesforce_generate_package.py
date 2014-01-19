@@ -1,12 +1,12 @@
-from helpers.file_helper import IsDirectory
-from helpers.XML.xml_helper import SaveEtreeXMLPrettily
+from pbf.helpers.file_helper import IsDirectory
+from pbf.helpers.XML.xml_helper import SaveEtreeXMLPrettily
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 from xml.etree.ElementTree import parse, SubElement
 
 import os
-import templates.template_manager as template_manager
+import pbf.templates.template_manager as template_manager
 
 class SalesforceGeneratePackage:
     """ Generate Salesforce package xml """

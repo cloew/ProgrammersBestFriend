@@ -1,6 +1,6 @@
-from helpers.file_helper import IsDirectory
-from helpers.Project.project_helper import GetParentProjectFromDirectory
-from helpers.Salesforce.salesforce_project_helper import GetCurrentSalesforceProject
+from pbf.helpers.file_helper import IsDirectory
+from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
+from pbf.helpers.Salesforce.salesforce_project_helper import GetCurrentSalesforceProject
 
 from xml.etree.ElementTree import parse, SubElement
 

@@ -1,9 +1,9 @@
-from helpers.file_helper import GetLinesFromFile, Save
-from helpers.filename_helper import Capitalize
-from helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList, FindSuiteStartingLine
-from helpers.filename_helper import Capitalize
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.helpers.file_helper import GetLinesFromFile, Save
+from pbf.helpers.filename_helper import Capitalize
+from pbf.helpers.Python.unittest.unittest_helper import AddSuiteToSuiteList, FindSuiteStartingLine
+from pbf.helpers.filename_helper import Capitalize
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 class InsertFunctionTest:
     """ Package to Insert a test class for a function into a pre-existing test file """

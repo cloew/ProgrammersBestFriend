@@ -1,5 +1,5 @@
-from helpers.configuration_helper import GetConfigurationsFilename
-from helpers.XML.xml_helper import SaveEtreeXMLPrettily
+from pbf.helpers.configuration_helper import GetConfigurationsFilename
+from pbf.helpers.XML.xml_helper import SaveEtreeXMLPrettily
 
 from xml.etree.ElementTree import parse, Element, ElementTree
 

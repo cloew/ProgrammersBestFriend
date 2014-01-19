@@ -1,6 +1,6 @@
-from helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 import os
 

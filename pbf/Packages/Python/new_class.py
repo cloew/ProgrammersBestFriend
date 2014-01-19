@@ -1,6 +1,6 @@
-from helpers.filename_helper import GetPythonClassnameFromFilename
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 class NewClass:
     """ Package to create a new Python class """

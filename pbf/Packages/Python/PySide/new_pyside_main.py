@@ -1,6 +1,6 @@
-from Packages import package_manager
+from pbf.Packages import package_manager
 
-import templates.template_manager as template_manager
+import pbf.templates.template_manager as template_manager
 
 class NewPySideMain:
     """ ADD DESCRIPTION HERE """

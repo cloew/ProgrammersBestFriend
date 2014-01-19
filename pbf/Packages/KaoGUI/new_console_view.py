@@ -1,7 +1,7 @@
-from helpers.filename_helper import GetPythonClassnameFromFilename
+from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
 
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 class NewConsoleView:
     """ Creates a new Console View """

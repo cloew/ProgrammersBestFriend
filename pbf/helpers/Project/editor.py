@@ -1,4 +1,4 @@
-from helpers.configuration_helper import GetConfigurationPathRelativeToCurrentDirectory
+from pbf.helpers.configuration_helper import GetConfigurationPathRelativeToCurrentDirectory
 
 import os
 

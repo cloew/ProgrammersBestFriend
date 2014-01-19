@@ -1,6 +1,6 @@
-from helpers.Project.project_helper import GetParentProjectFromDirectory
+from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 class OpenProjectFile:
     """ Open a file within the current Project Context """

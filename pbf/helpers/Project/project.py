@@ -1,6 +1,6 @@
-from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationPathRelativeToCurrentDirectory
-from helpers.Project.editor import Editor
-from helpers.Project.project_xml_helper import SaveProjectXML
+from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationPathRelativeToCurrentDirectory
+from pbf.helpers.Project.editor import Editor
+from pbf.helpers.Project.project_xml_helper import SaveProjectXML
 
 from xml.etree.ElementTree import SubElement
 

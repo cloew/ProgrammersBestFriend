@@ -1,8 +1,8 @@
-from helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationsFilename
-from helpers.file_helper import Save
-from helpers.Python.python_helper import GetPythonRoots, GetPythonRootsConfigurationsFilename
+from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory, GetConfigurationsFilename
+from pbf.helpers.file_helper import Save
+from pbf.helpers.Python.python_helper import GetPythonRoots, GetPythonRootsConfigurationsFilename
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 import os
 

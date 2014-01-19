@@ -1,8 +1,8 @@
-from helpers.filename_helper import GetPythonClassnameFromFilename, GetFilenameFromClassname
-from helpers.Python.python_helper import GetPythonImportString
+from pbf.helpers.filename_helper import GetPythonClassnameFromFilename, GetFilenameFromClassname
+from pbf.helpers.Python.python_helper import GetPythonImportString
 
-from Packages import package_manager
-import templates.template_manager as template_manager
+from pbf.Packages import package_manager
+import pbf.templates.template_manager as template_manager
 
 class NewConsoleController:
     """ Creates a new Console Controller """

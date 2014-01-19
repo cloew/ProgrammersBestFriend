@@ -1,4 +1,4 @@
-from Packages.Core.package_list import PackageList
+from pbf.Packages.Core.package_list import PackageList
 
 RootPackageList = PackageList()
 

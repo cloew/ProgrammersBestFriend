@@ -1,4 +1,4 @@
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 class %PackageName%:
     """ ADD DESCRIPTION HERE """

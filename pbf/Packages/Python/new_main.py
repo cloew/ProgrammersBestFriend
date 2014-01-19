@@ -1,7 +1,7 @@
-from helpers.file_helper import IsDirectory
-from Packages import package_manager
+from pbf.helpers.file_helper import IsDirectory
+from pbf.Packages import package_manager
 
-import templates.template_manager as template_manager
+import pbf.templates.template_manager as template_manager
 
 import os
 

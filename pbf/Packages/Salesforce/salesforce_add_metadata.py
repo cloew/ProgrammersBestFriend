@@ -1,7 +1,7 @@
-from helpers.Project.project_helper import GetParentProjectFromDirectory
-from helpers.Project.project_xml_helper import SaveProjectXML
+from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
+from pbf.helpers.Project.project_xml_helper import SaveProjectXML
 
-from Packages import package_manager
+from pbf.Packages import package_manager
 
 from xml.etree.ElementTree import SubElement
 
