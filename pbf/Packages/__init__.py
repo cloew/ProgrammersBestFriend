@@ -12,7 +12,7 @@ def GetPackageName(directory):
     package_paths = directoryString.split("/")
     if '' in package_paths:
         package_paths.remove('')
-    package_paths = ["Packages"] + package_paths
+    package_paths = ["pbf", "Packages"] + package_paths
     return ".".join(package_paths)
 
 def ImportPythonDirectory(directory):
