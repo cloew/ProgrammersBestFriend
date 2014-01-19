@@ -15,7 +15,7 @@ class SalesforceProject:
     @property
     def password(self):
         """ Return the Project Password """
-        return self.salesforceXML.find('password')
+        return self.salesforceXML.find('password').text
         
     @property
     def securityToken(self):
