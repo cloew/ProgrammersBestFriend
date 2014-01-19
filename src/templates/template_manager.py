@@ -26,6 +26,6 @@ def ReplaceKeywords(lines, keywords):
     return lines
     
 def GetRealTemplatePath(templatepath):
-    """ Returns the Actula Path to the template file """
+    """ Returns the Actual Path to the template file """
     templates_directory = os.path.dirname(__file__)
     return os.path.join(templates_directory, templatepath)
