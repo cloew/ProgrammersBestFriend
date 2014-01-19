@@ -15,11 +15,11 @@ class SalesforceGeneratePackage:
     description = "Generate default Salesforce Package XML"
     minimumNumberOfArguments = 1
     
-    defaultMetadata = {"ApexClass":"*",
-                       "ApexComponent":"*",
-                       "ApexPage":"*",
-                       "ApexTrigger":"*",
-                       "StaticResource":"*"}
+    defaultMetadata = {"ApexClass":["*"],
+                       "ApexComponent":["*"],
+                       "ApexPage":["*"],
+                       "ApexTrigger":["*"],
+                       "StaticResource":["*"]}
     
     def run(self, args):
         """ Run the package """
