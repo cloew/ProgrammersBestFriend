@@ -7,6 +7,8 @@ def SaveEtreeXMLPrettily(tree, filename):
     
     xmlString = xmlString.replace('\n', '')
     xmlString = xmlString.replace('\t', '')
+    xmlString = xmlString.replace('ns0:', '')
+    xmlString = xmlString.replace(':ns0', '')
     
     xml = parseString(xmlString)
     prettyXMLString = xml.toprettyxml()

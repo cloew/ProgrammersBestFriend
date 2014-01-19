@@ -33,8 +33,3 @@ def CreateConfigurationXML():
 def SaveProjectXML():
     """ Save the Project XML with the given tree """
     SaveEtreeXMLPrettily(__project_xml_tree__, GetProjectXMLFilename())
-    # xmlString = tostring(__project_xml_tree__.getroot())
-    # xml = parseString(xmlString)
-    # prettyXMLString = xml.toprettyxml()
-    # with open(GetProjectXMLFilename(), 'w') as file:
-        # file.write(prettyXMLString)
