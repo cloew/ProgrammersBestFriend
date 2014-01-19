@@ -25,7 +25,6 @@ class Project:
         
     def addRecentFile(self, filename):
         """ Add a file to the recently opened section of the Project XML """
-        
         recentFilesElement = self.projectXML.find('recent_files')
         
         if recentFilesElement is None:
