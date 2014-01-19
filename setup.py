@@ -13,4 +13,5 @@ setup(name='pbf',
                 'pbf.Packages.PBF', 'pbf.Packages.Project', 'pbf.Packages.Python', 'pbf.Packages.Python.PySide', 'pbf.Packages.Python.unittest',  
                 'pbf.Packages.Salesforce',
                 'pbf.templates'],
+      package_data = {'pbf.templates':['KaoGUI/*', 'PBF/*', 'Python/PySide/*', 'Python/unittest/*', 'Python/*.py', 'Salesforce/*']},
      )
