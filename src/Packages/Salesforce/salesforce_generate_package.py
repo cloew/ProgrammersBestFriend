@@ -15,12 +15,21 @@ class SalesforceGeneratePackage:
     description = "Generate default Salesforce Package XML"
     minimumNumberOfArguments = 1
     
+    defaultMetadata = {"ApexClass":"*",
+                       "ApexComponent":"*",
+                       "ApexPage":"*",
+                       "ApexTrigger":"*",
+                       "StaticResource":"*"}
+    
     def run(self, args):
         """ Run the package """
-        self.generatePackageXML(args[0], {"ApexClass":"*", "ApexTrigger":"*"})
+        self.generatePackageXML(args[0])
         
-    def generatePackageXML(self, destination, metadata):
+    def generatePackageXML(self, destination, metadata=None):
         """ Generate the Package XML at the given destination with the given metadata """
+        if metadata is None:
+            metadata = SalesforceGeneratePackage.defaultMetadata
+        
         if IsDirectory(destination):
             destination = os.path.join(destination, "package.xml")
         
