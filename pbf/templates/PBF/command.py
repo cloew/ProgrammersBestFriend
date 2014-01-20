@@ -1,6 +1,6 @@
 from pbf.Commands import command_manager
 
-class %CommandName%:
+class %CommandClassName%:
     """ ADD DESCRIPTION HERE """
     category = "%CategoryName%"
     command = "%CommandName%"
@@ -15,4 +15,4 @@ class %CommandName%:
         print "Usage: pbf {category} {command}".format(category=self.category, command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
         print "" # ADD DETAILED DESCRIPTION 
     
-command_manager.RegisterCommand(%CommandName%)
+command_manager.RegisterCommand(%CommandClassName%)

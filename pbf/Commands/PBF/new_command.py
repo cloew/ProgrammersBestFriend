@@ -18,7 +18,7 @@ class NewCommand:
         categoryName = pieces[0]
         commandName = "-".join(pieces[1:])
         print "Creating PBF Command:", classname, "at:", args[0]
-        template_manager.CopyTemplate(args[0], "PBF/command.py", {"%CommandName%":classname,
+        template_manager.CopyTemplate(args[0], "PBF/command.py", {"%CommandClassName%":classname,
                                                                   "%CategoryName%":categoryName,
                                                                   "%CommandName%":commandName})
     
