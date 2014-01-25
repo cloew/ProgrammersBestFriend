@@ -3,7 +3,7 @@ from pbf.templates import template_manager
 
 import os
 
-class MakeTemplatesDir:
+class MakeTemplatesDirectory:
     """ Command to make a PBF Templates Directory """
     category = "mk"
     command = "templates-dir"
@@ -30,4 +30,4 @@ class MakeTemplatesDir:
         print "Usage: pbf {category} {command} [directory]".format(category=self.category, command=self.command)
         print "Makes the PBF templates ditrectory in the directory given"
     
-command_manager.RegisterCommand(MakeTemplatesDir)
+command_manager.RegisterCommand(MakeTemplatesDirectory)
