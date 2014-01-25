@@ -2,15 +2,14 @@ from pbf.Commands import command_manager
 from pbf.Commands.Python.mk_pydir import MakePyDir
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
-
-import pbf.templates.template_manager as template_manager
+from pbf.templates import template_manager
 import os
 
-class NewPackage:
-    """ Represents the command to generate a new PBF Package """
-    category = "new"
-    command = "package"
-    description = "Generate a new PBF Package directory"
+class MakePBFPackage:
+    """ Command to make a new PBF Package """
+    category = "mk"
+    command = "pbf-package"
+    description = "Make a PBF Package directory structure"
     minimumNumberOfArguments = 2
     
     def run(self, args):
@@ -50,4 +49,4 @@ class NewPackage:
         print "Usage: pbf {category} {command} [path/to/package] [package name]".format(category=self.category, command=self.command)
         print "Create the PBF Package at the path specified and with the package name given"
     
-command_manager.RegisterCommand(NewPackage)
+command_manager.RegisterCommand(MakePBFPackage)
