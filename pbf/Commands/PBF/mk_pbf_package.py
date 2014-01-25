@@ -1,4 +1,5 @@
 from pbf.Commands import command_manager
+from pbf.Commands.PBF.mk_templates_dir import MakeTemplatesDirectory
 from pbf.Commands.Python.mk_pydir import MakePyDir
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
@@ -36,6 +37,12 @@ class MakePBFPackage:
             pythonDirectoryMaker.makePyDir(currentDirectory)
             
         pythonDirectoryMaker.makePyDir(os.path.join(currentDirectory, "Commands"))
+        self.createTemplatesDirectory(currentDirectory)
+        
+    def createTemplatesDirectory(self, pbfPackageRoot):
+        """ Creates the templates Directory in the directory given """
+        templateDirectoryMaker = MakeTemplatesDirectory()
+        templateDirectoryMaker.makeTemplatesDirectory(pbfPackageRoot)
             
     def prepareSetupFile(self, packagePath, packages):
         """ Prepares the PBF Packages Setup file """
