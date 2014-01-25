@@ -18,6 +18,7 @@ class MakePBFPackage:
         packagePath = args[0]
         packageName = args[1]
         
+        print "Making PBF Package at:", packagePath, "for package:", packageName
         self.createNewPackage(packagePath, packageName)
         
     def createNewPackage(self, packagePath, packageName):
