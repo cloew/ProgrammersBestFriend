@@ -1,5 +1,6 @@
 from pbf.Commands import command_manager
 from pbf.Commands.PBF.mk_templates_dir import MakeTemplatesDirectory
+from pbf.Commands.PBF.new_pbf_driver import NewPbfDriver
 from pbf.Commands.Python.mk_pydir import MakePyDir
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
@@ -27,6 +28,7 @@ class MakePBFPackage:
         packages = ["pbf"] + packageName.split('.')
         
         self.createPackageDirectories(packagePath, packages)
+        self.createPBFDriver(packagePath, packageName)
         self.prepareSetupFile(packagePath, packages)
         
     def createPackageDirectories(self, packagePath, packages):
@@ -44,6 +46,11 @@ class MakePBFPackage:
         """ Creates the templates Directory in the directory given """
         templateDirectoryMaker = MakeTemplatesDirectory()
         templateDirectoryMaker.makeTemplatesDirectory(pbfPackageRoot)
+        
+    def createPBFDriver(self, packageRoot, packageName):
+        """ Creates a PBF Driver file in the given directory """
+        driverCreator = NewPbfDriver()
+        driverCreator.createPBFDriver(packageRoot, packageName)
             
     def prepareSetupFile(self, packagePath, packages):
         """ Prepares the PBF Packages Setup file """
