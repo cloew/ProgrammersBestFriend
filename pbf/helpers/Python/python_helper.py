@@ -1,5 +1,4 @@
-from pbf.helpers.configuration_helper import GetConfigurationsFilename, GetRelativePathFromConfigurationsDirectory, GetConfigurationPathRelativeToCurrentDirectory
-from pbf.helpers.file_helper import CreateFileIfItDoesNotExist, GetLinesFromFile
+from pbf.helpers.file_helper import IsDirectory
 from pbf.helpers.filename_helper import GetBaseFilenameWithoutExtension, RemoveFileExtension
 
 import os
@@ -25,25 +24,19 @@ def GetPythonImportString(filenameToImportFrom, imports, asName=None):
     
     importString = "from {0} import {1}{2}\n".format(package, ", ".join(imports), asString)
     return importString
-
-def GetPythonRoots():
-    """ Return the Python Roots """
-    filename = GetPythonRootsConfigurationsFilename()
-    lines = GetLinesFromFile(filename)
-    return [line.strip() for line in lines]
-    
-def GetPythonRootsConfigurationsFilename():
-    """ Return the Python Roots Configurations Filename """
-    filename = GetConfigurationsFilename("python_roots")
-    CreateFileIfItDoesNotExist(filename)
-    return filename
     
 def GetPythonRootForFilename(filename):
     """ Returns the Python Project Root that the filename is in or None """
-    roots = GetPythonRoots()
-    relativeFilepath = GetRelativePathFromConfigurationsDirectory(filename)
-    for root in roots:
-        if root in relativeFilepath:
-            return GetConfigurationPathRelativeToCurrentDirectory(root)
-    else:
-        return None 
+    absolutePathToFilename = os.path.abspath(filename)
+    
+    currentPath = absolutePathToFilename
+    while True:
+        directory = os.path.dirname(currentPath)
+        if not IsPythonDirectory(directory):
+            return directory
+        currentPath = directory
+        
+def IsPythonDirectory(directory):
+    """ Return if the directory is a Python directory """
+    initFilePath = os.path.join(directory, "__init__.py")
+    return IsDirectory(directory) and os.path.exists(initFilePath)
