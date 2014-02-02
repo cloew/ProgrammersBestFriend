@@ -9,9 +9,10 @@ setup(name='pbf',
       packages=['pbf',
                 'pbf.helpers', 'pbf.helpers.Project', 
                 'pbf.helpers.Python', 'pbf.helpers.XML',
-                'pbf.Commands', 'pbf.Commands.Core', 'pbf.Commands.PBF', 'pbf.Commands.Project', 
-                'pbf.Commands.Python', 'pbf.Commands.Python.PySide',
+                'pbf.Commands', 'pbf.Commands.Core', 
+                'pbf.Commands.PBF', 'pbf.Commands.Project', 
+                'pbf.Commands.Python',
                 'pbf.templates'],
-      package_data = {'pbf.templates':['PBF/*', 'Python/PySide/*', 'Python/*.py']},
+      package_data = {'pbf.templates':['PBF/*', 'Python/*.py']},
       scripts=['pbf/scripts/pbf']
      )
