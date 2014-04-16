@@ -2,6 +2,12 @@ import os
 import site
 import sys
 
+class CommandDirectory:
+    def __init__(self, packagePath, packageFullPath):
+        """ Initialize the Command Directory """
+        self.packagePath = packagePath
+        self.packageFullPath = packageFullPath
+
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
     requestedPackages = []
@@ -13,13 +19,13 @@ def FindCommandDirectories(parentDirectory):
     
     sitePackagesRoot = site.getsitepackages()[0]
     localCommandsDirectory = os.path.join(parentDirectory, 'Commands')
-    commands = [(os.path.relpath(localCommandsDirectory), os.path.relpath(localCommandsDirectory))]
+    commands = [CommandDirectory(os.path.relpath(localCommandsDirectory), os.path.relpath(localCommandsDirectory))]
     
     for directory in requestedPackages:
         potentialCommandDirectory = os.path.join(directory, "Commands")
         pathToDirectory = os.path.join(sitePackagesRoot, potentialCommandDirectory)
         if os.path.isdir(pathToDirectory):
-            commands.append((potentialCommandDirectory, pathToDirectory))
+            commands.append(CommandDirectory(potentialCommandDirectory, pathToDirectory))
         else:
             print "Requested Package has no commands:", potentialCommandDirectory
         
@@ -44,17 +50,17 @@ def ImportPythonDirectory(directory):
         
 def ImportPythonFilesFromDirectory(directory):
     """ Import Python files from the root of the given directory """
-    package = GetPackageName(directory[0])
+    package = GetPackageName(directory.packagePath)
     # print package
-    for modulename in os.listdir(directory[1]):
+    for modulename in os.listdir(directory.packageFullPath):
         ImportPythonFile(modulename, package)
         
 def ImportSubDirectories(directory):
     """ Import Python files from subdirectories of the given directory """
-    for subdirectory in GetImmediateSubdirectories(directory[1]):
-        pacakgePath = os.path.join(directory[0], subdirectory)
-        fullpath = os.path.join(directory[1], subdirectory)
-        ImportPythonDirectory((pacakgePath, fullpath))
+    for subdirectory in GetImmediateSubdirectories(directory.packageFullPath):
+        pacakgePath = os.path.join(directory.packagePath, subdirectory)
+        fullpath = os.path.join(directory.packageFullPath, subdirectory)
+        ImportPythonDirectory(CommandDirectory(pacakgePath, fullpath))
 
 def ImportPythonFile(modulename, package):
     """ Import a Python File """
@@ -65,6 +71,6 @@ def ImportPythonFile(modulename, package):
             print "Couldn't import", modulename
             print error
     
-commandsDirectories = FindCommandDirectories(os.path.join(os.path.dirname(__file__), "../"))\
+commandsDirectories = FindCommandDirectories(os.path.join(os.path.dirname(__file__), "../"))
 for commandsDirectory in commandsDirectories:
     ImportPythonDirectory(commandsDirectory)
