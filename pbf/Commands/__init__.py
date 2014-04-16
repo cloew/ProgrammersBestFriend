@@ -51,7 +51,6 @@ def ImportPythonDirectory(directory):
 def ImportPythonFilesFromDirectory(directory):
     """ Import Python files from the root of the given directory """
     package = GetPackageName(directory.packagePath)
-    # print package
     for modulename in os.listdir(directory.packageFullPath):
         ImportPythonFile(modulename, package)
         
