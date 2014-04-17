@@ -2,11 +2,7 @@ import os
 import site
 import sys
 
-class CommandDirectory:
-    def __init__(self, packagePath, packageFullPath):
-        """ Initialize the Command Directory """
-        self.packagePath = packagePath
-        self.packageFullPath = packageFullPath
+from pbf.Commands.CommandDirectory.command_directory import CommandDirectory
 
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
