@@ -2,6 +2,8 @@ from .command_directory import CommandDirectory
 
 import os
 import site
+import sys
+
 SITE_PACKAGES_ROOT = site.getsitepackages()[0]
 
 def BuildPBFCoreCommandDirectory(directory):
@@ -21,6 +23,13 @@ def BuildRequestedCommandDirectories(requestedPackages):
     
 def BuildRequestedCommandDirectory(directory):
     """ Build the Core command directory from the directory given """
+    if directory.startswith('.'):
+        return BuildLocalPackageCommandDirectory(directory)
+    else:
+        return BuildInstalledPackageCommandDirectory(directory)
+    
+def BuildInstalledPackageCommandDirectory(directory):
+    """ Build Command Directory for an installed package """
     global SITE_PACKAGES_ROOT
     commandDirectory = None
     
@@ -29,6 +38,23 @@ def BuildRequestedCommandDirectory(directory):
     
     if os.path.isdir(pathToDirectory):
         commandDirectory = CommandDirectory(potentialCommandDirectory, pathToDirectory)
+    else:
+        print "Requested Package has no commands:", potentialCommandDirectory
+        
+    return commandDirectory
+    
+def BuildLocalPackageCommandDirectory(directory):
+    """ Build Command Directory for an installed package """
+    commandDirectory = None
+    
+    potentialCommandDirectory = os.path.join(directory, "Commands")
+    potentialCommandPackagePath = os.path.basename(potentialCommandDirectory)
+    if potentialCommandPackagePath == '':
+        potentialCommandPackagePath = os.path.basename(potentialCommandDirectory[:-1])
+    
+    if os.path.isdir(potentialCommandDirectory):
+        sys.path.insert(0, directory)
+        commandDirectory = CommandDirectory(potentialCommandPackagePath, potentialCommandDirectory)
     else:
         print "Requested Package has no commands:", potentialCommandDirectory
         

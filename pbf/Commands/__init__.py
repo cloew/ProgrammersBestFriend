@@ -16,7 +16,7 @@ def GetRequestedPacakges():
     requestedPackages = []
     try:
         with open('.pbf-properties', 'r') as propertyFile:
-            requestedPackages = propertyFile.readlines()
+            requestedPackages = [line.strip() for line in propertyFile.readlines()]
     except IOError:
         pass # If it doesn't exist we just don't add any extra pacakges
     return requestedPackages
