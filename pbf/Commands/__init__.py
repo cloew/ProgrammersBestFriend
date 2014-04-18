@@ -3,6 +3,7 @@ import site
 import sys
 
 from pbf.Commands.CommandDirectory.command_directory import CommandDirectory
+from pbf.Commands.CommandDirectory.command_directory_factory import BuildPBFCoreCommandDirectory
 
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
@@ -14,8 +15,7 @@ def FindCommandDirectories(parentDirectory):
         pass # If it doesn't exist we just don't add any extra pacakges
     
     sitePackagesRoot = site.getsitepackages()[0]
-    localCommandsDirectory = os.path.join(parentDirectory, 'Commands')
-    commands = [CommandDirectory(os.path.relpath(localCommandsDirectory), os.path.relpath(localCommandsDirectory))]
+    commands = [BuildPBFCoreCommandDirectory(parentDirectory)]
     
     for directory in requestedPackages:
         potentialCommandDirectory = os.path.join(directory, "Commands")
