@@ -3,29 +3,13 @@ import site
 import sys
 
 from pbf.Commands.CommandDirectory.command_directory import CommandDirectory
-from pbf.Commands.CommandDirectory.command_directory_factory import BuildPBFCoreCommandDirectory
+from pbf.Commands.CommandDirectory.command_directory_factory import BuildPBFCoreCommandDirectory, BuildRequestedCommandDirectories
 
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
     requestedPackages = GetRequestedPacakges()
-    try:
-        with open('.pbf-properties', 'r') as propertyFile:
-            requestedPackages = propertyFile.readlines()
-    except IOError:
-        pass # If it doesn't exist we just don't add any extra pacakges
-    
     sitePackagesRoot = site.getsitepackages()[0]
-    commands = [BuildPBFCoreCommandDirectory(parentDirectory)]
-    
-    for directory in requestedPackages:
-        potentialCommandDirectory = os.path.join(directory, "Commands")
-        pathToDirectory = os.path.join(sitePackagesRoot, potentialCommandDirectory)
-        if os.path.isdir(pathToDirectory):
-            commands.append(CommandDirectory(potentialCommandDirectory, pathToDirectory))
-        else:
-            print "Requested Package has no commands:", potentialCommandDirectory
-        
-    return commands
+    return [BuildPBFCoreCommandDirectory(parentDirectory)] + BuildRequestedCommandDirectories(requestedPackages)
     
 def GetRequestedPacakges():
     """ Get the Requested packages for the current working directory """
