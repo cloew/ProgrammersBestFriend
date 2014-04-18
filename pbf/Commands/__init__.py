@@ -6,7 +6,7 @@ from pbf.Commands.CommandDirectory.command_directory import CommandDirectory
 
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
-    requestedPackages = []
+    requestedPackages = GetRequestedPacakges()
     try:
         with open('.pbf-properties', 'r') as propertyFile:
             requestedPackages = propertyFile.readlines()
@@ -26,6 +26,16 @@ def FindCommandDirectories(parentDirectory):
             print "Requested Package has no commands:", potentialCommandDirectory
         
     return commands
+    
+def GetRequestedPacakges():
+    """ Get the Requested packages for the current working directory """
+    requestedPackages = []
+    try:
+        with open('.pbf-properties', 'r') as propertyFile:
+            requestedPackages = propertyFile.readlines()
+    except IOError:
+        pass # If it doesn't exist we just don't add any extra pacakges
+    return requestedPackages
 
 def GetImmediateSubdirectories(directory):
     return [name for name in os.listdir(directory)
