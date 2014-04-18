@@ -37,18 +37,6 @@ def GetRequestedPacakges():
         pass # If it doesn't exist we just don't add any extra pacakges
     return requestedPackages
 
-def GetImmediateSubdirectories(directory):
-    return [name for name in os.listdir(directory)
-            if os.path.isdir(os.path.join(directory, name))]
-            
-def GetPackageName(directory):
-    """ Return the Python package Name for the given directory """
-    directoryString = directory.replace("\\", "/")
-    package_paths = directoryString.split("/")
-    if '' in package_paths:
-        package_paths.remove('')
-    return ".".join(package_paths)
-
 def ImportPythonDirectory(directory):
     """ Import Python files from the given directory """
     ImportPythonFilesFromDirectory(directory)
@@ -56,7 +44,7 @@ def ImportPythonDirectory(directory):
         
 def ImportPythonFilesFromDirectory(directory):
     """ Import Python files from the root of the given directory """
-    package = GetPackageName(directory.packagePath)
+    package = directory.getPyhtonPackage()
     for modulename in os.listdir(directory.packageFullPath):
         ImportPythonFile(modulename, package)
         
@@ -66,6 +54,10 @@ def ImportSubDirectories(directory):
         pacakgePath = os.path.join(directory.packagePath, subdirectory)
         fullpath = os.path.join(directory.packageFullPath, subdirectory)
         ImportPythonDirectory(CommandDirectory(pacakgePath, fullpath))
+
+def GetImmediateSubdirectories(directory):
+    return [name for name in os.listdir(directory)
+            if os.path.isdir(os.path.join(directory, name))]
 
 def ImportPythonFile(modulename, package):
     """ Import a Python File """
