@@ -17,7 +17,7 @@ def AppendLinesToEndOfFile(filename, lines):
     allLines = originalLines + lines
     Save(filename, allLines)
 
-def Save(filename, lines):
+def Save(filename, lines=[]):
     """ Writes the given lines to the file specified at the filename """
     with open(filename, 'w') as file:
         file.writelines(lines)
