@@ -1,3 +1,4 @@
+import os
 
 def GetRequestedPacakges(propertiesFilename=None):
     """ Get the Requested packages for the current working directory """
@@ -15,4 +16,13 @@ def GetRequestedPacakges(propertiesFilename=None):
     
 def FindPBFProperties():
     """ Return the current PBF Properties file """
-    return '.pbf-properties'
+    currentDirectory = os.getcwd()
+    propertiesFilename = None
+    
+    while currentDirectory != '/':
+        propertiesFilename = os.path.join(currentDirectory, '.pbf-properties')
+        if os.path.exists(propertiesFilename):
+            break
+        currentDirectory = os.path.dirname(currentDirectory)
+    
+    return propertiesFilename
