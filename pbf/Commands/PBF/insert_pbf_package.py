@@ -17,9 +17,9 @@ class InsertPbfPackage:
         print "Inserting package:", args[0], "into local pbf properties"
         self.insertPBFPackage(args[0])
     
-    def insertPBFPackage(self, package):
+    def insertPBFPackage(self, package, directoryToSearchFrom=None):
         """ Insert the provided package into the PBF Properties """
-        propertiesFilename = FindPBFPropertiesFilename()
+        propertiesFilename = FindPBFPropertiesFilename(directoryToSearchFrom)
         packages = GetRequestedPacakges()
         
         packages.append(package)

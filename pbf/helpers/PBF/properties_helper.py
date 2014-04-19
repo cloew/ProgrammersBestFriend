@@ -16,23 +16,26 @@ def GetRequestedPacakges():
     return requestedPackages
     
     
-def FindPBFPropertiesFilename():
+def FindPBFPropertiesFilename(directoryToSearchFrom=None):
     """ Return the current PBF Properties file """
     global PBF_PROPERTIES_DIRECTORY
     
     propertiesFilename = None
     if PBF_PROPERTIES_DIRECTORY is None:
-        FindPBFPropertiesDirectory()
+        FindPBFPropertiesDirectory(directoryToSearchFrom)
         
     if PBF_PROPERTIES_DIRECTORY is not None:
         propertiesFilename = os.path.join(PBF_PROPERTIES_DIRECTORY, '.pbf-properties')
     return propertiesFilename
     
-def FindPBFPropertiesDirectory():
+def FindPBFPropertiesDirectory(directoryToSearchFrom=None):
     """ Return the current PBF Properties file """
     global PBF_PROPERTIES_DIRECTORY
     
-    currentDirectory = os.getcwd()
+    if directoryToSearchFrom is None:
+        currentDirectory = os.getcwd()
+    else:
+        currentDirectory = directoryToSearchFrom
     propertiesFilename = None
     
     while currentDirectory != '/':
