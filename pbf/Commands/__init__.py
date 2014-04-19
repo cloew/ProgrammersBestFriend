@@ -5,21 +5,13 @@ import sys
 from pbf.Commands.CommandDirectory.command_directory import CommandDirectory
 from pbf.Commands.CommandDirectory.command_directory_factory import BuildPBFCoreCommandDirectory, BuildRequestedCommandDirectories
 
+from pbf.helpers.PBF.properties_helper import GetRequestedPacakges
+
 def FindCommandDirectories(parentDirectory):
     """ Return all the Command Directories under the given parent directory """
     requestedPackages = GetRequestedPacakges()
     sitePackagesRoot = site.getsitepackages()[0]
     return [BuildPBFCoreCommandDirectory(parentDirectory)] + BuildRequestedCommandDirectories(requestedPackages)
-    
-def GetRequestedPacakges():
-    """ Get the Requested packages for the current working directory """
-    requestedPackages = []
-    try:
-        with open('.pbf-properties', 'r') as propertyFile:
-            requestedPackages = [line.strip() for line in propertyFile.readlines()]
-    except IOError:
-        pass # If it doesn't exist we just don't add any extra pacakges
-    return requestedPackages
 
 def ImportPythonDirectory(directory):
     """ Import Python files from the given directory """

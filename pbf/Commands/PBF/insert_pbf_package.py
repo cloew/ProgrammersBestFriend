@@ -1,6 +1,7 @@
 from pbf.Commands import command_manager
 
 from pbf.helpers.file_helper import Save
+from pbf.helpers.PBF.properties_helper import GetRequestedPacakges, FindPBFProperties
 
 import os
 
@@ -18,11 +19,11 @@ class InsertPbfPackage:
     
     def insertPBFPackage(self, package):
         """ Insert the provided package into the PBF Properties """
-        lines = []
-        with open('.pbf-properties', 'r') as file:
-            lines = [line.strip() for line in file.readlines()]
-        lines.append(package)
-        Save('.pbf-properties', lines)
+        propertiesFilename = FindPBFProperties()
+        packages = GetRequestedPacakges(propertiesFilename)
+        
+        packages.append(package)
+        Save(propertiesFilename, [package + '\n' for package in packages])
     
     def help(self):
         """ Print Command usage """
