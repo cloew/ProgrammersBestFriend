@@ -3,6 +3,20 @@ import os
 def IsDirectory(filename):
     """ Return if the given filename is a directory """
     return os.path.isdir(filename)
+    
+def GetBasename(path):
+    """ Return the proper base name handling trailing Serparators (/, \) """
+    basename = os.path.basename(path)
+    if basename == '':
+        basename = os.path.basename(path[:-1])
+    return basename
+    
+def GetDirname(path):
+    """ Return the proper directory name handling trailing Serparators (/, \) """
+    dirname = os.path.dirname(path)
+    if os.path.basename(path) == '':
+        dirname = os.path.dirname(dirname)
+    return dirname
 
 def GetLinesFromFile(filename):
     """ Return Lines from a file """
