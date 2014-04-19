@@ -1,6 +1,6 @@
 from pbf.Commands import command_manager
+from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
 from pbf.Commands.PBF.mk_templates_dir import MakeTemplatesDirectory
-from pbf.Commands.PBF.new_pbf_driver import NewPbfDriver
 from pbf.Commands.Python.mk_pydir import MakePyDir
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
@@ -25,19 +25,17 @@ class MakePBFPackage:
     def createNewPackage(self, packagePath, packageName):
         """ Create a new PBF Pacakge """
         CreateDirectoryIfItDoesNotExist(packagePath)
-        packages = ["pbf"] + packageName.split('.')
         
-        self.createPackageDirectories(packagePath, packages)
-        self.createPBFDriver(packagePath, packageName)
-        self.prepareSetupFile(packagePath, packages)
+        self.createPackageDirectories(packagePath, packageName)
+        self.prepareSetupFile(packagePath, packageName)
         
-    def createPackageDirectories(self, packagePath, packages):
+    def createPackageDirectories(self, packagePath, packageName):
         """ Create Pacakge Directories """
         currentDirectory = packagePath
         pythonDirectoryMaker = MakePyDir()
-        for package in packages:
-            currentDirectory = os.path.join(currentDirectory, package)
-            pythonDirectoryMaker.makePyDir(currentDirectory)
+        
+        currentDirectory = os.path.join(currentDirectory, packageName)
+        pythonDirectoryMaker.makePyDir(currentDirectory)
             
         pythonDirectoryMaker.makePyDir(os.path.join(currentDirectory, "Commands"))
         self.createTemplatesDirectory(currentDirectory)
@@ -46,17 +44,12 @@ class MakePBFPackage:
         """ Creates the templates Directory in the directory given """
         templateDirectoryMaker = MakeTemplatesDirectory()
         templateDirectoryMaker.makeTemplatesDirectory(pbfPackageRoot)
-        
-    def createPBFDriver(self, packageRoot, packageName):
-        """ Creates a PBF Driver file in the given directory """
-        driverCreator = NewPbfDriver()
-        driverCreator.createPBFDriver(packageRoot, packageName)
             
-    def prepareSetupFile(self, packagePath, packages):
-        """ Prepares the PBF Packages Setup file """
+    def prepareSetupFile(self, packagePath, packageName):
+        """ Prepares the PBF Package Setup file """
         destination = os.path.join(packagePath, "setup.py")
-        keywords = {"%PackagePath%":'.'.join(packages),
-                    "%PackageName%":packages[-1].capitalize()}
+        keywords = {"%PackagePath%":packageName,
+                    "%PackageName%":packageName}
         template_manager.CopyTemplate(destination, "PBF/setup.py", keywords)
     
     def help(self):
