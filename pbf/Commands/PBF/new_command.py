@@ -13,12 +13,17 @@ class NewCommand:
     
     def run(self, args):
         """ Run the Command """
-        classname = GetPythonClassnameFromFilename(args[0])
-        pieces = GetBaseFilenameWithoutExtension(args[0]).split("_")
+        filepath = args[0]
+        print "Creating PBF Command:", classname, "at:", filepath
+        self.createNewCommand(filepath)
+        
+    def createNewCommand(self, filepath):
+        """ Create a new command at the filepath provided """
+        classname = GetPythonClassnameFromFilename(filepath)
+        pieces = GetBaseFilenameWithoutExtension(filepath).split("_")
         categoryName = pieces[0]
         commandName = "-".join(pieces[1:])
-        print "Creating PBF Command:", classname, "at:", args[0]
-        template_manager.CopyTemplate(args[0], "PBF/command.py", {"%CommandClassName%":classname,
+        template_manager.CopyTemplate(filepath, "PBF/command.py", {"%CommandClassName%":classname,
                                                                   "%CategoryName%":categoryName,
                                                                   "%CommandName%":commandName})
     
