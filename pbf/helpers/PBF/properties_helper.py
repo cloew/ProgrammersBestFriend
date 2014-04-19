@@ -7,11 +7,12 @@ def GetRequestedPacakges():
     requestedPackages = []
     propertiesFilename = FindPBFPropertiesFilename()
     
-    try:
-        with open(propertiesFilename, 'r') as propertyFile:
-            requestedPackages = [line.strip() for line in propertyFile.readlines()]
-    except IOError:
-        pass # If it doesn't exist we just don't add any extra pacakges
+    if propertiesFilename is not None:
+        try:
+            with open(propertiesFilename, 'r') as propertyFile:
+                requestedPackages = [line.strip() for line in propertyFile.readlines()]
+        except IOError:
+            pass # If it doesn't exist we just don't add any extra pacakges
     return requestedPackages
     
     
