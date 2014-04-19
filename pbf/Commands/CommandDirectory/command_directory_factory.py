@@ -1,6 +1,7 @@
 from .command_directory import CommandDirectory
 
 from pbf.helpers.file_helper import GetBasename, GetDirname
+from pbf.helpers.PBF.properties_helper import FindPBFPropertiesDirectory
 
 import os
 import site
@@ -56,10 +57,13 @@ def BuildLocalPackageCommandDirectory(directory):
     
     packageRoot = GetBasename(directory)
     commandPackagePath = os.path.join(packageRoot, "Commands")
-    potentialCommandDirectory = os.path.join(directory, "Commands")
+    
+    propertiesDirectory = FindPBFPropertiesDirectory()
+    properDirectoryPath = os.path.join(propertiesDirectory, directory)
+    potentialCommandDirectory = os.path.join(properDirectoryPath, "Commands")
     
     if os.path.isdir(potentialCommandDirectory):
-        sys.path.insert(0, GetDirname(directory))
+        sys.path.insert(0, GetDirname(properDirectoryPath))
         commandDirectory = CommandDirectory(commandPackagePath, potentialCommandDirectory)
     else:
         print "Requested Package has no commands:", directory
