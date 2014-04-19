@@ -8,8 +8,13 @@ SITE_PACKAGES_ROOT = site.getsitepackages()[0]
 
 def BuildPBFCoreCommandDirectory(directory):
     """ Build the Core command directory from the directory given """
+    global SITE_PACKAGES_ROOT
+    
     localCommandsDirectory = os.path.join(directory, 'Commands')
-    return CommandDirectory(os.path.relpath(localCommandsDirectory), os.path.relpath(localCommandsDirectory))
+    if localCommandsDirectory.startswith(SITE_PACKAGES_ROOT):
+        return CommandDirectory('pbf/Commands', localCommandsDirectory)
+    else:
+        return CommandDirectory(os.path.relpath(localCommandsDirectory), os.path.relpath(localCommandsDirectory))
 
 def BuildRequestedCommandDirectories(requestedPackages):
     """ Build command directories for each valid requested package """
