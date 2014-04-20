@@ -26,4 +26,4 @@ class NewCoreCommand:
         print "Usage: pbf {category} {command} [command name]".format(category=self.category, command=self.command)
         print "Creates a new PBF command with the name given in the core PBF installation."
     
-command_manager.RegisterCommand(NewCoreCommand)
+# command_manager.RegisterCommand(NewCoreCommand)
