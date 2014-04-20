@@ -14,7 +14,7 @@ class NewCommand:
     def run(self, args):
         """ Run the Command """
         filepath = args[0]
-        print "Creating PBF Command:", classname, "at:", filepath
+        print "Creating PBF Command:", GetPythonClassnameFromFilename(filepath), "at:", filepath
         self.createNewCommand(filepath)
         
     def createNewCommand(self, filepath):
