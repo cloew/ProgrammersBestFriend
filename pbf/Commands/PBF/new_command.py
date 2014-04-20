@@ -1,5 +1,6 @@
-from pbf.helpers.filename_helper import GetPythonClassnameFromFilename, GetBaseFilenameWithoutExtension
 from pbf.Commands import command_manager
+from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
+from pbf.helpers.PBF.command_helper import GetCommandClassName, GetCommandCategoryAndCommand
 import pbf.templates.template_manager as template_manager
 
 import os
@@ -19,10 +20,8 @@ class NewCommand:
         
     def createNewCommand(self, filepath):
         """ Create a new command at the filepath provided """
-        classname = GetPythonClassnameFromFilename(filepath)
-        pieces = GetBaseFilenameWithoutExtension(filepath).split("_")
-        categoryName = pieces[0]
-        commandName = "-".join(pieces[1:])
+        classname = GetCommandClassName(filepath)
+        categoryName, commandName = GetCommandCategoryAndCommand(filepath)
         template_manager.CopyTemplate(filepath, "PBF/command.py", {"%CommandClassName%":classname,
                                                                   "%CategoryName%":categoryName,
                                                                   "%CommandName%":commandName})

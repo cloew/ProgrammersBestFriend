@@ -1,6 +1,7 @@
 from pbf.Commands import command_manager
 from pbf.helpers.file_helper import GetBasename
-from pbf.helpers.filename_helper import GetPythonClassnameFromFilename, GetBaseFilenameWithoutExtension, GetPythonPackageRootForFilename
+from pbf.helpers.filename_helper import GetPythonClassnameFromFilename, GetPythonPackageRootForFilename
+from pbf.helpers.PBF.command_helper import GetCommandClassName, GetCommandCategoryAndCommand
 from pbf.templates import template_manager
 
 class NewTemplateCommand:
@@ -18,10 +19,8 @@ class NewTemplateCommand:
         
     def createTemplateCommand(self, filepath):
         """ Create the PBF template command """
-        classname = GetPythonClassnameFromFilename(filepath)
-        pieces = GetBaseFilenameWithoutExtension(filepath).split("_")
-        categoryName = pieces[0]
-        commandName = "-".join(pieces[1:])
+        classname = GetCommandClassName(filepath)
+        categoryName, commandName = GetCommandCategoryAndCommand(filepath)
         packageRoot = GetBasename(GetPythonPackageRootForFilename(filepath))
         
         template_manager.CopyTemplate(filepath, "PBF/template_command.py", {"%CommandClassName%":classname,
