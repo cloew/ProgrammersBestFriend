@@ -22,7 +22,12 @@ class NewTemplateCommand:
         """ Create the PBF template command """
         classname = GetCommandClassName(filepath)
         categoryName, commandName = GetCommandCategoryAndCommand(filepath)
-        packageRoot = GetBasename(GetPythonPackageRootForFilename(filepath))
+        packageRootDirectory = GetPythonPackageRootForFilename(filepath)
+        if packageRootDirectory is not None:
+            packageRoot = GetBasename(GetPythonPackageRootForFilename(filepath))
+        else:
+            print "Destination is not within a Python Directory. You'll need to manually set the Templates path"
+            packageRoot = "# Set Proper Template Path -- "
         
         template_manager.CopyTemplate(filepath, "PBF/template_command.py", {"%CommandClassName%":classname,
                                                                             "%CategoryName%":categoryName,
