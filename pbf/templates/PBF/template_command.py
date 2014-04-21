@@ -18,7 +18,7 @@ class %CommandClassName%:
     def create%CapitalCommandName%(self, filepath):
         """ Create a %CapitalCommandName% """
         keywords = {}
-        template_manager.CopyTemplate(filename, templateFilename, keywords, TemplatesRoot) # Add proper template file name here
+        template_manager.CopyTemplate(filepath, """ TEMPLATE_FILENAME """, keywords, TemplatesRoot) # Add proper template file name here
     
     def help(self):
         """ Print Command usage """
