@@ -16,12 +16,15 @@ class Open:
         self.osActions = {'cygwin':self.__open_cygwin__,
                           'darwin':self.__open_mac__,
                           'win32':self.__open_windows__}
+                          
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('filename', action='store')
     
-    def run(self, args):
+    def run(self, arguments):
         """ Run the command """
-        file = args[0]
-        print "Opening", file
-        self.open(file)
+        print "Opening", arguments.filename
+        self.open(arguments.filename)
         
     def open(self, file):
         """ Open the given file """

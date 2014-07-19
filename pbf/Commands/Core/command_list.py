@@ -1,3 +1,4 @@
+import argparse
 
 class CommandList:
     """ Represents a Command that allows access to other Commands """
@@ -16,9 +17,16 @@ class CommandList:
             if len(args[1:]) < command.minimumNumberOfArguments:
                 command.help()
             else:
-                command.run(args[1:])
+                self.runCommand(command, args[1:])
         else:
             self.help()
+            
+    def runCommand(self, command, args):
+        """ Run the command with the given arguments """
+        parser = argparse.ArgumentParser()
+        command.addArguments(parser)
+        arguments = parser.parse_args(args)
+        command.run(arguments)
         
     def addCommand(self, category, command):
         """ Add the Command to run for the given category """
