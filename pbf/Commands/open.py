@@ -9,7 +9,6 @@ class Open:
     """ Command to open a given file """
     command = "open"
     description = "Open the provided file in the default editor."
-    minimumNumberOfArguments = 1
     
     def __init__(self):
         """ Initialize the Open command """
@@ -19,7 +18,7 @@ class Open:
                           
     def addArguments(self, parser):
         """ Add arguments to the parser """
-        parser.add_argument('filename', action='store')
+        parser.add_argument('filename', action='store', help='Filename to open')
     
     def run(self, arguments):
         """ Run the command """

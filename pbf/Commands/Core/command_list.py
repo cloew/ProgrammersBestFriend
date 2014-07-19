@@ -14,19 +14,37 @@ class CommandList:
         """ Run the command list """
         if len(args) > 0 and args[0] in self.commands:
             command = self.commands[args[0]]
-            if len(args[1:]) < command.minimumNumberOfArguments:
-                command.help()
+            argsForNextCommand = args[1:]
+            if isinstance(command, CommandList):
+                command.run(argsForNextCommand)
             else:
-                self.runCommand(command, args[1:])
+                self.runBaseCommand(command, argsForNextCommand)
         else:
             self.help()
             
-    def runCommand(self, command, args):
+    def runBaseCommand(self, command, argsForNextCommand):
         """ Run the command with the given arguments """
-        parser = argparse.ArgumentParser()
-        command.addArguments(parser)
-        arguments = parser.parse_args(args)
+        parser = self.buildArgParser(command)
+        arguments = parser.parse_args(argsForNextCommand)
         command.run(arguments)
+        
+    def buildArgParser(self, command):
+        """ Return a parser """
+        parser = argparse.ArgumentParser(prog=self.buildProgramName(command))
+        command.addArguments(parser)
+        return parser
+        
+    def buildProgramName(self, command):
+        """ Return the program name for the given command """
+        programPieces = []
+        
+        if hasattr(command, 'category'):
+            programPieces.append(command.category)
+            
+        if hasattr(command, 'command'):
+            programPieces.append(command.command)
+            
+        return "pbf {0}".format(" ".join(programPieces))
         
     def addCommand(self, category, command):
         """ Add the Command to run for the given category """
