@@ -5,9 +5,13 @@ class %CommandClassName%:
     category = "%CategoryName%"
     command = "%CommandName%"
     description = "" # ADD DESCRIPTION HERE
-    minimumNumberOfArguments = 0 # SET MINIMUM NUMBER OF REQUIRED ARGUMENTS
+                          
+    def addArguments(self, parser): # ADD ARGUMENTS
+        """ Add arguments to the parser """
+        pass # No Arguments
+        # Sample Argument: parser.add_argument('filename', action='store', help='Filename to open')
     
-    def run(self, args):
+    def run(self, arguments):
         """ Run the command """
     
     def help(self):

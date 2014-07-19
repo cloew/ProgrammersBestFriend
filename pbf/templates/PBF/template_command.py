@@ -8,11 +8,14 @@ class %CommandClassName%:
     category = "%CategoryName%"
     command = "%CommandName%"
     description = "" # ADD DESCRIPTION HERE
-    minimumNumberOfArguments = 0 # SET MINIMUM NUMBER OF REQUIRED ARGUMENTS
+                          
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('filepath', action='store', help='Path to Filename to copy template to')
     
-    def run(self, args):
+    def run(self, arguments):
         """ Run the command """
-        filepath = args[0]
+        filepath = arguments.filepath
         self.create%CapitalCommandName%(filepath)
         
     def create%CapitalCommandName%(self, filepath):
