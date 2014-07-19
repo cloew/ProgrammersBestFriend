@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='pbf',
-      version='.2',
+      version='.3',
       description="Programmer's Best Friend Command Line Utility",
       author='Chris Loew',
       author_email='cloew123@gmail.com',
