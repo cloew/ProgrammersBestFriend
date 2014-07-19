@@ -10,11 +10,14 @@ class NewCommand:
     category = "new"
     command = "command"
     description = "Create a new PBF command file"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('destination', action='store', help='The destination filename to create')
+    
+    def run(self, arguments):
         """ Run the Command """
-        filepath = args[0]
+        filepath = arguments.destination
         print "Creating PBF Command:", GetPythonClassnameFromFilename(filepath), "at:", filepath
         self.createNewCommand(filepath)
         

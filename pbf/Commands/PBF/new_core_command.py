@@ -8,11 +8,14 @@ class NewCoreCommand:
     category = "new"
     command = "core-command"
     description = "Create a new PBF command to be stored with the core PBF installation"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('filename', action='store', help='Filename of the new core PBF command to create')
+    
+    def run(self, arguments):
         """ Run the command """
-        filename = args[0]
+        filename = arguments.filename
         print "Creating core command:", filename
         self.createCoreCommand(filename)
     

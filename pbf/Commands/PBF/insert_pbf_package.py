@@ -10,12 +10,16 @@ class InsertPbfPackage:
     category = "insert"
     command = "pbf-package"
     description = "Insert a PBF Package into the Properties file"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('package', action='store', help='Package to add to .pbf-properties')
+    
+    def run(self, arguments):
         """ Run the command """
-        print "Inserting package:", args[0], "into local pbf properties"
-        self.insertPBFPackage(args[0])
+        package = arguments.package
+        print "Inserting package:", package, "into local pbf properties"
+        self.insertPBFPackage(package)
     
     def insertPBFPackage(self, package, directoryToSearchFrom=None):
         """ Insert the provided package into the PBF Properties """

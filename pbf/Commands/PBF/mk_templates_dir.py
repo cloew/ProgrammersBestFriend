@@ -8,11 +8,14 @@ class MakeTemplatesDirectory:
     category = "mk"
     command = "templates-dir"
     description = "Create a PBF Templates Directory"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('directory', action='store', help='Directory to create PBF Template Directory in')
+    
+    def run(self, arguments):
         """ Run the command """
-        directory = args[0]
+        directory = arguments.directory
         
         print "Creating templates directory in:", directory
         self.makeTemplatesDirectory(directory)

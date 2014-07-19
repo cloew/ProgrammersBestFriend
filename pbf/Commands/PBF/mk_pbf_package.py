@@ -13,12 +13,16 @@ class MakePBFPackage:
     category = "mk"
     command = "pbf-package"
     description = "Make a PBF Package directory structure"
-    minimumNumberOfArguments = 2
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('packagePath', action='store', help='Directory to create PBF Package')
+        parser.add_argument('packageName', action='store', help='Name of the PBF Package')
+    
+    def run(self, arguments):
         """ Run the command """
-        packagePath = args[0]
-        packageName = args[1]
+        packagePath = arguments.packagePath
+        packageName = arguments.packageName
         
         print "Making PBF Package at:", packagePath, "for package:", packageName
         self.createNewPackage(packagePath, packageName)

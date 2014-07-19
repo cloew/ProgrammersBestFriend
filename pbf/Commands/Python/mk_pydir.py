@@ -8,12 +8,16 @@ class MakePyDir:
     category = "mk"
     command = "pydir"
     description = "Makes a Python Directory"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('directory', action='store', help='Directory to create as a Python package')
+    
+    def run(self, arguments):
         """ Create the Python Directory and the __init__.py file """
-        print "Creating Python Directory:", args[0]
-        self.makePyDir(args[0])
+        directory = arguments.directory
+        print "Creating Python Directory:", directory
+        self.makePyDir(directory)
         
     def makePyDir(self, dirname):
         """ Create the Python directory """

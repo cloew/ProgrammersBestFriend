@@ -9,11 +9,14 @@ class NewPbfProperties:
     category = "new"
     command = "pbf-properties"
     description = "Creates a new empty PBF Properties file"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('destination', action='store', help='Destination directory to add .pbf-properties file')
+    
+    def run(self, arguments):
         """ Run the command """
-        print "Creating PBF Properties at:", self.createPropertiesFile(args[0])
+        print "Creating PBF Properties at:", self.createPropertiesFile(arguments.destination)
         
     def createPropertiesFile(self, path):
         """ Create Properties file at the given path """

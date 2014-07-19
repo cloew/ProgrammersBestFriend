@@ -10,11 +10,14 @@ class NewTemplateCommand:
     category = "new"
     command = "template-command"
     description = "Creates a command to copy a template file"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('destination', action='store', help='Destination of the new PBF Template Command')
+    
+    def run(self, arguments):
         """ Run the command """
-        filepath = args[0]
+        filepath = arguments.destination
         print "Creating PBF Template Command:", GetPythonClassnameFromFilename(filepath), "at:", filepath
         self.createTemplateCommand(filepath)
         

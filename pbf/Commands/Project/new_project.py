@@ -11,16 +11,22 @@ class NewProject:
     category = "new"
     command = "project"
     description = "Create a new PBF Project"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('projectroot', action='store', help='Root Directory for the new Project')
+        parser.add_argument('editor', nargs='?', action='store', help='Command to use to open projects')
+    
+    def run(self, arguments):
         """ Run the command """
-        self.createNewProject(args[0], args[1], args[2:])
+        self.createNewProject(arguments.projectroot, arguments.editor)
        
-    def createNewProject(self, projectPath, editor, editorArguments):
+    def createNewProject(self, projectPath, editorCommand):
         """ Create a new project """
         tree = GetProjectXMLTree()
         if not HasProjectWithPath(projectPath):
+            editor = editorCommand.split(' ')[0]
+            editorArguments = editorCommand.split(' ')[1:]
             self.createProjectXML(tree.getroot(), projectPath, editor, editorArguments)
             SaveProjectXML()
         else:

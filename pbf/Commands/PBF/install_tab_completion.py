@@ -9,11 +9,15 @@ class InstallTabCompletion:
     category = "install"
     command = "tab-completion"
     description = "Install the PBF Tab Completion"
-    minimumNumberOfArguments = 0
+    
     completionDirectory = "/etc/bash_completion.d"
     completionFilename = "pbf_completion"
     
-    def run(self, args): # Note: currently only tested for Cygwin
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        pass # No Arguments needed
+    
+    def run(self, arguments): # Note: currently only tested for Cygwin
         self.installTabCompletion()
     
     def installTabCompletion(self):

@@ -10,15 +10,15 @@ class StartProject:
     category = "start"
     command = "project"
     description = "Start editing a project"
-    minimumNumberOfArguments = 0
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('projectpath', nargs='?', action='store', default=os.getcwd(), help='Path to project root to open')
+    
+    def run(self, arguments):
         """ Run the command """
-        if len(args) == 0:
-            projectPath = os.getcwd()
-        else:
-            projectPath = args[0]
-        self.startProject(projectPath)
+        path = arguments.projectpath
+        self.startProject(path)
         
     def startProject(self, projectPath):
         """ Start the Project """
