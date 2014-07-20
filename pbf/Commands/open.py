@@ -1,17 +1,19 @@
-from pbf.helpers.os_helper import GetActionForOS
+# from pbf.helpers.os_helper import GetActionForOS
 from pbf.Commands import command_manager
 
-from subprocess import call
+# from subprocess import call
 
-import os
+# import os
 
 class Open:
     """ Command to open a given file """
     command = "open"
     description = "Open the provided file in the default editor."
+    dependencies = ['pbf.helpers.os_helper', 'os', 'subprocess']
     
-    def __init__(self):
+    def __init__(self, modules={}):
         """ Initialize the Open command """
+        self.modules = modules
         self.osActions = {'cygwin':self.__open_cygwin__,
                           'darwin':self.__open_mac__,
                           'win32':self.__open_windows__}
@@ -27,7 +29,7 @@ class Open:
         
     def open(self, file):
         """ Open the given file """
-        action = GetActionForOS(self.osActions)
+        action = self.modules['pbf.helpers.os_helper'].GetActionForOS(self.osActions)
         if action is not None:
             action(file)
         else:
@@ -35,15 +37,15 @@ class Open:
         
     def __open_cygwin__(self, file):
         """ Open the file on Cygwin """
-        call(["cygstart", file])
+        self.modules['subprocess'].call(["cygstart", file])
         
     def __open_windows__(self, file):
         """ Open the file on Windows """
-        os.system("START {0}".format(file))
+        self.modules['os'].system("START {0}".format(file))
         
     def __open_mac__(self, file):
         """ Open the file on Mac """
-        call(["open", file])
+        self.modules['subprocess'].call(["open", file])
     
     def help(self):
         """ Print Command usage """

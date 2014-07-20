@@ -1,3 +1,5 @@
+from pbf.Commands.Dependency.dependency_injector import DependencyInjector
+
 import argparse
 
 class CommandList:
@@ -26,6 +28,7 @@ class CommandList:
         """ Run the command with the given arguments """
         parser = self.buildArgParser(command)
         arguments = parser.parse_args(argsForNextCommand)
+        command.modules = DependencyInjector.getModules(command.dependencies)
         command.run(arguments)
         
     def buildArgParser(self, command):
