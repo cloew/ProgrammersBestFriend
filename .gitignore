@@ -1,3 +1,6 @@
 *.pyc
 build
 configurations
+
+# PBF
+.pbf-properties
