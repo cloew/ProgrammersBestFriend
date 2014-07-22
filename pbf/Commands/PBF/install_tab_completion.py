@@ -1,8 +1,4 @@
-from pbf.helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
 from pbf.Commands import command_manager
-import pbf.templates.template_manager as template_manager
-
-import os
 
 class InstallTabCompletion:
     """ Install the PBF Tab Completion """
@@ -22,6 +18,9 @@ class InstallTabCompletion:
     
     def installTabCompletion(self):
         """ Install the PBF Tab Completion """
+        from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
+        import pbf.templates.template_manager as template_manager
+        
         CreateDirectoryIfItDoesNotExist(self.completionDirectory)
         completionFilename = self.getFullCompletionFilename()
         template_manager.CopyTemplate(completionFilename, "PBF/pbf_completion.sh")
@@ -29,6 +28,9 @@ class InstallTabCompletion:
         
     def tryToAddTabCompletionToProfile(self):
         """ Tries to Source Tab Completion in the profile """
+        from pbf.helpers.file_helper import AppendLinesToEndOfFile, GetLinesFromFile
+        import os
+        
         profile = os.path.join(os.path.expanduser("~"), ".bashrc")
         lines = GetLinesFromFile(profile)
         sourceCommand = "source {0}".format(self.getFullCompletionFilename())
@@ -48,6 +50,7 @@ class InstallTabCompletion:
         
     def getFullCompletionFilename(self):
         """ Return the full completion filename """
+        import os
         return os.path.join(self.completionDirectory, self.completionFilename)
     
 command_manager.RegisterCommand(InstallTabCompletion)

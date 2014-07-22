@@ -1,10 +1,4 @@
-from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
-from pbf.helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
-from pbf.helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
-
 from pbf.Commands import command_manager
-
-from xml.etree.ElementTree import SubElement
 
 class NewProject:
     """ Create a New PBF Project     """
@@ -23,6 +17,9 @@ class NewProject:
        
     def createNewProject(self, projectPath, editorCommand):
         """ Create a new project """
+        from pbf.helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
+        from pbf.helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
+        
         tree = GetProjectXMLTree()
         if not HasProjectWithPath(projectPath):
             editor = editorCommand.split(' ')[0]
@@ -34,6 +31,9 @@ class NewProject:
         
     def createProjectXML(self, projectsElement, projectPath, editor, editorArguments):
         """ Creaete the Project XML """
+        from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDirectory
+        from xml.etree.ElementTree import SubElement
+        
         projectElement = SubElement(projectsElement, "project")
         pathElement = SubElement(projectElement, "path")
         pathElement.text = GetRelativePathFromConfigurationsDirectory(projectPath)

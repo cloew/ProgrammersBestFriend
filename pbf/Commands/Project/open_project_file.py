@@ -1,5 +1,3 @@
-from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
-
 from pbf.Commands import command_manager
 
 class OpenProjectFile:
@@ -14,6 +12,8 @@ class OpenProjectFile:
     
     def run(self, arguments):
         """ Run the command """
+        from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
+        
         filename = arguments.filename
         project = GetParentProjectFromDirectory()
         print "Opening {0} in project {1}".format(filename, project)

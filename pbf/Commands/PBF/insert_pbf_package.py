@@ -1,10 +1,5 @@
 from pbf.Commands import command_manager
 
-from pbf.helpers.file_helper import Save
-from pbf.helpers.PBF.properties_helper import GetRequestedPacakges, FindPBFPropertiesFilename
-
-import os
-
 class InsertPbfPackage:
     """ Insert a PBF Package into the Properties file """
     category = "insert"
@@ -23,6 +18,9 @@ class InsertPbfPackage:
     
     def insertPBFPackage(self, package, directoryToSearchFrom=None):
         """ Insert the provided package into the PBF Properties """
+        from pbf.helpers.file_helper import Save
+        from pbf.helpers.PBF.properties_helper import GetRequestedPacakges, FindPBFPropertiesFilename
+        
         propertiesFilename = FindPBFPropertiesFilename(directoryToSearchFrom)
         packages = GetRequestedPacakges()
         

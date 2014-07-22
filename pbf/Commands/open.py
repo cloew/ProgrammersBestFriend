@@ -1,9 +1,4 @@
-from pbf.helpers.os_helper import GetActionForOS
 from pbf.Commands import command_manager
-
-from subprocess import call
-
-import os
 
 class Open:
     """ Command to open a given file """
@@ -27,6 +22,7 @@ class Open:
         
     def open(self, file):
         """ Open the given file """
+        from pbf.helpers.os_helper import GetActionForOS
         action = GetActionForOS(self.osActions)
         if action is not None:
             action(file)
@@ -35,14 +31,17 @@ class Open:
         
     def __open_cygwin__(self, file):
         """ Open the file on Cygwin """
+        from subprocess import call
         call(["cygstart", file])
         
     def __open_windows__(self, file):
         """ Open the file on Windows """
+        import os
         os.system("START {0}".format(file))
         
     def __open_mac__(self, file):
         """ Open the file on Mac """
+        from subprocess import call
         call(["open", file])
     
     def help(self):

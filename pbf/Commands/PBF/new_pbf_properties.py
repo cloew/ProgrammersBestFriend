@@ -1,9 +1,5 @@
 from pbf.Commands import command_manager
 
-from pbf.helpers.file_helper import Save
-
-import os
-
 class NewPbfProperties:
     """ COmmand to create new pbf properties file """
     category = "new"
@@ -20,6 +16,9 @@ class NewPbfProperties:
         
     def createPropertiesFile(self, path):
         """ Create Properties file at the given path """
+        from pbf.helpers.file_helper import Save
+        import os
+        
         pathToProperties = os.path.join(path, '.pbf-properties')
         Save(pathToProperties)
         return pathToProperties

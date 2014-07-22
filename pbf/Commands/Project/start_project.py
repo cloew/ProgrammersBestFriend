@@ -1,9 +1,4 @@
-from pbf.helpers.configuration_helper import GetConfigurationPathRelativeToCurrentDirectory
-from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
-
 from pbf.Commands import command_manager
-
-import os
 
 class StartProject:
     """ Start using a new project """
@@ -13,6 +8,7 @@ class StartProject:
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
+        import os
         parser.add_argument('projectpath', nargs='?', action='store', default=os.getcwd(), help='Path to project root to open')
     
     def run(self, arguments):
@@ -22,6 +18,8 @@ class StartProject:
         
     def startProject(self, projectPath):
         """ Start the Project """
+        from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
+        
         project = GetParentProjectFromDirectory(projectPath)
         if project is None:
             print "No project:", project
