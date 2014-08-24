@@ -15,7 +15,7 @@ class NewProject:
     def addArguments(self, parser):
         """ Add arguments to the parser """
         parser.add_argument('projectroot', action='store', help='Root Directory for the new Project')
-        parser.add_argument('editor', nargs='?', action='store', help='Command to use to open projects')
+        parser.add_argument('editor', nargs='?', default='', action='store', help='Command to use to open projects')
     
     def run(self, arguments):
         """ Run the command """
