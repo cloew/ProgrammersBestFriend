@@ -2,12 +2,11 @@
 class CommandDirectory:
     """ Represents a PBF Command Directory """
     
-    def __init__(self, packagePath, packageFullPath):
+    def __init__(self, packagePath):
         """ Initialize the Command Directory """
         self.packagePath = packagePath
-        self.packageFullPath = packageFullPath
         
-    def getPyhtonPackage(self):
+    def getPythonPackage(self):
         """ Return the Python package Name for the given directory """
         packagePathString = self.packagePath.replace("\\", "/")
         package_paths = packagePathString.split("/")
