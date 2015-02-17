@@ -1,15 +1,10 @@
 from pbf.helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
-from pbf.Commands import command_manager
 import pbf.templates.template_manager as template_manager
 
 import os
 
 class InstallTabCompletion:
     """ Install the PBF Tab Completion """
-    category = "install"
-    command = "tab-completion"
-    description = "Install the PBF Tab Completion"
-    
     completionDirectory = "/etc/bash_completion.d"
     completionFilename = "pbf_completion"
     
@@ -40,14 +35,7 @@ class InstallTabCompletion:
             print "Please source {0} to have PBF tab-completion in the current shell".format(profile)
         else:
             print "PBF Tab Completion is already sourced from {0}".format(profile)
-    
-    def help(self):
-        """ Print usage """
-        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command)
-        print "\tWill install the PBF Tab Completion"
-        
+            
     def getFullCompletionFilename(self):
         """ Return the full completion filename """
         return os.path.join(self.completionDirectory, self.completionFilename)
-    
-command_manager.RegisterCommand(InstallTabCompletion)

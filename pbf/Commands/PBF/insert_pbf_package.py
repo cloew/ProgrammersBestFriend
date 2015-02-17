@@ -1,5 +1,3 @@
-from pbf.Commands import command_manager
-
 from pbf.helpers.file_helper import Save
 from pbf.helpers.PBF.properties_helper import GetRequestedPacakges, FindPBFPropertiesFilename
 
