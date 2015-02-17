@@ -3,11 +3,16 @@ from pbf.Commands.Core.command_list import CommandList
 RootCommandList = CommandList()
 
 class CommandConfig:
-    def __init__(self, command, module, category=None, description=None):
+    def __init__(self, command, module, description=None):
         """ Initialize the Command Config """
-        self.command = command
+        pieces = command.split(' ', 1)
+        if len(pieces) == 1:
+            self.command = command
+            self.category = None
+        else:
+            self.category, self.command = pieces
+            
         self.module = module
-        self.category = category
         self.description = description
         
 def RegisterCommands(commandConfigs):
