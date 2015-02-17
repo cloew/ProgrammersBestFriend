@@ -1,5 +1,4 @@
 from pbf.helpers.os_helper import GetActionForOS
-from pbf.Commands import command_manager
 
 from subprocess import call
 
@@ -7,8 +6,6 @@ import os
 
 class Open:
     """ Command to open a given file """
-    command = "open"
-    description = "Open the provided file in the default editor."
     
     def __init__(self):
         """ Initialize the Open command """
@@ -44,10 +41,3 @@ class Open:
     def __open_mac__(self, file):
         """ Open the file on Mac """
         call(["open", file])
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {command} [file]".format(command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
-        print "Opens the file provided in the OS's default prgram for the file type" # ADD DETAILED DESCRIPTION 
-    
-command_manager.RegisterCommand(Open)
