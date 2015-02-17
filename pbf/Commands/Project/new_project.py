@@ -2,15 +2,10 @@ from pbf.helpers.configuration_helper import GetRelativePathFromConfigurationsDi
 from pbf.helpers.Project.project_helper import GetProjectNameFromPath, HasProjectWithPath
 from pbf.helpers.Project.project_xml_helper import GetProjectXMLTree, SaveProjectXML
 
-from pbf.Commands import command_manager
-
 from xml.etree.ElementTree import SubElement
 
 class NewProject:
     """ Create a New PBF Project     """
-    category = "new"
-    command = "project"
-    description = "Create a new PBF Project"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -48,10 +43,3 @@ class NewProject:
         for argument in editorArguments:
             editorArgumentElement = SubElement(editorArgumentsElement, "argument")
             editorArgumentElement.text = argument
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command} [path/to/project/root] [editor.exe]".format(category=self.category, command=self.command)
-        print "Create a new project at the path provided and set it to use the editor provided" 
-    
-command_manager.RegisterCommand(NewProject)
