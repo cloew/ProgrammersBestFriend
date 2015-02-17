@@ -7,9 +7,6 @@ import os
 
 class InsertPbfPackage:
     """ Insert a PBF Package into the Properties file """
-    category = "insert"
-    command = "pbf-package"
-    description = "Insert a PBF Package into the Properties file"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -28,10 +25,3 @@ class InsertPbfPackage:
         
         packages.append(package)
         Save(propertiesFilename, [package + '\n' for package in packages])
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command} [package]".format(category=self.category, command=self.command)
-        print "Insert the provided package into the PBF Properties file"
-    
-command_manager.RegisterCommand(InsertPbfPackage)
