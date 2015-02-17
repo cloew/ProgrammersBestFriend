@@ -4,8 +4,12 @@ import os
 
 local_directory = os.path.dirname(__file__)
 
-def CopyTemplate(filepath, templatepath, keywords={}, templates_directory=local_directory):
+def CopyTemplate(filepath, templatepath, keywords={}, templates_directory=None):
     """ Copy the given template to the lcoation given """
+    global local_directory
+    if templates_directory is None:
+        templates_directory = local_directory
+    
     lines = GetTemplateFileLinesWithKeywordsReplaced(templatepath, keywords, templates_directory)
     Save(filepath, lines)
     
