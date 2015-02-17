@@ -2,19 +2,27 @@ from pbf.Commands.Core.command_list import CommandList
 
 RootCommandList = CommandList()
 
-__Commands__ = {}
-
-def RegisterCommand(command, category=None):
-    """ Registers a Command with the Command Manager """
-    if hasattr(command, "category"):
-        category = command.category
+class CommandConfig:
+    def __init__(self, command, module, category=None, description=None):
+        """ Initialize the Command Config """
+        self.command = command
+        self.module = module
+        self.category = category
+        self.description = description
         
-    commandList = GetCommandListForCategory(category)
-    
-    commandList.addCommand(command.command, command())
+def RegisterCommands(commandConfigs):
+    """ Register all the given commands with the command manager """
+    [RegisterCommand(command) for command in commandConfigs]
+
+def RegisterCommand(commandConfig):
+    """ Registers a Command with the Command Manager """
+    commandList = GetCommandListForCategory(commandConfig.category)
+    commandList.addCommand(commandConfig.command, commandConfig)
     
 def GetCommandListForCategory(category):
     """ Returns the Command List for the given category """
+    global RootCommandList
+    
     commandList = RootCommandList
     if category is not None and category != '':
         for category in category.split('/'):
@@ -25,17 +33,3 @@ def GetCommandListForCategory(category):
                 commandList.addCommand(category, newCommandList)
                 commandList = newCommandList
     return commandList
-    
-def Run(arguments):
-    """ Try to Run the given Command """
-    if len(arguments) > 0 and arguments[0] == "-c":
-        GetTabCompletion(RootCommandList, arguments[1:])
-    else:
-        RootCommandList.run(arguments)
-        
-def GetTabCompletion(rootCommandList, arguments):
-    """ Return the tab completion strings """
-    results = rootCommandList.getTabCompletion(arguments)
-        
-    results.sort()
-    print " ".join(results)

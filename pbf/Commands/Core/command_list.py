@@ -1,3 +1,4 @@
+from pbf.helpers.import_helper import ImportAndInstantiateClass
 import argparse
 
 class CommandList:
@@ -22,33 +23,34 @@ class CommandList:
         else:
             self.help()
             
-    def runBaseCommand(self, command, argsForNextCommand):
+    def runBaseCommand(self, commandConfig, argsForNextCommand):
         """ Run the command with the given arguments """
-        parser = self.buildArgParser(command)
+        command = ImportAndInstantiateClass(commandConfig.module)
+        parser = self.buildArgParser(command, commandConfig)
         arguments = parser.parse_args(argsForNextCommand)
         command.run(arguments)
         
-    def buildArgParser(self, command):
+    def buildArgParser(self, command, commandConfig):
         """ Return a parser """
-        parser = argparse.ArgumentParser(prog=self.buildProgramName(command))
+        parser = argparse.ArgumentParser(prog=self.buildProgramName(commandConfig))
         command.addArguments(parser)
         return parser
         
-    def buildProgramName(self, command):
+    def buildProgramName(self, commandConfig):
         """ Return the program name for the given command """
         programPieces = []
         
-        if hasattr(command, 'category'):
-            programPieces.append(command.category)
+        if commandConfig.category is not None:
+            programPieces.append(commandConfig.category)
             
-        if hasattr(command, 'command'):
-            programPieces.append(command.command)
+        if commandConfig.command is not None:
+            programPieces.append(commandConfig.command)
             
         return "pbf {0}".format(" ".join(programPieces))
         
-    def addCommand(self, category, command):
+    def addCommand(self, category, commandConfig):
         """ Add the Command to run for the given category """
-        self.commands[category] = command
+        self.commands[category] = commandConfig
         
     def getTabCompletion(self, arguments):
         """ Return the tab completion for the given arguments """
