@@ -7,7 +7,7 @@ class NewPbfProperties:
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
-        parser.add_argument('destination', action='store', help='Destination directory to add .pbf-properties file')
+        parser.add_argument('destination', action='store', nargs='?', default='.', help='Destination directory to add .pbf-properties file. Defaults to the current directory')
     
     def run(self, arguments):
         """ Run the command """
