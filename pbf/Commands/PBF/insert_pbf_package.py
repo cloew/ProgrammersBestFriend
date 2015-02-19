@@ -8,18 +8,18 @@ class InsertPbfPackage:
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
-        parser.add_argument('package', action='store', help='Package to add to .pbf-properties')
+        parser.add_argument('packages', metavar='package', nargs='+', action='store', help='Package to add to .pbf-properties')
     
     def run(self, arguments):
         """ Run the command """
-        package = arguments.package
-        print "Inserting package:", package, "into local pbf properties"
-        self.insertPBFPackage(package)
+        packages = arguments.packages
+        print "Inserting packages:", ", ".join(packages), "into local pbf properties"
+        self.insertPBFPackage(packages)
     
-    def insertPBFPackage(self, package, directoryToSearchFrom=None):
+    def insertPBFPackage(self, packages, startFrom=None):
         """ Insert the provided package into the PBF Properties """
-        propertiesFilename = FindPBFPropertiesFilename(directoryToSearchFrom)
-        packages = GetRequestedPacakges()
+        propertiesFilename = FindPBFPropertiesFilename(startFrom=startFrom)
+        currPackages = GetRequestedPacakges()
         
-        packages.append(package)
-        Save(propertiesFilename, [package + '\n' for package in packages])
+        currPackages += (packages)
+        Save(propertiesFilename, [package + '\n' for package in currPackages])
