@@ -16,7 +16,7 @@ def BuildPBFCoreCommandDirectory(directory):
     if directory.startswith(SITE_PACKAGES_ROOT):
         return CommandDirectory('pbf')
     else:
-        return CommandDirectory(os.path.relpath(directory))
+        return BuildLocalPackageCommandDirectory(os.path.normpath(directory))
 
 def BuildRequestedCommandDirectories(requestedPackages):
     """ Build command directories for each valid requested package """
@@ -31,7 +31,7 @@ def BuildRequestedCommandDirectories(requestedPackages):
 def BuildRequestedCommandDirectory(directory):
     """ Build the Core command directory from the directory given """
     if directory.startswith('.'):
-        return BuildLocalPackageCommandDirectory(directory)
+        return BuildLocalPropertiesPackageCommandDirectory(directory)
     else:
         return BuildInstalledPackageCommandDirectory(directory)
     
@@ -50,18 +50,20 @@ def BuildInstalledPackageCommandDirectory(directory):
         
     return commandDirectory
     
+def BuildLocalPropertiesPackageCommandDirectory(directory):
+    """ Build Command Directory for an installed package """
+    propertiesDirectory = FindPBFPropertiesDirectory()
+    properDirectoryPath = os.path.join(propertiesDirectory, directory)
+    return BuildLocalPackageCommandDirectory(properDirectoryPath)
+    
 def BuildLocalPackageCommandDirectory(directory):
     """ Build Command Directory for an installed package """
     commandDirectory = None
-    
     packageRoot = GetBasename(directory)
-    
-    propertiesDirectory = FindPBFPropertiesDirectory()
-    properDirectoryPath = os.path.join(propertiesDirectory, directory)
-    potentialCommandMap = os.path.join(properDirectoryPath, "command_map.py")
+    potentialCommandMap = os.path.join(directory, "command_map.py")
     
     if os.path.isfile(potentialCommandMap):
-        sys.path.insert(0, GetDirname(properDirectoryPath))
+        sys.path.insert(0, GetDirname(directory))
         commandDirectory = CommandDirectory(packageRoot)
     else:
         print "Requested Package has no command map:", directory
