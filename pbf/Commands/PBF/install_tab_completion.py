@@ -1,3 +1,4 @@
+from pbf.helpers.configuration_helper import GetUserHomeFolder
 from pbf.helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
 import pbf.templates.template_manager as template_manager
 
@@ -24,7 +25,7 @@ class InstallTabCompletion:
         
     def tryToAddTabCompletionToProfile(self):
         """ Tries to Source Tab Completion in the profile """
-        profile = os.path.join(os.path.expanduser("~"), ".bashrc")
+        profile = os.path.join(GetUserHomeFolder(), ".bashrc")
         lines = GetLinesFromFile(profile)
         sourceCommand = "source {0}".format(self.getFullCompletionFilename())
         sourceLine = "{0}".format(sourceCommand)

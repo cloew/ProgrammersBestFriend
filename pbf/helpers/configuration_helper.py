@@ -1,5 +1,9 @@
 import os
 
+def GetUserHomeFolder():
+    """ Return the User's Home Directory """
+    return os.path.expanduser("~")
+
 def GetConfigurationsDirectory():
     """ Returns the configurations directory and creates it if it does not exist """
     configurationsPath = os.path.join(os.path.dirname(__file__), "../configurations")
