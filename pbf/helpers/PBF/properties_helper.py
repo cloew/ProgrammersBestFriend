@@ -1,6 +1,9 @@
+from kao_config import LocalConfigFinder
+from pbf.helpers.file_helper import GetDirname
 import os
 
-PBF_PROPERTIES_DIRECTORY = None
+PBF_PROPERTIES_FINDER = None
+PROPERTIES_FILENAME = '.pbf-properties'
 
 def GetRequestedPacakges():
     """ Get the Requested packages for the current working directory """
@@ -16,33 +19,40 @@ def GetRequestedPacakges():
     return requestedPackages
     
     
-def FindPBFPropertiesFilename(directoryToSearchFrom=None):
+def FindPBFPropertiesFilename(startFrom=None):
     """ Return the current PBF Properties file """
-    global PBF_PROPERTIES_DIRECTORY
+    global PBF_PROPERTIES_FINDER, PROPERTIES_FILENAME
     
-    propertiesFilename = None
-    if PBF_PROPERTIES_DIRECTORY is None:
-        FindPBFPropertiesDirectory(directoryToSearchFrom)
+    if PBF_PROPERTIES_FINDER is None:
+        PBF_PROPERTIES_FINDER = LocalConfigFinder(PROPERTIES_FILENAME)
+    return PBF_PROPERTIES_FINDER.find(startFrom=startFrom)
+    
+    # propertiesFilename = None
+    # if PBF_PROPERTIES_DIRECTORY is None:
+        # FindPBFPropertiesDirectory(directoryToSearchFrom)
         
-    if PBF_PROPERTIES_DIRECTORY is not None:
-        propertiesFilename = os.path.join(PBF_PROPERTIES_DIRECTORY, '.pbf-properties')
-    return propertiesFilename
+    # if PBF_PROPERTIES_DIRECTORY is not None:
+        # propertiesFilename = os.path.join(PBF_PROPERTIES_DIRECTORY, '.pbf-properties')
+    # return propertiesFilename
     
-def FindPBFPropertiesDirectory(directoryToSearchFrom=None):
+def FindPBFPropertiesDirectory(startFrom=None):
     """ Return the current PBF Properties file """
-    global PBF_PROPERTIES_DIRECTORY
+    global PBF_PROPERTIES_FINDER, PROPERTIES_FILENAME
     
-    if directoryToSearchFrom is None:
-        currentDirectory = os.getcwd()
-    else:
-        currentDirectory = directoryToSearchFrom
-    propertiesFilename = None
+    propertiesFilename = FindPBFPropertiesFilename(startFrom=startFrom)
+    return GetDirname(propertiesFilename)
     
-    while currentDirectory != '/':
-        propertiesFilename = os.path.join(currentDirectory, '.pbf-properties')
-        if os.path.exists(propertiesFilename):
-            PBF_PROPERTIES_DIRECTORY = currentDirectory
-            break
-        currentDirectory = os.path.dirname(currentDirectory)
+    # if directoryToSearchFrom is None:
+        # currentDirectory = os.getcwd()
+    # else:
+        # currentDirectory = directoryToSearchFrom
+    # propertiesFilename = None
     
-    return PBF_PROPERTIES_DIRECTORY
+    # while currentDirectory != '/':
+        # propertiesFilename = os.path.join(currentDirectory, '.pbf-properties')
+        # if os.path.exists(propertiesFilename):
+            # PBF_PROPERTIES_DIRECTORY = currentDirectory
+            # break
+        # currentDirectory = os.path.dirname(currentDirectory)
+    
+    # return PBF_PROPERTIES_DIRECTORY

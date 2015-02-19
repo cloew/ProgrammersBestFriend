@@ -1,4 +1,4 @@
-from pbf.helpers.configuration_helper import GetUserHomeFolder
+from kao_config import GetUserHomeFolder
 from pbf.helpers.file_helper import AppendLinesToEndOfFile, CreateDirectoryIfItDoesNotExist, GetLinesFromFile
 import pbf.templates.template_manager as template_manager
 
