@@ -1,9 +1,11 @@
 from kao_config import LocalConfigFinder
+from pbf.helpers.configuration_helper import GetConfigurationsFilename
 from pbf.helpers.file_helper import GetDirname
 import os
 
 PBF_PROPERTIES_FINDER = None
 PROPERTIES_FILENAME = '.pbf-properties'
+GLOBAL_PROPERTIES_CONFIGS = 'property_configs'
 
 def GetRequestedPacakges():
     """ Get the Requested packages for the current working directory """
@@ -33,3 +35,25 @@ def FindPBFPropertiesDirectory(startFrom=None):
     
     propertiesFilename = FindPBFPropertiesFilename(startFrom=startFrom)
     return GetDirname(propertiesFilename)
+    
+def GetPropertyConfigurationsFilename():
+    """ Return the Property COnfigurations Filename """
+    global GLOBAL_PROPERTIES_CONFIGS
+    return GetConfigurationsFilename(GLOBAL_PROPERTIES_CONFIGS, create=True)
+    
+def FindPropertyConfigs():
+    """ Load the global pbf properties configurations """
+    filename = GetPropertyConfigurationsFilename()
+    
+    lines = []
+    configs = {}
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+        
+    for line in lines:
+        configName, packages = line.split(':')
+        packages = packages.split(' ')
+        packages.remove('')
+        configs[configName] = packages
+        
+    return configs
