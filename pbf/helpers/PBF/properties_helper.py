@@ -21,13 +21,13 @@ def GetRequestedPacakges():
     return requestedPackages
     
     
-def FindPBFPropertiesFilename(startFrom=None):
+def FindPBFPropertiesFilename(startFrom=None, reload=False):
     """ Return the current PBF Properties file """
     global PBF_PROPERTIES_FINDER, PROPERTIES_FILENAME
     
     if PBF_PROPERTIES_FINDER is None:
         PBF_PROPERTIES_FINDER = LocalConfigFinder(PROPERTIES_FILENAME)
-    return PBF_PROPERTIES_FINDER.find(startFrom=startFrom)
+    return PBF_PROPERTIES_FINDER.find(startFrom=startFrom, reload=reload)
     
 def FindPBFPropertiesDirectory(startFrom=None):
     """ Return the current PBF Properties file """
