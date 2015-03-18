@@ -1,4 +1,6 @@
 from pbf.helpers.import_helper import ImportAndInstantiateClass
+
+from kao_modules import NamespacedClass
 import argparse
 
 class CommandList:
@@ -25,7 +27,7 @@ class CommandList:
             
     def runBaseCommand(self, commandConfig, argsForNextCommand):
         """ Run the command with the given arguments """
-        command = ImportAndInstantiateClass(commandConfig.module)
+        command = NamespacedClass(commandConfig.module).instantiate()
         parser = self.buildArgParser(command, commandConfig)
         arguments = parser.parse_args(argsForNextCommand)
         command.run(arguments)
