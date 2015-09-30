@@ -13,5 +13,6 @@ setup(name='pbf',
                 'pbf.Commands',
                 'pbf.templates'],
       package_data = {'pbf.templates':['PBF/*']},
-      scripts=['pbf/scripts/pbf']
+      scripts=['pbf/scripts/pbf'],
+      install_requires=['kao_modules', 'kao_config']
      )
