@@ -10,7 +10,7 @@ def GetConfigurationsDirectory():
    
 def GetConfigurationsFilename(filename, create=False):    
     """ Returns the path to a file in the configurations directory """
-    return GetConfigurationsDirectory().getFile(filename, create=create)
+    return GetConfigurationsDirectory().getFile(filename, create=create).path
     
 def GetConfigurationPathRelativeToCurrentDirectory(filename):
     """ Return a relative path from the current directory to a path from the configurations directory """

@@ -1,4 +1,4 @@
-from kao_config import LocalConfigFinder
+from kao_config import LocalConfigFile
 from pbf.helpers.configuration_helper import GetConfigurationsFilename
 from pbf.helpers.file_helper import GetDirname
 import os
@@ -26,8 +26,8 @@ def FindPBFPropertiesFilename(startFrom=None, reload=False):
     global PBF_PROPERTIES_FINDER, PROPERTIES_FILENAME
     
     if PBF_PROPERTIES_FINDER is None:
-        PBF_PROPERTIES_FINDER = LocalConfigFinder(PROPERTIES_FILENAME)
-    return PBF_PROPERTIES_FINDER.find(startFrom=startFrom, reload=reload)
+        PBF_PROPERTIES_FINDER = LocalConfigFile(PROPERTIES_FILENAME, startFrom=startFrom)
+    return PBF_PROPERTIES_FINDER.path
     
 def FindPBFPropertiesDirectory(startFrom=None):
     """ Return the current PBF Properties file """
