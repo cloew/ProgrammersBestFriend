@@ -13,7 +13,7 @@ class InsertPbfPackage:
     def run(self, arguments):
         """ Run the command """
         packages = arguments.packages
-        print "Inserting packages:", ", ".join(packages), "into local pbf properties"
+        print("Inserting packages:", ", ".join(packages), "into local pbf properties")
         self.insertPBFPackages(packages)
     
     def insertPBFPackages(self, packages, startFrom=None):

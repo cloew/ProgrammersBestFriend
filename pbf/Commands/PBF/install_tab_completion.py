@@ -31,7 +31,7 @@ class InstallTabCompletion:
         
         if sourceLine not in lines:
             AppendLinesToEndOfFile(profile, ["\n", "#Source PBF Tab Completion\n", sourceLine])
-            print "PBF Tab Completion will now be sourced by {0}".format(profile)
-            print "Please source {0} to have PBF tab-completion in the current shell".format(profile)
+            print("PBF Tab Completion will now be sourced by {0}".format(profile))
+            print("Please source {0} to have PBF tab-completion in the current shell".format(profile))
         else:
-            print "PBF Tab Completion is already sourced from {0}".format(profile)
+            print("PBF Tab Completion is already sourced from {0}".format(profile))

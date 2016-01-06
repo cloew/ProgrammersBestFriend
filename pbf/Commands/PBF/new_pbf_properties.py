@@ -14,7 +14,7 @@ class NewPbfProperties:
     
     def run(self, arguments):
         """ Run the command """
-        print "Creating PBF Properties at:", arguments.destination
+        print("Creating PBF Properties at:", arguments.destination)
         self.createPropertiesFile(arguments.destination, config=arguments.config)
         
     def createPropertiesFile(self, path, config=None):
@@ -33,4 +33,5 @@ class NewPbfProperties:
             packages = configToPackages[config]
             InsertPbfPackage().insertPBFPackages(packages, startFrom=propertiesDirectory)
         else:
-            print "Unknown Properties Configuration - {0}.\nPlease make sure it is defined in {1}".format(config, GetPropertyConfigurationsFilename())
+            print("Unknown Properties Configuration - {0}.".format(config))
+            print("\nPlease make sure it is defined in {0}".format(GetPropertyConfigurationsFilename()))

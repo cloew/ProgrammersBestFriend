@@ -19,7 +19,7 @@ class Open:
     
     def run(self, arguments):
         """ Run the command """
-        print "Opening", arguments.filename
+        print("Opening", arguments.filename)
         self.open(arguments.filename)
         
     def open(self, file):
@@ -28,7 +28,7 @@ class Open:
         if action is not None:
             action(file)
         else:
-            print "Cannot open a file on this OS."
+            print("Cannot open a file on this OS.")
         
     def __open_cygwin__(self, file):
         """ Open the file on Cygwin """

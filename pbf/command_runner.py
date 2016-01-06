@@ -12,4 +12,4 @@ def GetTabCompletion(rootCommandList, arguments):
     results = rootCommandList.getTabCompletion(arguments)
         
     results.sort()
-    print " ".join(results)
+    print(" ".join(results))

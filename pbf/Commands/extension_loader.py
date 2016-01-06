@@ -59,7 +59,7 @@ class ExtensionLoader:
         if self.hasCommandMap(os.path.join(self.SITE_PACKAGES_ROOT, package)):
             module = KaoModule(package)
         else:
-            print "Requested Package has no commands:", package
+            print("Requested Package has no commands:", package)
             
         return module
         
@@ -78,7 +78,7 @@ class ExtensionLoader:
             sys.path.insert(0, GetDirname(directory))
             module = KaoModule(packageRoot)
         else:
-            print "Requested Package has no command map:", directory
+            print("Requested Package has no command map:", directory)
             
         return module
         
