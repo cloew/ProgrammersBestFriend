@@ -1,0 +1,4 @@
+git+git://github.com/cloew/KaoConfig
+git+git://github.com/cloew/KaoModules
+
+-e .
