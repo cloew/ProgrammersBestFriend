@@ -1,6 +1,6 @@
 from kao_config import LocalConfigFile
-from pbf.helpers.configuration_helper import GetConfigurationsFilename
-from pbf.helpers.file_helper import GetDirname
+from ..configuration_helper import GetConfigurationsFilename
+from ..file_helper import GetDirname
 import os
 
 PBF_PROPERTIES_FINDER = None

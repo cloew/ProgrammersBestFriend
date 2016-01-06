@@ -1,4 +1,4 @@
-from insert_pbf_package import InsertPbfPackage
+from .insert_pbf_package import InsertPbfPackage
 from pbf.helpers.file_helper import Save, GetDirname
 from pbf.helpers.PBF.properties_helper import FindPropertyConfigs, GetPropertyConfigurationsFilename
 

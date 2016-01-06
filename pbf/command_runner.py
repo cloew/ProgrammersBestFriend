@@ -1,4 +1,4 @@
-from pbf.Commands import command_manager
+from .Commands import command_manager
 
 def Run(arguments):
     """ Try to Run the given Command """

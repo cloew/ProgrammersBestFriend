@@ -1,8 +1,8 @@
 # from .command_directory import CommandDirectory
 
 from kao_modules import KaoModule
-from pbf.helpers.file_helper import GetBasename, GetDirname
-from pbf.helpers.PBF.properties_helper import FindPBFPropertiesDirectory
+from ..helpers.file_helper import GetBasename, GetDirname
+from ..helpers.PBF.properties_helper import FindPBFPropertiesDirectory
 
 import os
 import site

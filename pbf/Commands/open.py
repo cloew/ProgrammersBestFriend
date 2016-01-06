@@ -1,4 +1,4 @@
-from pbf.helpers.os_helper import GetActionForOS
+from ..helpers.os_helper import GetActionForOS
 
 from subprocess import call
 

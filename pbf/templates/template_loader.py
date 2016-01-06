@@ -1,4 +1,4 @@
-from pbf.helpers.file_helper import IsDirectory
+from ..helpers.file_helper import IsDirectory
 from template_manager import CopyTemplate
 import os
 

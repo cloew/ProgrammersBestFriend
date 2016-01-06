@@ -1,4 +1,4 @@
-from pbf.Commands.Core.command_list import CommandList
+from .Core.command_list import CommandList
 
 RootCommandList = CommandList()
 
